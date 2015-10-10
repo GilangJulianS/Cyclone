@@ -57,8 +57,7 @@ public class MainActivity extends AppCompatActivity
 		FragmentManager manager = getSupportFragmentManager();
 		manager.beginTransaction().replace(R.id.container, RadioProfileFragment.newInstance()).commit();
 
-		Intent intent = new Intent(this, StandardActivity.class);
-		startActivity(intent);
+
 
 	}
 

@@ -131,13 +131,13 @@
 				android:text="Featured Program"/>
 
 			<Button
+				android:id="@+id/btn_more_program"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_alignParentRight="true"
 				android:layout_centerVertical="true"
 				style="@style/AppTheme.Button"
 				android:text="More"
-				android:textSize="10sp"
 				android:textColor="#fff"/>
 
 		</RelativeLayout>
@@ -255,7 +255,6 @@
 				android:layout_centerVertical="true"
 				style="@style/AppTheme.Button"
 				android:text="More"
-				android:textSize="10sp"
 				android:textColor="#fff"/>
 
 		</RelativeLayout>
