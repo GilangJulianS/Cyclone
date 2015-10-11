@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.cyclone.fragment.ProgramPageFragment;
 import com.cyclone.fragment.RadioProfileFragment;
 
 public class CollapseActivity extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class CollapseActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_collapse);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id
 				.collapsing_toolbar_layout);
@@ -29,7 +31,7 @@ public class CollapseActivity extends AppCompatActivity {
 		toolbarLayout.setTitle("K-Lite FM Bandung");
 
 		FragmentManager manager = getSupportFragmentManager();
-		manager.beginTransaction().replace(R.id.container, RadioProfileFragment.newInstance()).commit();
+		manager.beginTransaction().replace(R.id.container, ProgramPageFragment.newInstance()).commit();
 
 
 //		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -55,7 +57,10 @@ public class CollapseActivity extends AppCompatActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-
+		switch (id){
+			case android.R.id.home:
+				onBackPressed();
+		}
 
 		return super.onOptionsItemSelected(item);
 	}

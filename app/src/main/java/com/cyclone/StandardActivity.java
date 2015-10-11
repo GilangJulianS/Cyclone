@@ -1,5 +1,6 @@
 package com.cyclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -7,9 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.cyclone.fragment.AnnouncersFragment;
 import com.cyclone.fragment.ProgramsFragment;
 
 public class StandardActivity extends AppCompatActivity {
+
+	public static final int LAYOUT_PROGRAMS = 101;
+	public static final int LAYOUT_ANNOUNCERS = 102;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +24,20 @@ public class StandardActivity extends AppCompatActivity {
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		FragmentManager manager = getSupportFragmentManager();
-		manager.beginTransaction().replace(R.id.container, ProgramsFragment.newInstance()).commit();
-
+		Intent caller =  getIntent();
+		if(caller != null) {
+			int mode = caller.getExtras().getInt("layout", 0);
+			switch (mode) {
+				case LAYOUT_PROGRAMS:
+					FragmentManager manager = getSupportFragmentManager();
+					manager.beginTransaction().replace(R.id.container, ProgramsFragment.newInstance()).commit();
+					break;
+				case LAYOUT_ANNOUNCERS:
+					getSupportFragmentManager().beginTransaction().replace(R.id.container,
+							AnnouncersFragment.newInstance()).commit();
+					break;
+			}
+		}
 //		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //		fab.setOnClickListener(new View.OnClickListener() {
 //			@Override

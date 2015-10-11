@@ -24,7 +24,8 @@ public class ProgramPageFragment extends Fragment {
 	}
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-		return null;
+		View v = inflater.inflate(R.layout.fragment_program_page, parent, false);
+		return v;
 	}
 
 	@Override

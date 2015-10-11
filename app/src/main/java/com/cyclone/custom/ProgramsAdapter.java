@@ -21,19 +21,18 @@ import java.util.List;
 /**
  * Created by gilang on 10/10/2015.
  */
-public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHolder> {
+public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.ViewHolder> {
 
 	private List<Program> datas;
 	private Context context;
 
-	public ProgramAdapter(Context context, String json){
+	public ProgramsAdapter(Context context, String json){
 		datas = parseData(json);
 		this.context = context;
 	}
 
 	public List<Program> parseData(String json){
 		List<Program> programs = new ArrayList<>();
-
 //		-------- dummy -------
 		programs.add(new Program("http://imgurl.com", "Inspiring Life", "Sen - Jum, 04.00 - 05" +
 				".00", 4));

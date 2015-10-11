@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cyclone.R;
-import com.cyclone.custom.ProgramAdapter;
+import com.cyclone.custom.ProgramsAdapter;
 
 /**
  * Created by gilang on 10/10/2015.
@@ -29,13 +29,13 @@ public class ProgramsFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-		View v = inflater.inflate(R.layout.fragment_programs, parent, false);
-		mRecyclerView = (RecyclerView) v.findViewById(R.id.program_container);
+		View v = inflater.inflate(R.layout.fragment_recycler, parent, false);
+		mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
 
 		mLayoutManager = new GridLayoutManager(getActivity(), 2);
 		mRecyclerView.setLayoutManager(mLayoutManager);
 
-		mAdapter = new ProgramAdapter("");
+		mAdapter = new ProgramsAdapter(getContext(), "");
 		mRecyclerView.setAdapter(mAdapter);
 
 		return v;

@@ -19,6 +19,7 @@ import com.cyclone.StandardActivity;
 public class RadioProfileFragment extends Fragment {
 
 	private Button btnMoreProgram;
+	private Button btnMoreAnnouncer;
 
 	public RadioProfileFragment(){}
 
@@ -34,8 +35,18 @@ public class RadioProfileFragment extends Fragment {
 		btnMoreProgram.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getContext(), StandardActivity.class);
-				startActivity(intent);
+				Intent i = new Intent(getContext(), StandardActivity.class);
+				i.putExtra("layout", StandardActivity.LAYOUT_PROGRAMS);
+				startActivity(i);
+			}
+		});
+		btnMoreAnnouncer = (Button) v.findViewById(R.id.btn_more_announcer);
+		btnMoreAnnouncer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getContext(), StandardActivity.class);
+				i.putExtra("layout", StandardActivity.LAYOUT_ANNOUNCERS);
+				startActivity(i);
 			}
 		});
 		return v;
