@@ -1,6 +1,8 @@
 package com.cyclone.custom;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.cyclone.CollapseActivity;
 import com.cyclone.R;
 import com.cyclone.model.Program;
 
@@ -21,9 +24,11 @@ import java.util.List;
 public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHolder> {
 
 	private List<Program> datas;
+	private Context context;
 
-	public ProgramAdapter(String json){
+	public ProgramAdapter(Context context, String json){
 		datas = parseData(json);
+		this.context = context;
 	}
 
 	public List<Program> parseData(String json){
@@ -68,6 +73,13 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
 		holder.txtTitle.setText(p.title);
 		holder.txtSchedule.setText(p.schedule);
 		holder.ratingBar.setRating(p.rating);
+		holder.card.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(context, CollapseActivity.class);
+				context.startActivity(i);
+			}
+		});
 	}
 
 	@Override
@@ -81,6 +93,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
 		public TextView txtTitle;
 		public TextView txtSchedule;
 		public RatingBar ratingBar;
+		public ViewGroup card;
 
 		public ViewHolder(View v){
 			super(v);
@@ -88,6 +101,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
 			txtTitle = (TextView) v.findViewById(R.id.txt_title);
 			txtSchedule = (TextView) v.findViewById(R.id.txt_schedule);
 			ratingBar = (RatingBar) v.findViewById(R.id.ratingbar);
+			card = (ViewGroup) v.findViewById(R.id.card_program);
 		}
 
 	}

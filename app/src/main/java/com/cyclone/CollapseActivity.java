@@ -1,26 +1,36 @@
 package com.cyclone;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-import com.cyclone.fragment.ProgramsFragment;
+import com.cyclone.fragment.RadioProfileFragment;
 
-public class StandardActivity extends AppCompatActivity {
+public class CollapseActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_standard);
+		setContentView(R.layout.activity_collapse);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+		CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id
+				.collapsing_toolbar_layout);
+		toolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
+		toolbarLayout.setTitle("K-Lite FM Bandung");
 
 		FragmentManager manager = getSupportFragmentManager();
-		manager.beginTransaction().replace(R.id.container, ProgramsFragment.newInstance()).commit();
+		manager.beginTransaction().replace(R.id.container, RadioProfileFragment.newInstance()).commit();
+
 
 //		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //		fab.setOnClickListener(new View.OnClickListener() {
@@ -45,11 +55,7 @@ public class StandardActivity extends AppCompatActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		switch (id){
-			case android.R.id.home:
-				super.onBackPressed();
-				return true;
-		}
+
 
 		return super.onOptionsItemSelected(item);
 	}

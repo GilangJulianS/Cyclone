@@ -21,7 +21,12 @@
         <activity
             android:name=".StandardActivity"
             android:label="@string/title_activity_standard"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".CollapseActivity"
+            android:label="@string/title_activity_collapse"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 

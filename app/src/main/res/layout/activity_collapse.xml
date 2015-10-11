@@ -5,12 +5,13 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".MainActivity">
+	android:fitsSystemWindows="true"
+	tools:context="com.cyclone.CollapseActivity">
 
 	<android.support.design.widget.AppBarLayout
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
-		android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+		android:theme="@style/AppTheme.AppBarOverlay">
 
 		<android.support.design.widget.CollapsingToolbarLayout
 			android:id="@+id/collapsing_toolbar_layout"
@@ -33,18 +34,15 @@
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="?attr/actionBarSize"
-				app:layout_scrollFlags="scroll|enterAlways"
+				android:background="?attr/colorPrimary"
 				app:layout_collapseMode="pin"
-				app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
-
+				app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
 		</android.support.design.widget.CollapsingToolbarLayout>
 
 	</android.support.design.widget.AppBarLayout>
 
-
-	<include layout="@layout/content_main"/>
+	<include layout="@layout/content_collapse"/>
 
 	<!--<android.support.design.widget.FloatingActionButton-->
 		<!--android:id="@+id/fab"-->
