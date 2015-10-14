@@ -7,13 +7,13 @@
 	<ImageView
 		android:id="@+id/img_cover"
 		android:layout_width="match_parent"
-		android:layout_height="180dp"
+		android:layout_height="190dp"
 		android:src="@drawable/background_login"
 		android:scaleType="centerCrop"/>
 
 	<View
 		android:layout_width="match_parent"
-		android:layout_height="180dp"
+		android:layout_height="190dp"
 		android:background="@color/dim_filter"/>
 
 	<ImageView
@@ -21,13 +21,14 @@
 		android:layout_width="80dp"
 		android:layout_height="80dp"
 		android:layout_centerHorizontal="true"
+		android:layout_marginTop="20dp"
 		android:src="@drawable/radio_icon"/>
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/img_radio_logo"
-		android:layout_marginTop="10dp"
+		android:layout_marginTop="5dp"
 		android:gravity="center_horizontal"
 		android:orientation="vertical">
 
