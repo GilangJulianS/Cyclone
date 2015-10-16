@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -23,12 +25,21 @@ import java.util.List;
  */
 public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.ViewHolder> {
 
-	private List<Program> datas;
+	public List<Program> datas;
 	private Context context;
 
 	public ProgramsAdapter(Context context, String json){
-		datas = parseData(json);
+		datas = new ArrayList<>();
+//		datas = parseData(json);
 		this.context = context;
+	}
+
+	public void add(Program program, int position){
+		datas.add(position, program);
+	}
+
+	public void add(Program program){
+		datas.add(program);
 	}
 
 	public List<Program> parseData(String json){
