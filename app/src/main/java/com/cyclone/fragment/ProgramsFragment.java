@@ -58,7 +58,7 @@ public class ProgramsFragment extends Fragment {
 		slideAnimator.setMoveDuration(500);
 		mRecyclerView.setItemAnimator(slideAnimator);
 
-		mAdapter = new ProgramsAdapter(getContext(), "");
+		mAdapter = new ProgramsAdapter(getActivity(), "");
 		mRecyclerView.setAdapter(mAdapter);
 
 		programs = new ArrayList<>();

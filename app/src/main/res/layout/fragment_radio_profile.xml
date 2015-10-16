@@ -2,12 +2,14 @@
 <android.support.v4.widget.NestedScrollView
 	android:layout_height="match_parent"
 	android:layout_width="match_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android">
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<LinearLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:paddingBottom="15dp"
 		android:background="#F2F2F2"
 		android:clipToPadding="false"
 		android:orientation="vertical">
@@ -88,6 +90,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="15dp"
+			android:layout_marginTop="5dp"
 			android:textSize="18sp"
 			android:textStyle="bold"
 			android:text="About"/>
@@ -95,7 +98,9 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_margin="15dp"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp"
+			android:layout_marginTop="5dp"
 			android:elevation="2dp"
 			android:background="#fff"
 			android:orientation="horizontal">
@@ -118,6 +123,7 @@
 		<RelativeLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:layout_marginTop="20dp"
 			android:layout_marginLeft="15dp"
 			android:layout_marginRight="15dp">
 
@@ -147,95 +153,132 @@
 			android:layout_height="wrap_content"
 			android:orientation="horizontal">
 
-			<LinearLayout
+			<android.support.v7.widget.CardView
+				android:id="@+id/card_program_1"
 				android:layout_width="0dp"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp"
-				android:layout_marginLeft="10dp"
-				android:layout_marginBottom="10dp"
-				android:padding="10dp"
-				android:elevation="2dp"
-				android:background="#fff"
-				android:orientation="vertical">
+				app:cardElevation="2dp"
+				android:clipToPadding="false"
+				android:layout_marginLeft="15dp"
+				android:layout_marginTop="5dp"
+				android:layout_marginBottom="5dp"
+				android:layout_marginRight="5dp"
+				android:foreground="?android:attr/selectableItemBackground">
 
-				<ImageView
+				<LinearLayout
 					android:layout_width="match_parent"
-					android:layout_height="160dp"
-					android:scaleType="centerCrop"
-					android:src="@drawable/background_login"/>
-
-				<TextView
-					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="5dp"
-					android:textStyle="bold"
-					android:text="Hit The Beat"/>
+					android:background="#fff"
+					android:orientation="vertical">
 
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textSize="10sp"
-					android:text="Sen - Jum, 12:00 - 15:00"/>
+					<ImageView
+						android:layout_width="match_parent"
+						android:layout_height="160dp"
+						android:scaleType="centerCrop"
+						android:src="@drawable/background_login"/>
 
-				<RatingBar
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					style="?android:attr/ratingBarStyleSmall"
-					android:numStars="5"
-					android:stepSize="1"
-					android:rating="2"/>
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="10dp"
+						android:layout_marginBottom="10dp"
+						android:layout_marginRight="10dp"
+						android:orientation="vertical">
 
-			</LinearLayout>
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="5dp"
+							android:textStyle="bold"
+							android:text="Hit The Beat"/>
 
-			<LinearLayout
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textSize="10sp"
+							android:text="Sen - Jum, 12:00 - 15:00"/>
+
+						<RatingBar
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							style="?android:attr/ratingBarStyleSmall"
+							android:numStars="5"
+							android:stepSize="1"
+							android:rating="2"/>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</android.support.v7.widget.CardView>
+
+			<android.support.v7.widget.CardView
+				android:id="@+id/card_program_2"
 				android:layout_width="0dp"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp"
-				android:layout_marginLeft="10dp"
-				android:layout_marginBottom="10dp"
-				android:layout_marginRight="10dp"
-				android:padding="10dp"
-				android:elevation="2dp"
-				android:background="#fff"
-				android:orientation="vertical">
+				app:cardElevation="2dp"
+				android:clipToPadding="false"
+				android:layout_marginTop="5dp"
+				android:layout_marginBottom="5dp"
+				android:layout_marginLeft="5dp"
+				android:layout_marginRight="15dp"
+				android:foreground="?android:attr/selectableItemBackground">
 
-				<ImageView
+				<LinearLayout
 					android:layout_width="match_parent"
-					android:layout_height="160dp"
-					android:scaleType="centerCrop"
-					android:src="@drawable/background_login"/>
-
-				<TextView
-					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="5dp"
-					android:textStyle="bold"
-					android:text="Hit The Beat"/>
+					android:background="#fff"
+					android:orientation="vertical">
 
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textSize="10sp"
-					android:text="Sen - Jum, 12:00 - 15:00"/>
+					<ImageView
+						android:layout_width="match_parent"
+						android:layout_height="160dp"
+						android:scaleType="centerCrop"
+						android:src="@drawable/background_login"/>
 
-				<RatingBar
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					style="?android:attr/ratingBarStyleSmall"
-					android:numStars="5"
-					android:stepSize="1"
-					android:rating="2"/>
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="10dp"
+						android:layout_marginBottom="10dp"
+						android:layout_marginRight="10dp"
+						android:orientation="vertical">
 
-			</LinearLayout>
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="5dp"
+							android:textStyle="bold"
+							android:text="Hit The Beat"/>
 
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textSize="10sp"
+							android:text="Sen - Jum, 12:00 - 15:00"/>
+
+						<RatingBar
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							style="?android:attr/ratingBarStyleSmall"
+							android:numStars="5"
+							android:stepSize="1"
+							android:rating="2"/>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</android.support.v7.widget.CardView>
 
 		</LinearLayout>
 
 		<RelativeLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:layout_marginTop="15dp"
 			android:layout_marginLeft="15dp"
 			android:layout_marginRight="15dp">
 
@@ -263,16 +306,14 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:layout_marginTop="5dp"
 			android:orientation="horizontal">
 
 			<LinearLayout
 				android:layout_width="0dp"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp"
-				android:layout_marginLeft="5dp"
-				android:layout_marginBottom="10dp"
-				android:padding="5dp"
+				android:layout_marginLeft="15dp"
 				android:elevation="2dp"
 				android:background="#fff"
 				android:orientation="vertical">
@@ -286,7 +327,7 @@
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="5dp"
+					android:layout_margin="5dp"
 					android:text="Chandra A"
 					android:textSize="12sp"/>
 
@@ -296,10 +337,7 @@
 				android:layout_width="0dp"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp"
-				android:layout_marginLeft="5dp"
-				android:layout_marginBottom="10dp"
-				android:padding="5dp"
+				android:layout_marginLeft="10dp"
 				android:elevation="2dp"
 				android:background="#fff"
 				android:orientation="vertical">
@@ -313,9 +351,9 @@
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="5dp"
-					android:textSize="12sp"
-					android:text="Rini R"/>
+					android:layout_margin="5dp"
+					android:text="Chandra A"
+					android:textSize="12sp"/>
 
 			</LinearLayout>
 
@@ -323,11 +361,8 @@
 				android:layout_width="0dp"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp"
-				android:layout_marginLeft="5dp"
-				android:layout_marginBottom="10dp"
-				android:layout_marginRight="5dp"
-				android:padding="5dp"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="15dp"
 				android:elevation="2dp"
 				android:background="#fff"
 				android:orientation="vertical">
@@ -341,9 +376,9 @@
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="5dp"
-					android:textSize="12sp"
-					android:text="Hasanah N"/>
+					android:layout_margin="5dp"
+					android:text="Chandra A"
+					android:textSize="12sp"/>
 
 			</LinearLayout>
 
@@ -353,6 +388,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_alignParentLeft="true"
+			android:layout_marginTop="20dp"
 			android:layout_marginLeft="15dp"
 			android:layout_marginRight="15dp"
 			android:textSize="18sp"
@@ -363,7 +399,9 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_margin="10dp"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp"
+			android:layout_marginTop="5dp"
 			android:elevation="2dp"
 			android:padding="10dp"
 			android:background="#fff"
@@ -440,7 +478,7 @@
 			android:layout_alignParentLeft="true"
 			android:layout_marginLeft="15dp"
 			android:layout_marginRight="15dp"
-			android:layout_marginTop="10dp"
+			android:layout_marginTop="20dp"
 			android:textSize="18sp"
 			android:textStyle="bold"
 			android:layout_centerVertical="true"
@@ -449,7 +487,9 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_margin="10dp"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp"
+			android:layout_marginTop="5dp"
 			android:elevation="2dp"
 			android:padding="10dp"
 			android:background="#fff"

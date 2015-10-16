@@ -59,7 +59,9 @@ public class CollapseActivity extends AppCompatActivity {
 		int id = item.getItemId();
 		switch (id){
 			case android.R.id.home:
+				supportFinishAfterTransition();
 				onBackPressed();
+				return true;
 		}
 
 		return super.onOptionsItemSelected(item);

@@ -1,8 +1,12 @@
 package com.cyclone.custom;
 
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +31,13 @@ public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.ViewHo
 
 	public List<Program> datas;
 	private Context context;
+	private Activity activity;
 
-	public ProgramsAdapter(Context context, String json){
+	public ProgramsAdapter(Activity activity, String json){
 		datas = new ArrayList<>();
 //		datas = parseData(json);
-		this.context = context;
+		this.activity = activity;
+		context = (Context)activity;
 	}
 
 	public void add(Program program, int position){
@@ -79,6 +85,7 @@ public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.ViewHo
 	@Override
 	public void onBindViewHolder(ViewHolder holder, int position) {
 		Program p = datas.get(position);
+		final ImageView imageView = holder.imgCover;
 		holder.imgCover.setImageResource(R.drawable.background_login);
 		holder.txtTitle.setText(p.title);
 		holder.txtSchedule.setText(p.schedule);
@@ -87,7 +94,13 @@ public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.ViewHo
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(context, CollapseActivity.class);
-				context.startActivity(i);
+				if(Build.VERSION.SDK_INT >= 16) {
+					ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
+							(activity, imageView, "program");
+					activity.startActivity(i, options.toBundle());
+				}else{
+					activity.startActivity(i);
+				}
 			}
 		});
 	}

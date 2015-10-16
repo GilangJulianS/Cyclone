@@ -63,6 +63,7 @@ public class StandardActivity extends AppCompatActivity {
 		int id = item.getItemId();
 		switch (id){
 			case android.R.id.home:
+				supportFinishAfterTransition();
 				super.onBackPressed();
 				return true;
 		}
