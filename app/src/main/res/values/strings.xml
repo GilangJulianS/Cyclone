@@ -8,4 +8,11 @@
 	<string name="title_activity_main2">Main2Activity</string>
 	<string name="title_activity_standard">StandardActivity</string>
 	<string name="title_activity_collapse">CollapseActivity</string>
+	<string name="title_activity_drawer_standard">DrawerStandardActivity</string>
+
+	<string name="title_section1">Section 1</string>
+	<string name="title_section2">Section 2</string>
+	<string name="title_section3">Section 3</string>
+
+	<string name="action_example">Example action</string>
 </resources>

@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.cyclone.fragment.ClubRadioFragment;
 import com.cyclone.fragment.RadioProfileFragment;
 
 public class DrawerActivity extends AppCompatActivity
@@ -90,19 +91,11 @@ public class DrawerActivity extends AppCompatActivity
 	public boolean onNavigationItemSelected(MenuItem item) {
 		// Handle navigation view item clicks here.
 		int id = item.getItemId();
-
-		if (id == R.id.nav_camara) {
-			// Handle the camera action
-		} else if (id == R.id.nav_gallery) {
-
-		} else if (id == R.id.nav_slideshow) {
-
-		} else if (id == R.id.nav_manage) {
-
-		} else if (id == R.id.nav_share) {
-
-		} else if (id == R.id.nav_send) {
-
+		switch (id){
+			case R.id.nav_klub:
+				FragmentManager manager = getSupportFragmentManager();
+				manager.beginTransaction().replace(R.id.container, ClubRadioFragment.newInstance
+						()).commit();
 		}
 
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

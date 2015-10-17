@@ -61,34 +61,37 @@ public class ProgramsFragment extends Fragment {
 		mAdapter = new ProgramsAdapter(getActivity(), "");
 		mRecyclerView.setAdapter(mAdapter);
 
-		programs = new ArrayList<>();
-		programs.add(new Program("http://imgurl.com", "Inspiring Life", "Sen - Jum, 04.00 - 05" +
-				".00", 4));
-		programs.add(new Program("http://imgurl.com", "Inspiring Morning", "Sen - Jum, 04.00 - 05" +
-				".00", 4));
-		programs.add(new Program("http://imgurl.com", "Easy Busy", "Sen - Jum, 04.00 - 05" +
-				".00", 4));
-		programs.add(new Program("http://imgurl.com", "Hit The Beat", "Sen - Jum, 04.00 - 05" +
-				".00", 4));
-		programs.add(new Program("http://imgurl.com", "Inspiring Night", "Sen - Jum, 04.00 - 05" +
-				".00", 4));
-		programs.add(new Program("http://imgurl.com", "Afternoon Cafe", "Sen - Jum, 04.00 - 05" +
-				".00", 4));
-		programs.add(new Program("http://imgurl.com", "Soft Sensation", "Sen - Jum, 04.00 - 05" +
-				".00", 4));
-		programs.add(new Program("http://imgurl.com", "Headline News", "Sen - Jum, 04.00 - 05" +
-				".00", 4));
-		programs.add(new Program("http://imgurl.com", "Life Sports", "Sen - Jum, 04.00 - 05" +
-				".00", 4));
-		programs.add(new Program("http://imgurl.com", "Wild Life", "Sen - Jum, 04.00 - 05" +
-				".00", 4));
+		programs = parse("");
 
 		animate(programs.get(0));
 
 		return v;
 	}
 
-
+	public List<Program> parse(String json){
+		List<Program> datas = new ArrayList<>();
+		datas.add(new Program("http://imgurl.com", "Inspiring Life", "Sen - Jum, 04.00 - 05" +
+				".00", 4));
+		datas.add(new Program("http://imgurl.com", "Inspiring Morning", "Sen - Jum, 04.00 - 05" +
+				".00", 4));
+		datas.add(new Program("http://imgurl.com", "Easy Busy", "Sen - Jum, 04.00 - 05" +
+				".00", 4));
+		datas.add(new Program("http://imgurl.com", "Hit The Beat", "Sen - Jum, 04.00 - 05" +
+				".00", 4));
+		datas.add(new Program("http://imgurl.com", "Inspiring Night", "Sen - Jum, 04.00 - 05" +
+				".00", 4));
+		datas.add(new Program("http://imgurl.com", "Afternoon Cafe", "Sen - Jum, 04.00 - 05" +
+				".00", 4));
+		datas.add(new Program("http://imgurl.com", "Soft Sensation", "Sen - Jum, 04.00 - 05" +
+				".00", 4));
+		datas.add(new Program("http://imgurl.com", "Headline News", "Sen - Jum, 04.00 - 05" +
+				".00", 4));
+		datas.add(new Program("http://imgurl.com", "Life Sports", "Sen - Jum, 04.00 - 05" +
+				".00", 4));
+		datas.add(new Program("http://imgurl.com", "Wild Life", "Sen - Jum, 04.00 - 05" +
+				".00", 4));
+		return datas;
+	}
 
 	private void animate(final Program program){
 		final Handler handler = new Handler();
