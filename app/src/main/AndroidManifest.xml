@@ -28,6 +28,10 @@
             android:label="@string/title_activity_collapse"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".DrawerStandardActivity"
+            android:label="@string/title_activity_drawer_standard" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.cyclone;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -93,9 +94,8 @@ public class DrawerActivity extends AppCompatActivity
 		int id = item.getItemId();
 		switch (id){
 			case R.id.nav_klub:
-				FragmentManager manager = getSupportFragmentManager();
-				manager.beginTransaction().replace(R.id.container, ClubRadioFragment.newInstance
-						()).commit();
+				Intent i = new Intent(this, DrawerStandardActivity.class);
+				startActivity(i);
 		}
 
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
