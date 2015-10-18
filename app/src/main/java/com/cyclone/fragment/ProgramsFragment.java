@@ -3,6 +3,7 @@ package com.cyclone.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Slide;
@@ -64,6 +65,8 @@ public class ProgramsFragment extends Fragment {
 		programs = parse("");
 
 		animate(programs.get(0));
+
+		((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Programs");
 
 		return v;
 	}

@@ -14,23 +14,32 @@
 			android:id="@+id/nav_klub"
 			android:icon="@android:drawable/ic_menu_slideshow"
 			android:title="KlubRadio"/>
-		<item
-			android:id="@+id/nav_manage"
-			android:icon="@android:drawable/ic_menu_manage"
-			android:title="Tools"/>
 	</group>
 
-	<item android:title="Communicate">
-		<menu>
-			<item
-				android:id="@+id/nav_share"
-				android:icon="@android:drawable/ic_menu_share"
-				android:title="Share"/>
-			<item
-				android:id="@+id/nav_send"
-				android:icon="@android:drawable/ic_menu_send"
-				android:title="Send"/>
-		</menu>
-	</item>
+	<group android:checkableBehavior="none">
+		<item
+			android:id="@+id/nav_profile"
+			android:icon="@drawable/background_login"
+			android:title="Dimas Danang"/>
+		<item
+			android:id="@+id/nav_favorite"
+			android:icon="@drawable/ic_favorite_black_36dp"
+			android:title="Favorites"/>
+		<item
+			android:id="@+id/nav_notification"
+			android:icon="@drawable/ic_notifications_black_36dp"
+			android:title="Favorites"/>
+		<item
+			android:id="@+id/nav_virtual_card"
+			android:icon="@drawable/ic_credit_card_black_36dp"
+			android:title="Favorites"/>
+	</group>
+
+	<group android:checkableBehavior="none">
+		<item
+			android:id="@+id/nav_setting"
+			android:icon="@drawable/ic_settings_applications_black_36dp"
+			android:title="Settings"/>
+	</group>
 
 </menu>

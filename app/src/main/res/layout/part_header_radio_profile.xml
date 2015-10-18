@@ -7,13 +7,13 @@
 	<ImageView
 		android:id="@+id/img_cover"
 		android:layout_width="match_parent"
-		android:layout_height="190dp"
+		android:layout_height="210dp"
 		android:src="@drawable/background_login"
 		android:scaleType="centerCrop"/>
 
 	<View
 		android:layout_width="match_parent"
-		android:layout_height="190dp"
+		android:layout_height="210dp"
 		android:background="@color/dim_filter"/>
 
 	<de.hdodenhof.circleimageview.CircleImageView
@@ -21,7 +21,7 @@
 		android:layout_width="80dp"
 		android:layout_height="80dp"
 		android:layout_centerHorizontal="true"
-		android:layout_marginTop="20dp"
+		android:layout_marginTop="40dp"
 		android:src="@drawable/background_login"/>
 
 	<LinearLayout

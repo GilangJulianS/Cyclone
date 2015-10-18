@@ -1,5 +1,6 @@
 package com.cyclone;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -12,10 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.cyclone.fragment.PersonProfileFragment;
 import com.cyclone.fragment.ProgramPageFragment;
 import com.cyclone.fragment.RadioProfileFragment;
 
 public class CollapseActivity extends AppCompatActivity {
+
+	public static final int LAYOUT_PROGRAM_PAGE = 101;
+	public static final int LAYOUT_PERSON_PROFILE = 102;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +36,22 @@ public class CollapseActivity extends AppCompatActivity {
 		toolbarLayout.setTitle("K-Lite FM Bandung");
 
 		FragmentManager manager = getSupportFragmentManager();
-		manager.beginTransaction().replace(R.id.container, ProgramPageFragment.newInstance()).commit();
-
-
+		Intent caller = getIntent();
+		if(caller != null) {
+			int layout = caller.getExtras().getInt("layout", -1);
+			int mode = caller.getExtras().getInt("mode", -1);
+			String transitionId = caller.getExtras().getString("transition", "profile");
+			String title = caller.getExtras().getString("title", "");
+			if (!title.equals("")) {
+				getSupportActionBar().setTitle(title);
+			}
+			if (layout == LAYOUT_PROGRAM_PAGE) {
+				manager.beginTransaction().replace(R.id.container, ProgramPageFragment.newInstance()).commit();
+			} else if (layout == LAYOUT_PERSON_PROFILE) {
+				manager.beginTransaction().replace(R.id.container, PersonProfileFragment.newInstance
+						(mode, transitionId)).commit();
+			}
+		}
 //		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //		fab.setOnClickListener(new View.OnClickListener() {
 //			@Override
@@ -60,7 +78,7 @@ public class CollapseActivity extends AppCompatActivity {
 		switch (id){
 			case android.R.id.home:
 				supportFinishAfterTransition();
-				onBackPressed();
+//				onBackPressed();
 				return true;
 		}
 

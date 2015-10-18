@@ -94,6 +94,7 @@ public class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.ViewHo
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(context, CollapseActivity.class);
+				i.putExtra("layout", CollapseActivity.LAYOUT_PROGRAM_PAGE);
 				if(Build.VERSION.SDK_INT >= 16) {
 					ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
 							(activity, imageView, "program");

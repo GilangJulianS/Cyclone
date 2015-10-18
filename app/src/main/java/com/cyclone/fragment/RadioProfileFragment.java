@@ -37,6 +37,7 @@ public class RadioProfileFragment extends Fragment {
 			public void onClick(View v) {
 				Intent i = new Intent(getContext(), StandardActivity.class);
 				i.putExtra("layout", StandardActivity.LAYOUT_PROGRAMS);
+				i.putExtra("title", "Programs");
 				startActivity(i);
 			}
 		});
@@ -46,6 +47,7 @@ public class RadioProfileFragment extends Fragment {
 			public void onClick(View v) {
 				Intent i = new Intent(getContext(), StandardActivity.class);
 				i.putExtra("layout", StandardActivity.LAYOUT_ANNOUNCERS);
+				i.putExtra("title", "DJs and Announcers");
 				startActivity(i);
 			}
 		});

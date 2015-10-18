@@ -2,6 +2,7 @@ package com.cyclone;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,12 +10,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cyclone.fragment.AnnouncersFragment;
+import com.cyclone.fragment.ClubRadioFragment;
+import com.cyclone.fragment.PersonListFragment;
 import com.cyclone.fragment.ProgramsFragment;
 
 public class StandardActivity extends AppCompatActivity {
 
 	public static final int LAYOUT_PROGRAMS = 101;
 	public static final int LAYOUT_ANNOUNCERS = 102;
+	public static final int LAYOUT_FEED = 103;
+	public static final int LAYOUT_PEOPLE = 104;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,18 @@ public class StandardActivity extends AppCompatActivity {
 					getSupportFragmentManager().beginTransaction().replace(R.id.container,
 							AnnouncersFragment.newInstance()).commit();
 					break;
+				case LAYOUT_FEED:
+					getSupportFragmentManager().beginTransaction().replace(R.id.container,
+							ClubRadioFragment.newInstance()).commit();
+					break;
+				case LAYOUT_PEOPLE:
+					getSupportFragmentManager().beginTransaction().replace(R.id.container,
+							PersonListFragment.newInstance()).commit();
+					break;
+			}
+			String title = caller.getExtras().getString("title", "");
+			if(!title.equals("")){
+				getSupportActionBar().setTitle(title);
 			}
 		}
 //		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

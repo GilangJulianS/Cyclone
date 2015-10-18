@@ -92,10 +92,19 @@ public class DrawerActivity extends AppCompatActivity
 	public boolean onNavigationItemSelected(MenuItem item) {
 		// Handle navigation view item clicks here.
 		int id = item.getItemId();
+		Intent intent;
 		switch (id){
 			case R.id.nav_klub:
-				Intent i = new Intent(this, DrawerStandardActivity.class);
-				startActivity(i);
+				intent = new Intent(this, DrawerStandardActivity.class);
+				intent.putExtra("title", "Klub Radio");
+				startActivity(intent);
+				break;
+			case R.id.nav_profile:
+				intent = new Intent(this, CollapseActivity.class);
+				intent.putExtra("layout", CollapseActivity.LAYOUT_PERSON_PROFILE);
+				intent.putExtra("title", "Dimas Danang");
+				startActivity(intent);
+				break;
 		}
 
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

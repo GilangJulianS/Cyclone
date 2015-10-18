@@ -50,7 +50,13 @@ public class DrawerStandardActivity extends AppCompatActivity
 		FragmentManager manager = getSupportFragmentManager();
 		manager.beginTransaction().replace(R.id.container, ClubRadioFragment.newInstance()).commit();
 
-
+		Intent caller = getIntent();
+		if(caller != null) {
+			String title = caller.getExtras().getString("title", "");
+			if(!title.equals("")){
+				getSupportActionBar().setTitle(title);
+			}
+		}
 
 	}
 
@@ -87,12 +93,19 @@ public class DrawerStandardActivity extends AppCompatActivity
 	public boolean onNavigationItemSelected(MenuItem item) {
 		// Handle navigation view item clicks here.
 		int id = item.getItemId();
+		Intent intent;
 		switch (id){
 			case R.id.nav_home:
-				Intent i = new Intent(this, DrawerActivity.class);
-				startActivity(i);
+				intent = new Intent(this, DrawerActivity.class);
+				startActivity(intent);
+				finish();
+				break;
+			case R.id.nav_profile:
+				intent = new Intent(this, CollapseActivity.class);
+				intent.putExtra("layout", CollapseActivity.LAYOUT_PERSON_PROFILE);
+				startActivity(intent);
+				break;
 		}
-
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
 		return true;

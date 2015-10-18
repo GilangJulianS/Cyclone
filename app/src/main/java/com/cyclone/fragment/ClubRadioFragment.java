@@ -33,7 +33,7 @@ public class ClubRadioFragment extends Fragment {
 		recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-		ClubFeedAdapter adapter = new ClubFeedAdapter();
+		ClubFeedAdapter adapter = new ClubFeedAdapter(getActivity(), "");
 		adapter.add(new Post("", "Imam Darto", "1 Hour ago", "Mix", "", "Funky Sunshine", "New " +
 				"playlist by me", "40 tracks", 52, 20, Post.TYPE_POST));
 		adapter.add(new Post("", "Desta", "2 Hour ago", "Playlist", "", "Pop 2015", "2015 top " +
