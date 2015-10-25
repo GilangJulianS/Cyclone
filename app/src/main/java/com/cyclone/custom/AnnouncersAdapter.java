@@ -19,34 +19,19 @@ import java.util.List;
  */
 public class AnnouncersAdapter extends RecyclerView.Adapter<AnnouncersAdapter.ViewHolder> {
 
-	private List<Announcer> datas;
+	public List<Announcer> datas;
 	private Context context;
 
 	public AnnouncersAdapter(Context context, String json){
-		datas = parseData(json);
+		datas = new ArrayList<>();
 	}
 
-	public List<Announcer> parseData(String json){
-		List<Announcer> announcers = new ArrayList<>();
+	public void add(Announcer a){
+		datas.add(a);
+	}
 
-
-//		--------------- dummy ------------
-		announcers.add(new Announcer("http://imgurl.com", "Adiel"));
-		announcers.add(new Announcer("http://imgurl.com", "Arien"));
-		announcers.add(new Announcer("http://imgurl.com", "Arie W"));
-		announcers.add(new Announcer("http://imgurl.com", "Chandra"));
-		announcers.add(new Announcer("http://imgurl.com", "Erdina"));
-		announcers.add(new Announcer("http://imgurl.com", "Hasanah"));
-		announcers.add(new Announcer("http://imgurl.com", "Indira"));
-		announcers.add(new Announcer("http://imgurl.com", "Indra"));
-		announcers.add(new Announcer("http://imgurl.com", "Ivan"));
-		announcers.add(new Announcer("http://imgurl.com", "Kujang"));
-		announcers.add(new Announcer("http://imgurl.com", "Rini"));
-		announcers.add(new Announcer("http://imgurl.com", "Reno"));
-		announcers.add(new Announcer("http://imgurl.com", "Sam"));
-		announcers.add(new Announcer("http://imgurl.com", "Tira"));
-
-		return announcers;
+	public void add(Announcer a, int position){
+		datas.add(position, a);
 	}
 
 	@Override

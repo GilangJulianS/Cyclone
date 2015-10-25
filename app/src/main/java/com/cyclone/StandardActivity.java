@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.cyclone.fragment.AccountSettingFragment;
 import com.cyclone.fragment.AnnouncersFragment;
 import com.cyclone.fragment.ClubRadioFragment;
 import com.cyclone.fragment.PersonListFragment;
@@ -20,6 +21,7 @@ public class StandardActivity extends AppCompatActivity {
 	public static final int LAYOUT_ANNOUNCERS = 102;
 	public static final int LAYOUT_FEED = 103;
 	public static final int LAYOUT_PEOPLE = 104;
+	public static final int LAYOUT_ACCOUNT_SETTINGS = 105;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,10 @@ public class StandardActivity extends AppCompatActivity {
 				case LAYOUT_PEOPLE:
 					getSupportFragmentManager().beginTransaction().replace(R.id.container,
 							PersonListFragment.newInstance()).commit();
+					break;
+				case LAYOUT_ACCOUNT_SETTINGS:
+					getSupportFragmentManager().beginTransaction().replace(R.id.container,
+							AccountSettingFragment.newInstance()).commit();
 					break;
 			}
 			String title = caller.getExtras().getString("title", "");

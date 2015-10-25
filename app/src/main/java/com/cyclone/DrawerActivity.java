@@ -16,10 +16,13 @@ import android.view.MenuItem;
 
 import com.cyclone.fragment.ClubRadioFragment;
 import com.cyclone.fragment.RadioProfileFragment;
+import com.cyclone.fragment.VirtualCardFragment;
 
 public class DrawerActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
 
+	public static final int LAYOUT_HOME = 101;
+	public static final int LAYOUT_VIRTUAL_CARD = 102;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +55,25 @@ public class DrawerActivity extends AppCompatActivity
 		toolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
 		toolbarLayout.setTitle("K-Lite FM Bandung");
 
-		FragmentManager manager = getSupportFragmentManager();
-		manager.beginTransaction().replace(R.id.container, RadioProfileFragment.newInstance()).commit();
+
+		Intent caller = getIntent();
+
+		if(caller != null && caller.getExtras() != null) {
+			String title = caller.getExtras().getString("title", "");
+			int layout = caller.getExtras().getInt("layout", LAYOUT_HOME);
+			if(title != null && !title.equals(""))
+				getSupportActionBar().setTitle(title);
+			if(layout == LAYOUT_HOME){
+				FragmentManager manager = getSupportFragmentManager();
+				manager.beginTransaction().replace(R.id.container, RadioProfileFragment.newInstance()).commit();
+			}else if(layout == LAYOUT_VIRTUAL_CARD){
+				FragmentManager manager = getSupportFragmentManager();
+				manager.beginTransaction().replace(R.id.container, VirtualCardFragment.newInstance()).commit();
+			}
+		}else{
+			FragmentManager manager = getSupportFragmentManager();
+			manager.beginTransaction().replace(R.id.container, RadioProfileFragment.newInstance()).commit();
+		}
 
 
 
@@ -94,15 +114,40 @@ public class DrawerActivity extends AppCompatActivity
 		int id = item.getItemId();
 		Intent intent;
 		switch (id){
+			case R.id.nav_home:
+				intent = new Intent(this, DrawerActivity.class);
+				intent.putExtra("layout", DrawerActivity.LAYOUT_HOME);
+				startActivity(intent);
+				finish();
+				break;
 			case R.id.nav_klub:
 				intent = new Intent(this, DrawerStandardActivity.class);
 				intent.putExtra("title", "Klub Radio");
+				intent.putExtra("layout", DrawerStandardActivity.LAYOUT_CLUB);
 				startActivity(intent);
 				break;
 			case R.id.nav_profile:
 				intent = new Intent(this, CollapseActivity.class);
 				intent.putExtra("layout", CollapseActivity.LAYOUT_PERSON_PROFILE);
 				intent.putExtra("title", "Dimas Danang");
+				startActivity(intent);
+				break;
+			case R.id.nav_notification:
+				intent = new Intent(this, DrawerStandardActivity.class);
+				intent.putExtra("title", "Notifications");
+				intent.putExtra("layout", DrawerStandardActivity.LAYOUT_NOTIFICATION);
+				startActivity(intent);
+				break;
+			case R.id.nav_virtual_card:
+				intent = new Intent(this, DrawerActivity.class);
+				intent.putExtra("title", "Virtual Card");
+				intent.putExtra("layout", DrawerActivity.LAYOUT_VIRTUAL_CARD);
+				startActivity(intent);
+				break;
+			case R.id.nav_setting:
+				intent = new Intent(this, DrawerStandardActivity.class);
+				intent.putExtra("title", "Settings");
+				intent.putExtra("layout", DrawerStandardActivity.LAYOUT_SETTINGS);
 				startActivity(intent);
 				break;
 		}

@@ -15,10 +15,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cyclone.fragment.ClubRadioFragment;
+import com.cyclone.fragment.NotificationFragment;
 import com.cyclone.fragment.RadioProfileFragment;
+import com.cyclone.fragment.SettingsFragment;
 
 public class DrawerStandardActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
+
+	public static final int LAYOUT_CLUB = 101;
+	public static final int LAYOUT_NOTIFICATION = 102;
+	public static final int LAYOUT_SETTINGS = 103;
 
 
 	@Override
@@ -47,14 +53,24 @@ public class DrawerStandardActivity extends AppCompatActivity
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
 
-		FragmentManager manager = getSupportFragmentManager();
-		manager.beginTransaction().replace(R.id.container, ClubRadioFragment.newInstance()).commit();
+
 
 		Intent caller = getIntent();
 		if(caller != null) {
 			String title = caller.getExtras().getString("title", "");
+			int layout = caller.getExtras().getInt("layout", -1);
 			if(!title.equals("")){
 				getSupportActionBar().setTitle(title);
+			}
+			if(layout == LAYOUT_CLUB){
+				FragmentManager manager = getSupportFragmentManager();
+				manager.beginTransaction().replace(R.id.container, ClubRadioFragment.newInstance()).commit();
+			}else if(layout == LAYOUT_NOTIFICATION){
+				FragmentManager manager = getSupportFragmentManager();
+				manager.beginTransaction().replace(R.id.container, NotificationFragment.newInstance()).commit();
+			}else if(layout == LAYOUT_SETTINGS){
+				FragmentManager manager = getSupportFragmentManager();
+				manager.beginTransaction().replace(R.id.container, SettingsFragment.newInstance()).commit();
 			}
 		}
 
@@ -97,12 +113,38 @@ public class DrawerStandardActivity extends AppCompatActivity
 		switch (id){
 			case R.id.nav_home:
 				intent = new Intent(this, DrawerActivity.class);
+				intent.putExtra("layout", DrawerActivity.LAYOUT_HOME);
 				startActivity(intent);
 				finish();
+				break;
+			case R.id.nav_klub:
+				intent = new Intent(this, DrawerStandardActivity.class);
+				intent.putExtra("title", "Klub Radio");
+				intent.putExtra("layout", DrawerStandardActivity.LAYOUT_CLUB);
+				startActivity(intent);
 				break;
 			case R.id.nav_profile:
 				intent = new Intent(this, CollapseActivity.class);
 				intent.putExtra("layout", CollapseActivity.LAYOUT_PERSON_PROFILE);
+				intent.putExtra("title", "Dimas Danang");
+				startActivity(intent);
+				break;
+			case R.id.nav_notification:
+				intent = new Intent(this, DrawerStandardActivity.class);
+				intent.putExtra("title", "Notifications");
+				intent.putExtra("layout", DrawerStandardActivity.LAYOUT_NOTIFICATION);
+				startActivity(intent);
+				break;
+			case R.id.nav_virtual_card:
+				intent = new Intent(this, DrawerActivity.class);
+				intent.putExtra("title", "Virtual Card");
+				intent.putExtra("layout", DrawerActivity.LAYOUT_VIRTUAL_CARD);
+				startActivity(intent);
+				break;
+			case R.id.nav_setting:
+				intent = new Intent(this, DrawerStandardActivity.class);
+				intent.putExtra("title", "Settings");
+				intent.putExtra("layout", DrawerStandardActivity.LAYOUT_SETTINGS);
 				startActivity(intent);
 				break;
 		}
