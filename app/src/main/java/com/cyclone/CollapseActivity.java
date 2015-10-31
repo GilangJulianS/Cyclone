@@ -3,24 +3,37 @@ package com.cyclone;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.cyclone.fragment.PersonProfileFragment;
+import com.cyclone.fragment.PlayerFragment;
 import com.cyclone.fragment.ProgramPageFragment;
 import com.cyclone.fragment.RadioProfileFragment;
 
-public class CollapseActivity extends AppCompatActivity {
+public class CollapseActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
 
 	public static final int LAYOUT_PROGRAM_PAGE = 101;
 	public static final int LAYOUT_PERSON_PROFILE = 102;
+	public static final int LAYOUT_PLAYER = 103;
+
+	private GestureDetectorCompat gd;
+	public AppBarLayout appBarLayout;
+	public boolean isExpanded = true;
+	public boolean changing = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +63,9 @@ public class CollapseActivity extends AppCompatActivity {
 			} else if (layout == LAYOUT_PERSON_PROFILE) {
 				manager.beginTransaction().replace(R.id.container, PersonProfileFragment.newInstance
 						(mode, transitionId)).commit();
+			} else if(layout == LAYOUT_PLAYER){
+				manager.beginTransaction().replace(R.id.container, PlayerFragment.newInstance())
+						.commit();
 			}
 		}
 //		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -60,6 +76,34 @@ public class CollapseActivity extends AppCompatActivity {
 //						.setAction("Action", null).show();
 //			}
 //		});
+		gd = new GestureDetectorCompat(this, this);
+		CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
+		layout.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				System.out.println("touch");
+				if(!changing)
+					return gd.onTouchEvent(event);
+				else
+					return true;
+			}
+		});
+
+
+		appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
+		appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+			@Override
+			public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+				float percent = (float)Math.abs(verticalOffset) / (float)appBarLayout
+						.getTotalScrollRange()
+						* 100;
+//				System.out.println(percent);
+				if(percent == 100 || percent == 0){
+					changing = false;
+//					System.out.println("finish");
+				}
+			}
+		});
 	}
 
 	@Override
@@ -83,6 +127,47 @@ public class CollapseActivity extends AppCompatActivity {
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+		System.out.println("fling header: " + velocityX + " " + velocityY);
+		if(Math.abs(velocityY) > 200){
+			changing = true;
+			if(velocityY < 0){
+				appBarLayout.setExpanded(false);
+				System.out.println("collapsed");
+			}else if(velocityY > 0){
+				appBarLayout.setExpanded(true);
+				System.out.println("expanded");
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean onDown(MotionEvent e) {
+		return false;
+	}
+
+	@Override
+	public void onShowPress(MotionEvent e) {
+
+	}
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent e) {
+		return false;
+	}
+
+	@Override
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+		return false;
+	}
+
+	@Override
+	public void onLongPress(MotionEvent e) {
+
 	}
 
 }

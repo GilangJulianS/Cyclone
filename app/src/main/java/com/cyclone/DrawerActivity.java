@@ -150,6 +150,12 @@ public class DrawerActivity extends AppCompatActivity
 				intent.putExtra("layout", DrawerStandardActivity.LAYOUT_SETTINGS);
 				startActivity(intent);
 				break;
+			case R.id.nav_player:
+				intent = new Intent(this, CollapseActivity.class);
+				intent.putExtra("title", "Player");
+				intent.putExtra("layout", CollapseActivity.LAYOUT_PLAYER);
+				startActivity(intent);
+				break;
 		}
 
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

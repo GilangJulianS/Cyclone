@@ -44,6 +44,7 @@ public class VirtualCardFragment extends Fragment {
 			View header = inflater.inflate(R.layout.part_header_virtual_card, parallaxHeader,
 					false);
 			setupBackground(header);
+			parallaxHeader.removeAllViews();
 			parallaxHeader.addView(header);
 		}
 	}

@@ -65,6 +65,7 @@ public class RadioProfileFragment extends Fragment {
 			LayoutInflater inflater = activity.getLayoutInflater();
 			View header = inflater.inflate(R.layout.part_header_radio_profile, parallaxHeader,
 					false);
+			parallaxHeader.removeAllViews();
 			parallaxHeader.addView(header);
 		}
 	}

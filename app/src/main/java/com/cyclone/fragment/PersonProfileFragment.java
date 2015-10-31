@@ -89,6 +89,7 @@ public class PersonProfileFragment extends Fragment {
 			View header = inflater.inflate(R.layout.part_header_person_profile, parallaxHeader,
 					false);
 			setupHeader(header, "");
+			parallaxHeader.removeAllViews();
 			parallaxHeader.addView(header);
 		}
 	}

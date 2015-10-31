@@ -2,6 +2,9 @@
 <android.support.v4.widget.NestedScrollView
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	app:layout_behavior="@string/appbar_scrolling_view_behavior"
+	android:clipToPadding="false"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<LinearLayout

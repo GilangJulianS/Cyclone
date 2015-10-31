@@ -40,6 +40,7 @@ public class ProgramPageFragment extends Fragment {
 			LayoutInflater inflater = activity.getLayoutInflater();
 			View header = inflater.inflate(R.layout.part_header_program_page, parallaxHeader,
 					false);
+			parallaxHeader.removeAllViews();
 			parallaxHeader.addView(header);
 		}
 	}
