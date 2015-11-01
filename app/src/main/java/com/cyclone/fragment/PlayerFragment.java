@@ -36,6 +36,7 @@ import com.cyclone.CollapseActivity;
 import com.cyclone.R;
 import com.cyclone.custom.SongAdapter;
 import com.cyclone.model.Song;
+import com.wunderlist.slidinglayer.SlidingLayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,11 +57,12 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 	private LinearLayoutManager layoutManager;
 	private CollapseActivity activity;
 	private GestureDetectorCompat gd;
-	private ImageButton btnMinimize, btnRepeat, btnPrevious, btnPlay, btnNext, btnShuffle;
+	private ImageButton btnMinimize, btnRepeat, btnPrevious, btnPlay, btnNext, btnShuffle, btnMenu;
 	private ViewGroup groupInfo, groupControl;
 	private ImageView imgCover, imgTemp;
 	private View minimizedPlayer;
 	private TextView txtTitle, txtArtist, txtTotalTime;
+	private SlidingLayer slidingLayer;
 
 	public PlayerFragment(){}
 
@@ -180,6 +182,8 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		groupControl = (ViewGroup) v.findViewById(R.id.group_player_control);
 		imgCover = (ImageView) v.findViewById(R.id.img_cover);
 		imgTemp = (ImageView) v.findViewById(R.id.img_temp);
+		slidingLayer = (SlidingLayer) v.findViewById(R.id.sliding_layer);
+		btnMenu = (ImageButton) v.findViewById(R.id.btn_menu);
 
 		if(state == STATE_PLAYING)
 			btnPlay.setImageResource(R.drawable.ic_pause_white_48dp);
@@ -199,6 +203,14 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 				SharedPreferences.Editor editor = pref.edit();
 				editor.putInt("state", state);
 				editor.commit();
+			}
+		});
+
+
+		btnMenu.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				slidingLayer.openLayer(true);
 			}
 		});
 
