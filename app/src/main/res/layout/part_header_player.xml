@@ -5,13 +5,26 @@
   	android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<ImageView
-		android:id="@+id/img_cover"
+	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_weight="1"
-		android:scaleType="centerCrop"
-		android:src="@drawable/wallpaper"/>
+		android:layout_weight="1">
+
+		<ImageView
+			android:id="@+id/img_temp"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scaleType="centerCrop"
+			android:src="@drawable/wallpaper"/>
+
+		<ImageView
+			android:id="@+id/img_cover"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scaleType="centerCrop"
+			android:src="@drawable/wallpaper"/>
+
+	</RelativeLayout>
 
 	<LinearLayout
 		android:id="@+id/group_player_info"

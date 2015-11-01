@@ -1,10 +1,13 @@
 package com.cyclone.fragment;
 
+import android.animation.Animator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
@@ -15,7 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,16 +25,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.cyclone.CollapseActivity;
 import com.cyclone.R;
-import com.cyclone.custom.PersonAdapter;
 import com.cyclone.custom.SongAdapter;
-import com.cyclone.model.Person;
 import com.cyclone.model.Song;
 
 import java.util.ArrayList;
@@ -49,15 +51,16 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 	public static final int STATE_STOP = 101;
 	public static int state;
 	private RecyclerView recyclerView;
-	private List<Song> datas;
+	private List<Song> datas, persistentDatas;
 	private SongAdapter adapter;
 	private LinearLayoutManager layoutManager;
 	private CollapseActivity activity;
 	private GestureDetectorCompat gd;
 	private ImageButton btnMinimize, btnRepeat, btnPrevious, btnPlay, btnNext, btnShuffle;
 	private ViewGroup groupInfo, groupControl;
-	private ImageView imgCover;
+	private ImageView imgCover, imgTemp;
 	private View minimizedPlayer;
+	private TextView txtTitle, txtArtist, txtTotalTime;
 
 	public PlayerFragment(){}
 
@@ -78,7 +81,7 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 
 
 		adapter = new SongAdapter(getActivity(), "");
-		datas = parse("");
+
 		SlideInUpAnimator slideAnimator = new SlideInUpAnimator(new
 				DecelerateInterpolator());
 		slideAnimator.setAddDuration(500);
@@ -136,6 +139,10 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 				.preference_key), Context.MODE_PRIVATE);
 		state = pref.getInt("state", STATE_STOP);
 
+		datas = parse("");
+		persistentDatas = new ArrayList<>();
+		persistentDatas.addAll(datas);
+
 		AppCompatActivity activity;
 		if(context instanceof CollapseActivity){
 			this.activity = (CollapseActivity) context;
@@ -166,6 +173,13 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		btnPlay = (ImageButton) v.findViewById(R.id.btn_play);
 		btnNext = (ImageButton) v.findViewById(R.id.btn_next);
 		btnShuffle = (ImageButton) v.findViewById(R.id.btn_shuffle);
+		txtTitle = (TextView) v.findViewById(R.id.txt_title);
+		txtArtist = (TextView) v.findViewById(R.id.txt_artist);
+		txtTotalTime = (TextView) v.findViewById(R.id.txt_total_time);
+		groupInfo = (ViewGroup) v.findViewById(R.id.group_player_info);
+		groupControl = (ViewGroup) v.findViewById(R.id.group_player_control);
+		imgCover = (ImageView) v.findViewById(R.id.img_cover);
+		imgTemp = (ImageView) v.findViewById(R.id.img_temp);
 
 		if(state == STATE_PLAYING)
 			btnPlay.setImageResource(R.drawable.ic_pause_white_48dp);
@@ -173,10 +187,10 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		btnPlay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(state == STATE_STOP){
+				if (state == STATE_STOP) {
 					state = STATE_PLAYING;
 					btnPlay.setImageResource(R.drawable.ic_pause_white_48dp);
-				}else{
+				} else {
 					state = STATE_STOP;
 					btnPlay.setImageResource(R.drawable.ic_play_arrow_white_48dp);
 				}
@@ -188,19 +202,36 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 			}
 		});
 
+		btnNext.setOnClickListener(new View.OnClickListener() {
+
+			private int counter = 0;
+			@Override
+			public void onClick(View v) {
+				imgTemp.setImageDrawable(imgCover.getDrawable());
+				if (counter % 2 == 0) {
+					imgCover.setImageResource(R.drawable.background_login);
+				} else {
+					imgCover.setImageResource(R.drawable.wallpaper);
+				}
+				if(Build.VERSION.SDK_INT >= 21)
+					showImage(imgCover);
+				txtTitle.setText(persistentDatas.get(counter % persistentDatas.size()).title);
+				txtArtist.setText(persistentDatas.get(counter % persistentDatas.size()).artist);
+				txtTotalTime.setText(persistentDatas.get(counter % persistentDatas.size()).duration);
+				counter++;
+			}
+		});
+
 		btnMinimize = (ImageButton) v.findViewById(R.id.btn_minimize);
 		btnMinimize.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(activity != null){
+				if (activity != null) {
 					activity.changing = true;
 					activity.appBarLayout.setExpanded(false);
 				}
 			}
 		});
-		groupInfo = (ViewGroup) v.findViewById(R.id.group_player_info);
-		groupControl = (ViewGroup) v.findViewById(R.id.group_player_control);
-		imgCover = (ImageView) v.findViewById(R.id.img_cover);
 		imgCover.setImageResource(R.drawable.wallpaper);
 		Bitmap bitmap = ((BitmapDrawable)imgCover.getDrawable()).getBitmap();
 		Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
@@ -316,5 +347,24 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		songs.add(new Song("Extraordinary", "Clean Bandit", "04:48"));
 		songs.add(new Song("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
 		return songs;
+	}
+
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+	public void showImage(final View v){
+
+		// get the center for the clipping circle
+		int cx = v.getWidth() / 2;
+		int cy = v.getHeight() / 2;
+
+		// get the final radius for the clipping circle
+		int finalRadius = Math.max(v.getWidth(), v.getHeight());
+
+		// create the animator for this view (the start radius is zero)
+		Animator anim =
+				ViewAnimationUtils.createCircularReveal(v, cx, cy, 0, finalRadius);
+
+		// make the view visible and start the animation
+		v.setVisibility(View.VISIBLE);
+		anim.start();
 	}
 }
