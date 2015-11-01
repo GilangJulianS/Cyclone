@@ -15,6 +15,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GestureDetectorCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
@@ -65,6 +66,7 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 	private View minimizedPlayer;
 	private TextView txtTitle, txtArtist, txtTotalTime;
 	private SlidingLayer slidingLayer;
+	private SwipeRefreshLayout swipeLayout;
 
 	public PlayerFragment(){}
 
@@ -76,8 +78,12 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
 		setHasOptionsMenu(true);
-
 		View v = inflater.inflate(R.layout.fragment_recycler, parent, false);
+
+		swipeLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
+		swipeLayout.setEnabled(false);
+
+
 		bindView(v);
 
 		layoutManager = new LinearLayoutManager(getActivity());
@@ -215,6 +221,34 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 			@Override
 			public void onClick(View v) {
 				slidingLayer.openLayer(true);
+			}
+		});
+
+		btnRepeat.setOnClickListener(new View.OnClickListener() {
+			private boolean activated = false;
+			@Override
+			public void onClick(View v) {
+				if(!activated) {
+					btnRepeat.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorAccent));
+					activated = true;
+				}else{
+					btnRepeat.setColorFilter(Color.WHITE);
+					activated = false;
+				}
+			}
+		});
+
+		btnShuffle.setOnClickListener(new View.OnClickListener() {
+			private boolean activated = false;
+			@Override
+			public void onClick(View v) {
+				if(!activated) {
+					btnShuffle.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorAccent));
+					activated = true;
+				}else{
+					btnShuffle.setColorFilter(Color.WHITE);
+					activated = false;
+				}
 			}
 		});
 

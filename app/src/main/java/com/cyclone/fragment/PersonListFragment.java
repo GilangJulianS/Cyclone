@@ -3,6 +3,7 @@ package com.cyclone.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ public class PersonListFragment extends Fragment {
 	private RecyclerView recyclerView;
 	private List<Person> datas;
 	private UniversalAdapter adapter;
+	private SwipeRefreshLayout swipeLayout;
 
 	public PersonListFragment(){}
 
@@ -39,6 +41,10 @@ public class PersonListFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstaceState){
 		View v = inflater.inflate(R.layout.fragment_recycler, parent, false);
+
+		swipeLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
+		swipeLayout.setEnabled(false);
+
 		recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
 
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

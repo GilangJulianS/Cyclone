@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,14 +17,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
 
+import com.cyclone.custom.OnOffsetChangedListener;
 import com.cyclone.fragment.AlbumFragment;
 import com.cyclone.fragment.ArtistFragment;
 import com.cyclone.fragment.PersonProfileFragment;
 import com.cyclone.fragment.PlayerFragment;
 import com.cyclone.fragment.ProgramPageFragment;
-import com.cyclone.fragment.RadioProfileFragment;
 
 public class CollapseActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
 
@@ -42,6 +39,7 @@ public class CollapseActivity extends AppCompatActivity implements GestureDetect
 	public boolean changing = false;
 
 	private View miniPlayer;
+	private OnOffsetChangedListener callback;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +63,7 @@ public class CollapseActivity extends AppCompatActivity implements GestureDetect
 		toolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
 
 		FragmentManager manager = getSupportFragmentManager();
-		Intent caller = getIntent();
+		final Intent caller = getIntent();
 		if(caller != null) {
 			int layout = caller.getExtras().getInt("layout", -1);
 			int mode = caller.getExtras().getInt("mode", -1);
@@ -75,18 +73,23 @@ public class CollapseActivity extends AppCompatActivity implements GestureDetect
 				toolbarLayout.setTitle(title);
 			}
 			if (layout == LAYOUT_PROGRAM_PAGE) {
+				callback = null;
 				manager.beginTransaction().replace(R.id.container, ProgramPageFragment
 						.newInstance()).commit();
 			} else if (layout == LAYOUT_PERSON_PROFILE) {
-				manager.beginTransaction().replace(R.id.container, PersonProfileFragment.newInstance
-						(mode, transitionId)).commit();
+				PersonProfileFragment fragment = PersonProfileFragment.newInstance(mode, transitionId);
+				callback = fragment;
+				manager.beginTransaction().replace(R.id.container, fragment).commit();
 			} else if(layout == LAYOUT_PLAYER){
+				callback = null;
 				manager.beginTransaction().replace(R.id.container, PlayerFragment.newInstance())
 						.commit();
 			}else if(layout == LAYOUT_ALBUM){
+				callback = null;
 				manager.beginTransaction().replace(R.id.container, AlbumFragment.newInstance())
 						.commit();
 			}else if(layout == LAYOUT_ARTIST){
+				callback = null;
 				manager.beginTransaction().replace(R.id.container, ArtistFragment.newInstance())
 						.commit();
 			}
@@ -125,6 +128,9 @@ public class CollapseActivity extends AppCompatActivity implements GestureDetect
 				if(percent == 100 || percent == 0){
 					changing = false;
 //					System.out.println("finish");
+				}
+				if(callback != null) {
+					callback.onChanged(percent);
 				}
 			}
 		});

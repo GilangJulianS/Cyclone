@@ -6,18 +6,19 @@
 	<ImageView
 		android:id="@+id/img_header_background"
 		android:layout_width="match_parent"
-		android:layout_height="260dp"
+		android:layout_height="200dp"
 		android:scaleType="centerCrop"
 		android:background="@color/colorPrimaryDefault"/>
 
 	<View
 		android:layout_width="match_parent"
-		android:layout_height="260dp"
+		android:layout_height="200dp"
 		android:background="@color/dim_filter"/>
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="260dp"
+		android:layout_height="wrap_content"
+		android:paddingTop="40dp"
 		android:gravity="center_horizontal"
 		android:orientation="vertical">
 
@@ -26,7 +27,6 @@
 			android:layout_width="60dp"
 			android:layout_height="60dp"
 			android:transitionName="picture"
-			android:layout_marginTop="40dp"
 			android:src="@drawable/background_login"/>
 
 		<TextView
@@ -149,47 +149,77 @@
 		</LinearLayout>
 
 		<LinearLayout
-			android:id="@+id/group_btn_own_profile"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="5dp"
-			android:gravity="center_horizontal"
-			android:orientation="horizontal">
+			android:layout_height="match_parent"
+			android:layout_marginTop="15dp"
+			android:paddingTop="10dp"
+			android:background="#fff"
+			android:orientation="vertical">
 
-			<Button
-				android:id="@+id/btn_add_showlist"
-				android:layout_width="wrap_content"
+			<LinearLayout
+				android:id="@+id/group_btn_own_profile"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:drawableLeft="@drawable/ic_add_black_36dp"
-				android:theme="@style/ButtonTheme"
-				android:text="Add Show List"/>
+				android:gravity="center_horizontal"
+				android:orientation="horizontal">
 
-			<Button
-				android:id="@+id/btn_upload"
-				android:layout_width="wrap_content"
+
+				<Button
+					android:id="@+id/btn_add_showlist"
+					android:layout_width="wrap_content"
+					android:layout_height="30dp"
+					android:paddingLeft="20dp"
+					android:paddingRight="20dp"
+					android:drawableLeft="@drawable/ic_add_black_24dp"
+					android:background="@drawable/btn_header_standard"
+					android:drawableTint="@color/colorAccentDark"
+					android:textColor="@color/colorAccentDark"
+					android:text="Add Show List"/>
+
+				<Button
+					android:id="@+id/btn_upload"
+					android:layout_width="wrap_content"
+					android:layout_height="30dp"
+					android:paddingLeft="20dp"
+					android:paddingRight="20dp"
+					android:layout_marginLeft="20dp"
+					android:drawableLeft="@drawable/ic_file_upload_black_24dp"
+					android:background="@drawable/btn_header_standard"
+					android:drawableTint="@color/colorAccentDark"
+					android:textColor="@color/colorAccentDark"
+					android:text="Upload"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/group_btn_others_profile"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:drawableLeft="@drawable/ic_file_upload_black_36dp"
-				android:theme="@style/ButtonTheme"
-				android:text="Upload"/>
+				android:gravity="center_horizontal"
+				android:visibility="gone"
+				android:orientation="horizontal">
 
-		</LinearLayout>
+				<Button
+					android:id="@+id/btn_follow"
+					android:layout_width="wrap_content"
+					android:layout_height="30dp"
+					android:paddingLeft="20dp"
+					android:paddingRight="20dp"
+					android:drawableLeft="@drawable/ic_add_black_24dp"
+					android:animateLayoutChanges="true"
+					android:background="@drawable/btn_header_standard"
+					android:drawableTint="@color/colorAccentDark"
+					android:textColor="@color/colorAccentDark"
+					android:text="Follow"/>
 
-		<LinearLayout
-			android:id="@+id/group_btn_others_profile"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="5dp"
-			android:gravity="center_horizontal"
-			android:orientation="horizontal">
+			</LinearLayout>
 
-			<Button
-				android:id="@+id/btn_follow"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:drawableLeft="@drawable/ic_add_black_36dp"
-				android:animateLayoutChanges="true"
-				android:theme="@style/ButtonTheme"
-				android:text="Follow"/>
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_gravity="bottom"
+				android:layout_marginTop="10dp"
+				android:background="#888"/>
 
 		</LinearLayout>
 

@@ -4,5 +4,6 @@
     <color name="colorPrimary">#E74C3C</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FFCB2E</color>
+    <color name="colorAccentDark">#ED7D31</color>
     <color name="dim_filter">#99000000</color>
 </resources>
