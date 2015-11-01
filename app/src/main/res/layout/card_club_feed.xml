@@ -45,16 +45,15 @@
 					android:id="@+id/txt_header_name"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="22sp"
-					android:textStyle="bold"
-					android:text="Imam Darto"/>
+					android:text="Imam Darto created new Playlist blablablabla"/>
+
 
 				<TextView
 					android:id="@+id/txt_header_info"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_below="@id/txt_header_name"
-					android:textSize="14sp"
+					android:textSize="10sp"
 					android:text="2 Hours ago | Playlist"/>
 
 
@@ -77,7 +76,7 @@
 			android:layout_marginLeft="15dp"
 			android:layout_marginRight="15dp"
 			android:text="Funky Sunshine"
-			android:textSize="24sp"
+			android:textSize="16sp"
 			android:textStyle="bold"/>
 
 		<TextView
@@ -96,6 +95,7 @@
 			android:layout_marginTop="2dp"
 			android:layout_marginLeft="15dp"
 			android:layout_marginRight="15dp"
+			android:textSize="12sp"
 			android:text="40 tracks"/>
 
 		<LinearLayout
@@ -143,6 +143,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="bottom"
+				android:textSize="12sp"
 				android:text="8237 likes | 20 comments"/>
 
 		</LinearLayout>

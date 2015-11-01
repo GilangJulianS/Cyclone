@@ -2,9 +2,13 @@ package com.cyclone.custom;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,6 +35,7 @@ public class ClubFeedHolder extends UniversalHolder{
 	public ImageButton btnLike;
 	public ImageButton btnShare;
 	public ImageButton btnComment;
+	private Activity activity;
 	private int transitionId;
 	public static int autoId = 0;
 
@@ -53,6 +58,7 @@ public class ClubFeedHolder extends UniversalHolder{
 
 	@Override
 	public void bind(Object object, Activity activity, int position) {
+		this.activity = activity;
 		bind((Post)object, activity);
 	}
 
@@ -61,7 +67,7 @@ public class ClubFeedHolder extends UniversalHolder{
 		imgUser.setImageResource(R.drawable.background_login);
 		if(Build.VERSION.SDK_INT >= 21)
 			imgUser.setTransitionName("profile" + transitionId);
-		txtHeaderName.setText(p.headerName);
+		txtHeaderName.setText(Html.fromHtml(p.headerName));
 		txtHeaderInfo.setText(p.timestamp + " | " + p.playlistType);
 		imgPost.setImageResource(R.drawable.background_login);
 		txtPostTitle.setText(p.postTitle);
@@ -71,7 +77,7 @@ public class ClubFeedHolder extends UniversalHolder{
 		btnLike.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				btnLike.setColorFilter(Color.parseColor("#E91E63"));
 			}
 		});
 		btnShare.setOnClickListener(new View.OnClickListener() {

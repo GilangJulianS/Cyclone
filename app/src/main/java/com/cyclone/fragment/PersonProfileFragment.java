@@ -61,20 +61,24 @@ public class PersonProfileFragment extends Fragment {
 	}
 
 	public void parse(String json, UniversalAdapter adapter){
-		adapter.add(new Post("", "Imam Darto", "1 Hour ago", "Mix", "", "Funky Sunshine", "New " +
-				"playlist by me", "40 tracks", 52, 20, Post.TYPE_POST));
-		adapter.add(new Post("", "Desta", "2 Hour ago", "Playlist", "", "Pop 2015", "2015 top " +
-				"hits", "20 tracks", 1024, 56, Post.TYPE_POST));
-		adapter.add(new Post("", "News", "2 Hour ago", "", "", "Emil Prihatin Artis Dipal...",
-				"K-Lite FM Bandung\nSahabar K-Lite, Wali Kota Bandung Ridwan Kamil mengaku " +
-						"prihatin atas insiden pemalakan...", "", 100, 200, Post.TYPE_NEWS));
-		adapter.add(new Post("", "Desta", "4 Hour ago", "Playlist", "", "Pop 2015", "2015 top " +
-				"hits", "20 tracks", 1024, 56, Post.TYPE_POST));
-		adapter.add(new Post("", "Desta", "4 Hour ago", "Playlist", "", "Pop 2015", "2015 top " +
-				"hits", "20 tracks", 1024, 56, Post.TYPE_POST));
-		adapter.add(new Post("", "News", "2 Hour ago", "", "", "Emil Prihatin Artis Dipal...",
-				"K-Lite FM Bandung\nSahabar K-Lite, Wali Kota Bandung Ridwan Kamil mengaku " +
-						"prihatin atas insiden pemalakan...", "", 100, 200, Post.TYPE_NEWS));
+		adapter.add(new Post("", "<b>Imam Darto</b> created new <b>Mix</b>", "1 Hour ago", "Mix",
+				"", "Funky Sunshine", "New playlist by me", "40 tracks", 52, 20, Post.TYPE_POST));
+		adapter.add(new Post("", "<b>Desta</b> liked a Playlist", "2 Hour ago", "Playlist",
+				"", "Pop 2015", "2015 top hits", "20 tracks", 1024, 56, Post.TYPE_POST));
+		adapter.add(new Post("", "<b>Desta</b> created new <b>Playlist</b>", "4 Hour ago",
+				"Playlist", "", "Pop 2015", "2015 top hits", "20 tracks", 1024, 56, Post
+				.TYPE_POST));
+		adapter.add(new Post("", "<b>Desta</b> shared a <b>Playlist</b>", "4 Hour ago", "Playlist",
+				"", "Pop 2015", "2015 top hits", "20 tracks", 1024, 56, Post.TYPE_POST));
+		adapter.add(new Post("", "<b>Imam Darto</b> created new <b>Mix</b>", "1 Hour ago", "Mix",
+				"", "Funky Sunshine", "New playlist by me", "40 tracks", 52, 20, Post.TYPE_POST));
+		adapter.add(new Post("", "<b>Desta</b> liked a Playlist", "2 Hour ago", "Playlist",
+				"", "Pop 2015", "2015 top hits", "20 tracks", 1024, 56, Post.TYPE_POST));
+		adapter.add(new Post("", "<b>Desta</b> created new <b>Playlist</b>", "4 Hour ago",
+				"Playlist", "", "Pop 2015", "2015 top hits", "20 tracks", 1024, 56, Post
+				.TYPE_POST));
+		adapter.add(new Post("", "<b>Desta</b> shared a <b>Playlist</b>", "4 Hour ago", "Playlist",
+				"", "Pop 2015", "2015 top hits", "20 tracks", 1024, 56, Post.TYPE_POST));
 	}
 
 	@Override

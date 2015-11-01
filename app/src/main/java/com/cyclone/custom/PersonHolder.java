@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,8 +25,7 @@ public class PersonHolder extends UniversalHolder{
 	public ImageView imgUser;
 	public TextView txtName;
 	public TextView txtUsername;
-	public CardView card;
-	public ImageButton btnFollow;
+	public ViewGroup card;
 	private int transitionId;
 	public static int autoId = 0;
 
@@ -34,8 +34,7 @@ public class PersonHolder extends UniversalHolder{
 		imgUser = (ImageView)v.findViewById(R.id.img_user);
 		txtName = (TextView) v.findViewById(R.id.txt_name);
 		txtUsername = (TextView) v.findViewById(R.id.txt_username);
-		btnFollow = (ImageButton) v.findViewById(R.id.btn_follow);
-		card = (CardView) v.findViewById(R.id.card_person);
+		card = (ViewGroup) v.findViewById(R.id.card_person);
 		transitionId = autoId;
 		autoId++;
 	}
@@ -49,13 +48,6 @@ public class PersonHolder extends UniversalHolder{
 		imgUser.setImageResource(R.drawable.background_login);
 		txtName.setText(person.name);
 		txtUsername.setText(person.username);
-		final ImageButton button = btnFollow;
-		btnFollow.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				button.setVisibility(View.GONE);
-			}
-		});
 		final ImageView imageView = imgUser;
 		card.setOnClickListener(new View.OnClickListener() {
 			@Override

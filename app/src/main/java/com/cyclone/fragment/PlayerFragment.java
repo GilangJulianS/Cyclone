@@ -219,7 +219,6 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		});
 
 		btnNext.setOnClickListener(new View.OnClickListener() {
-
 			private int counter = 0;
 			@Override
 			public void onClick(View v) {
@@ -229,8 +228,35 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 				} else {
 					imgCover.setImageResource(R.drawable.wallpaper);
 				}
-				if(Build.VERSION.SDK_INT >= 21)
+				setPlayerColor();
+				if(Build.VERSION.SDK_INT >= 21) {
 					showImage(imgCover);
+//					showImage(groupInfo);
+//					showImage(groupControl);
+				}
+				txtTitle.setText(persistentDatas.get(counter % persistentDatas.size()).title);
+				txtArtist.setText(persistentDatas.get(counter % persistentDatas.size()).artist);
+				txtTotalTime.setText(persistentDatas.get(counter % persistentDatas.size()).duration);
+				counter++;
+			}
+		});
+
+		btnPrevious.setOnClickListener(new View.OnClickListener() {
+			private int counter = 0;
+			@Override
+			public void onClick(View v) {
+				imgTemp.setImageDrawable(imgCover.getDrawable());
+				if (counter % 2 == 0) {
+					imgCover.setImageResource(R.drawable.background_login);
+				} else {
+					imgCover.setImageResource(R.drawable.wallpaper);
+				}
+				setPlayerColor();
+				if(Build.VERSION.SDK_INT >= 21) {
+					showImage(imgCover);
+//					showImage(groupInfo);
+//					showImage(groupControl);
+				}
 				txtTitle.setText(persistentDatas.get(counter % persistentDatas.size()).title);
 				txtArtist.setText(persistentDatas.get(counter % persistentDatas.size()).artist);
 				txtTotalTime.setText(persistentDatas.get(counter % persistentDatas.size()).duration);
@@ -249,6 +275,31 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 			}
 		});
 		imgCover.setImageResource(R.drawable.wallpaper);
+		setPlayerColor();
+
+
+		btnArtist.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(activity, CollapseActivity.class);
+				i.putExtra("layout", CollapseActivity.LAYOUT_ARTIST);
+				i.putExtra("title", "Artist Name");
+				activity.startActivity(i);
+			}
+		});
+
+		btnAlbum.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(activity, CollapseActivity.class);
+				i.putExtra("layout", CollapseActivity.LAYOUT_ALBUM);
+				i.putExtra("title", "Album Name");
+				activity.startActivity(i);
+			}
+		});
+	}
+
+	public void setPlayerColor(){
 		Bitmap bitmap = ((BitmapDrawable)imgCover.getDrawable()).getBitmap();
 		Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
 
@@ -273,27 +324,6 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 				int lightColor = Color.rgb(r, g, b);
 				groupInfo.setBackgroundColor(color);
 				groupControl.setBackgroundColor(lightColor);
-			}
-		});
-
-
-		btnArtist.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(activity, CollapseActivity.class);
-				i.putExtra("layout", CollapseActivity.LAYOUT_ARTIST);
-				i.putExtra("title", "Artist Name");
-				activity.startActivity(i);
-			}
-		});
-
-		btnAlbum.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(activity, CollapseActivity.class);
-				i.putExtra("layout", CollapseActivity.LAYOUT_ALBUM);
-				i.putExtra("title", "Album Name");
-				activity.startActivity(i);
 			}
 		});
 	}
