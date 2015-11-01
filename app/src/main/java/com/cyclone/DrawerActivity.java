@@ -1,6 +1,8 @@
 package com.cyclone;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -11,18 +13,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.cyclone.fragment.ClubRadioFragment;
+import com.cyclone.fragment.PlayerFragment;
 import com.cyclone.fragment.RadioProfileFragment;
 import com.cyclone.fragment.VirtualCardFragment;
+import com.flipboard.bottomsheet.BottomSheetLayout;
 
 public class DrawerActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
 
 	public static final int LAYOUT_HOME = 101;
 	public static final int LAYOUT_VIRTUAL_CARD = 102;
+
+	private View miniPlayer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +47,6 @@ public class DrawerActivity extends AppCompatActivity
 //						.setAction("Action", null).show();
 //			}
 //		});
-
 
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -74,9 +81,19 @@ public class DrawerActivity extends AppCompatActivity
 			FragmentManager manager = getSupportFragmentManager();
 			manager.beginTransaction().replace(R.id.container, RadioProfileFragment.newInstance()).commit();
 		}
+	}
 
-
-
+	@Override
+	protected void onResume() {
+		super.onResume();
+		miniPlayer = (View) findViewById(R.id.minimized_player);
+		SharedPreferences pref = getSharedPreferences(getString(R.string.preference_key), Context
+				.MODE_PRIVATE);
+		if(pref.getInt("state", PlayerFragment.STATE_STOP) == PlayerFragment.STATE_STOP){
+			miniPlayer.setVisibility(View.GONE);
+		}else{
+			miniPlayer.setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override

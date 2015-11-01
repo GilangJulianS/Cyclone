@@ -1,6 +1,8 @@
 package com.cyclone;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -35,6 +37,8 @@ public class CollapseActivity extends AppCompatActivity implements GestureDetect
 	public boolean isExpanded = true;
 	public boolean changing = false;
 
+	private View miniPlayer;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,6 +46,15 @@ public class CollapseActivity extends AppCompatActivity implements GestureDetect
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+		miniPlayer = (View) findViewById(R.id.minimized_player);
+		SharedPreferences pref = getSharedPreferences(getString(R.string.preference_key), Context
+				.MODE_PRIVATE);
+		if(pref.getInt("state", PlayerFragment.STATE_STOP) == PlayerFragment.STATE_STOP){
+			miniPlayer.setVisibility(View.GONE);
+		}else{
+			miniPlayer.setVisibility(View.VISIBLE);
+		}
 
 		CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id
 				.collapsing_toolbar_layout);
@@ -132,7 +145,7 @@ public class CollapseActivity extends AppCompatActivity implements GestureDetect
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 		System.out.println("fling header: " + velocityX + " " + velocityY);
-		if(Math.abs(velocityY) > 200){
+		if(Math.abs(velocityY) > 50){
 			changing = true;
 			if(velocityY < 0){
 				appBarLayout.setExpanded(false);

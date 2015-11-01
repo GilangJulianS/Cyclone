@@ -8,10 +8,10 @@
 	<ImageView
 		android:id="@+id/img_cover"
 		android:layout_width="match_parent"
-		android:layout_weight="1"
 		android:layout_height="wrap_content"
+		android:layout_weight="1"
 		android:scaleType="centerCrop"
-		android:src="@drawable/background_login"/>
+		android:src="@drawable/wallpaper"/>
 
 	<LinearLayout
 		android:id="@+id/group_player_info"
@@ -71,6 +71,7 @@
 		</LinearLayout>
 
 		<SeekBar
+			android:id="@+id/seekbar"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="10dp"/>
@@ -93,6 +94,7 @@
 			<include layout="@layout/view_filler_horizontal"/>
 
 			<ImageButton
+				android:id="@+id/btn_repeat"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:background="#0000"
@@ -101,6 +103,7 @@
 			<include layout="@layout/view_filler_horizontal"/>
 
 			<ImageButton
+				android:id="@+id/btn_previous"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:background="#0000"
@@ -109,6 +112,7 @@
 			<include layout="@layout/view_filler_horizontal"/>
 
 			<ImageButton
+				android:id="@+id/btn_play"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:background="#0000"
@@ -117,6 +121,7 @@
 			<include layout="@layout/view_filler_horizontal"/>
 
 			<ImageButton
+				android:id="@+id/btn_next"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:background="#0000"
@@ -125,6 +130,7 @@
 			<include layout="@layout/view_filler_horizontal"/>
 
 			<ImageButton
+				android:id="@+id/btn_shuffle"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:background="#0000"

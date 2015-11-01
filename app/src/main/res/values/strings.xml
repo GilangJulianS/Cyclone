@@ -16,4 +16,6 @@
 
 	<string name="action_example">Example action</string>
 	<string name="title_activity_splash">SplashActivity</string>
+
+	<string name="preference_key">com.cyclone.SHARED_PREFERENCE_KEY</string>
 </resources>

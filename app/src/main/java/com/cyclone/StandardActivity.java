@@ -1,6 +1,8 @@
 package com.cyclone;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.FragmentManager;
@@ -8,11 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.cyclone.fragment.AccountSettingFragment;
 import com.cyclone.fragment.AnnouncersFragment;
 import com.cyclone.fragment.ClubRadioFragment;
 import com.cyclone.fragment.PersonListFragment;
+import com.cyclone.fragment.PlayerFragment;
 import com.cyclone.fragment.ProgramsFragment;
 
 public class StandardActivity extends AppCompatActivity {
@@ -23,6 +27,8 @@ public class StandardActivity extends AppCompatActivity {
 	public static final int LAYOUT_PEOPLE = 104;
 	public static final int LAYOUT_ACCOUNT_SETTINGS = 105;
 
+	private View miniPlayer;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,6 +36,15 @@ public class StandardActivity extends AppCompatActivity {
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+		miniPlayer = (View) findViewById(R.id.minimized_player);
+		SharedPreferences pref = getSharedPreferences(getString(R.string.preference_key), Context
+				.MODE_PRIVATE);
+		if(pref.getInt("state", PlayerFragment.STATE_STOP) == PlayerFragment.STATE_STOP){
+			miniPlayer.setVisibility(View.GONE);
+		}else{
+			miniPlayer.setVisibility(View.VISIBLE);
+		}
 
 		Intent caller =  getIntent();
 		if(caller != null) {

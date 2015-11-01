@@ -50,10 +50,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 	@Override
 	public void onBindViewHolder(ViewHolder holder, int position) {
 		Song song = datas.get(position);
-		holder.txtNumber.setText(position);
-		holder.txtInfo.setText(song.artist + " - " + song.title);
+		holder.txtTitle.setText(song.artist + " - " + song.title);
+		holder.txtArtist.setText(song.artist);
 		holder.txtDuration.setText(song.duration);
 	}
+
 
 	@Override
 	public int getItemCount() {
@@ -62,14 +63,14 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
 	public class ViewHolder extends RecyclerView.ViewHolder{
 
-		public TextView txtNumber;
-		public TextView txtInfo;
+		public TextView txtTitle;
+		public TextView txtArtist;
 		public TextView txtDuration;
 
 		public ViewHolder(View v) {
 			super(v);
-			txtNumber = (TextView) v.findViewById(R.id.txt_number);
-			txtInfo = (TextView) v.findViewById(R.id.txt_song_info);
+			txtTitle = (TextView) v.findViewById(R.id.txt_song_title);
+			txtArtist = (TextView) v.findViewById(R.id.txt_song_artist);
 			txtDuration = (TextView) v.findViewById(R.id.txt_duration);
 		}
 	}

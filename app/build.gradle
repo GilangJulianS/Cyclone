@@ -30,4 +30,5 @@ dependencies{
 	compile 'com.android.support:palette-v7:23.1.0'
 	compile 'jp.wasabeef:recyclerview-animators:2.0.0'
 	compile 'de.hdodenhof:circleimageview:2.0.0'
+	compile 'com.flipboard:bottomsheet-core:1.4.3'
 }

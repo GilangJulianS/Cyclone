@@ -1,6 +1,7 @@
 package com.cyclone.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,6 +18,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,15 +45,19 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
  */
 public class PlayerFragment extends Fragment implements GestureDetector.OnGestureListener{
 
+	public static final int STATE_PLAYING = 100;
+	public static final int STATE_STOP = 101;
+	public static int state;
 	private RecyclerView recyclerView;
 	private List<Song> datas;
 	private SongAdapter adapter;
 	private LinearLayoutManager layoutManager;
 	private CollapseActivity activity;
 	private GestureDetectorCompat gd;
-	private ImageButton btnMinimize;
+	private ImageButton btnMinimize, btnRepeat, btnPrevious, btnPlay, btnNext, btnShuffle;
 	private ViewGroup groupInfo, groupControl;
 	private ImageView imgCover;
+	private View minimizedPlayer;
 
 	public PlayerFragment(){}
 
@@ -60,8 +68,10 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
+		setHasOptionsMenu(true);
+
 		View v = inflater.inflate(R.layout.fragment_recycler, parent, false);
-		recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
+		bindView(v);
 
 		layoutManager = new LinearLayoutManager(getActivity());
 		recyclerView.setLayoutManager(layoutManager);
@@ -97,11 +107,35 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		return v;
 	}
 
+	public void bindView(View v){
+		recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
 
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.player, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if(id == R.id.btn_collapse){
+			activity.changing = true;
+			activity.appBarLayout.setExpanded(true);
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
 	@Override
 	public void onAttach(Context context){
 		super.onAttach(context);
+
+		SharedPreferences pref = context.getSharedPreferences(getString(R.string
+				.preference_key), Context.MODE_PRIVATE);
+		state = pref.getInt("state", STATE_STOP);
+
 		AppCompatActivity activity;
 		if(context instanceof CollapseActivity){
 			this.activity = (CollapseActivity) context;
@@ -114,11 +148,46 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 			View header = inflater.inflate(R.layout.part_header_player, parallaxHeader,
 					false);
 			bindHeaderView(header);
+			minimizedPlayer = activity.findViewById(R.id.minimized_player);
+			minimizedPlayer.setVisibility(View.GONE);
 			parallaxHeader.addView(header);
 		}
 	}
 
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		minimizedPlayer.setVisibility(View.VISIBLE);
+	}
+
 	public void bindHeaderView(View v){
+		btnRepeat = (ImageButton) v.findViewById(R.id.btn_repeat);
+		btnPrevious = (ImageButton) v.findViewById(R.id.btn_previous);
+		btnPlay = (ImageButton) v.findViewById(R.id.btn_play);
+		btnNext = (ImageButton) v.findViewById(R.id.btn_next);
+		btnShuffle = (ImageButton) v.findViewById(R.id.btn_shuffle);
+
+		if(state == STATE_PLAYING)
+			btnPlay.setImageResource(R.drawable.ic_pause_white_48dp);
+
+		btnPlay.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(state == STATE_STOP){
+					state = STATE_PLAYING;
+					btnPlay.setImageResource(R.drawable.ic_pause_white_48dp);
+				}else{
+					state = STATE_STOP;
+					btnPlay.setImageResource(R.drawable.ic_play_arrow_white_48dp);
+				}
+				SharedPreferences pref = getActivity().getSharedPreferences(getString(R.string
+						.preference_key), Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = pref.edit();
+				editor.putInt("state", state);
+				editor.commit();
+			}
+		});
+
 		btnMinimize = (ImageButton) v.findViewById(R.id.btn_minimize);
 		btnMinimize.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -132,7 +201,7 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		groupInfo = (ViewGroup) v.findViewById(R.id.group_player_info);
 		groupControl = (ViewGroup) v.findViewById(R.id.group_player_control);
 		imgCover = (ImageView) v.findViewById(R.id.img_cover);
-		imgCover.setImageResource(R.drawable.background_login);
+		imgCover.setImageResource(R.drawable.wallpaper);
 		Bitmap bitmap = ((BitmapDrawable)imgCover.getDrawable()).getBitmap();
 		Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
 
@@ -165,7 +234,7 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 		System.out.println("fling recycler: " + velocityX + " " + velocityY);
 		AppBarLayout appBarLayout = activity.appBarLayout;
-		if(Math.abs(velocityY) > 200){
+		if(Math.abs(velocityY) > 50){
 			activity.changing = true;
 			if(velocityY > 0){
 				appBarLayout.setExpanded(true);
