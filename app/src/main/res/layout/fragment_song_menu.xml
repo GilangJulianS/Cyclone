@@ -93,6 +93,7 @@
 	</LinearLayout>
 
 	<LinearLayout
+		android:id="@+id/btn_artist"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center_vertical"
@@ -117,6 +118,7 @@
 	</LinearLayout>
 
 	<LinearLayout
+		android:id="@+id/btn_album"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center_vertical"

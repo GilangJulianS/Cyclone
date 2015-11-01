@@ -8,12 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cyclone.R;
+import com.cyclone.model.Album;
 import com.cyclone.model.Announcer;
 import com.cyclone.model.Notification;
 import com.cyclone.model.Person;
 import com.cyclone.model.Post;
 import com.cyclone.model.Program;
 import com.cyclone.model.Playlist;
+import com.cyclone.model.Section;
+import com.cyclone.model.Song;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,9 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 	public static final int TYPE_PERSON = 104;
 	public static final int TYPE_PLAYLIST = 105;
 	public static final int TYPE_PROGRAM = 106;
+	public static final int TYPE_SECTION = 107;
+	public static final int TYPE_SONG = 108;
+	public static final int TYPE_ALBUM = 109;
 
 	public List<Object> datas;
 	private Activity activity;
@@ -73,6 +79,9 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 		else if(o instanceof Person) return TYPE_PERSON;
 		else if(o instanceof Program) return TYPE_PROGRAM;
 		else if(o instanceof Playlist) return TYPE_PLAYLIST;
+		else if(o instanceof Section) return TYPE_SECTION;
+		else if(o instanceof Song) return TYPE_SONG;
+		else if(o instanceof Album) return TYPE_ALBUM;
 		return -1;
 	}
 
@@ -84,6 +93,9 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 			case TYPE_PERSON: return R.layout.card_person;
 			case TYPE_PROGRAM: return R.layout.card_program;
 			case TYPE_PLAYLIST: return R.layout.card_playlist;
+			case TYPE_SECTION: return R.layout.card_section;
+			case TYPE_SONG: return R.layout.card_song;
+			case TYPE_ALBUM: return R.layout.card_album;
 			default: return -1;
 		}
 	}
@@ -97,6 +109,9 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 			case TYPE_PERSON: holder = new PersonHolder(v); break;
 			case TYPE_PROGRAM: holder = new ProgramHolder(v); break;
 			case TYPE_PLAYLIST: holder = new PlaylistHolder(v); break;
+			case TYPE_SECTION: holder = new SectionHolder(v); break;
+			case TYPE_SONG: holder = new SongHolder(v); break;
+			case TYPE_ALBUM: holder = new AlbumHolder(v); break;
 		}
 		return holder;
 	}

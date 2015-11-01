@@ -3,6 +3,7 @@ package com.cyclone.fragment;
 import android.animation.Animator;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -34,7 +35,6 @@ import android.widget.TextView;
 
 import com.cyclone.CollapseActivity;
 import com.cyclone.R;
-import com.cyclone.custom.PlaylistAdapter;
 import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Playlist;
 import com.wunderlist.slidinglayer.SlidingLayer;
@@ -60,6 +60,7 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 	private GestureDetectorCompat gd;
 	private ImageButton btnMinimize, btnRepeat, btnPrevious, btnPlay, btnNext, btnShuffle, btnMenu;
 	private ViewGroup groupInfo, groupControl;
+	private ViewGroup btnArtist, btnAlbum;
 	private ImageView imgCover, imgTemp;
 	private View minimizedPlayer;
 	private TextView txtTitle, txtArtist, txtTotalTime;
@@ -185,6 +186,8 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		imgTemp = (ImageView) v.findViewById(R.id.img_temp);
 		slidingLayer = (SlidingLayer) v.findViewById(R.id.sliding_layer);
 		btnMenu = (ImageButton) v.findViewById(R.id.btn_menu);
+		btnArtist = (ViewGroup) v.findViewById(R.id.btn_artist);
+		btnAlbum = (ViewGroup) v.findViewById(R.id.btn_album);
 
 		if(state == STATE_PLAYING)
 			btnPlay.setImageResource(R.drawable.ic_pause_white_48dp);
@@ -270,6 +273,27 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 				int lightColor = Color.rgb(r, g, b);
 				groupInfo.setBackgroundColor(color);
 				groupControl.setBackgroundColor(lightColor);
+			}
+		});
+
+
+		btnArtist.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(activity, CollapseActivity.class);
+				i.putExtra("layout", CollapseActivity.LAYOUT_ARTIST);
+				i.putExtra("title", "Artist Name");
+				activity.startActivity(i);
+			}
+		});
+
+		btnAlbum.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(activity, CollapseActivity.class);
+				i.putExtra("layout", CollapseActivity.LAYOUT_ALBUM);
+				i.putExtra("title", "Album Name");
+				activity.startActivity(i);
 			}
 		});
 	}

@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cyclone.R;
-import com.cyclone.custom.ClubFeedAdapter;
 import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Post;
 

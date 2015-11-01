@@ -69,7 +69,7 @@ public class DrawerActivity extends AppCompatActivity
 			String title = caller.getExtras().getString("title", "");
 			int layout = caller.getExtras().getInt("layout", LAYOUT_HOME);
 			if(title != null && !title.equals(""))
-				getSupportActionBar().setTitle(title);
+				toolbarLayout.setTitle(title);
 			if(layout == LAYOUT_HOME){
 				FragmentManager manager = getSupportFragmentManager();
 				manager.beginTransaction().replace(R.id.container, RadioProfileFragment.newInstance()).commit();
@@ -139,7 +139,7 @@ public class DrawerActivity extends AppCompatActivity
 				break;
 			case R.id.nav_klub:
 				intent = new Intent(this, DrawerStandardActivity.class);
-				intent.putExtra("title", "Klub Radio");
+				intent.putExtra("title", "Imam Darto");
 				intent.putExtra("layout", DrawerStandardActivity.LAYOUT_CLUB);
 				startActivity(intent);
 				break;

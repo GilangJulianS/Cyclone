@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 
 import com.cyclone.R;
-import com.cyclone.custom.NotificationAdapter;
 import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Notification;
 import com.cyclone.model.Program;

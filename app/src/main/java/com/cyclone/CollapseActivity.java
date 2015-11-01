@@ -21,6 +21,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.cyclone.fragment.AlbumFragment;
+import com.cyclone.fragment.ArtistFragment;
 import com.cyclone.fragment.PersonProfileFragment;
 import com.cyclone.fragment.PlayerFragment;
 import com.cyclone.fragment.ProgramPageFragment;
@@ -31,6 +33,8 @@ public class CollapseActivity extends AppCompatActivity implements GestureDetect
 	public static final int LAYOUT_PROGRAM_PAGE = 101;
 	public static final int LAYOUT_PERSON_PROFILE = 102;
 	public static final int LAYOUT_PLAYER = 103;
+	public static final int LAYOUT_ALBUM = 104;
+	public static final int LAYOUT_ARTIST = 105;
 
 	private GestureDetectorCompat gd;
 	public AppBarLayout appBarLayout;
@@ -59,7 +63,6 @@ public class CollapseActivity extends AppCompatActivity implements GestureDetect
 		CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id
 				.collapsing_toolbar_layout);
 		toolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
-		toolbarLayout.setTitle("K-Lite FM Bandung");
 
 		FragmentManager manager = getSupportFragmentManager();
 		Intent caller = getIntent();
@@ -69,18 +72,26 @@ public class CollapseActivity extends AppCompatActivity implements GestureDetect
 			String transitionId = caller.getExtras().getString("transition", "profile");
 			String title = caller.getExtras().getString("title", "");
 			if (!title.equals("")) {
-				getSupportActionBar().setTitle(title);
+				toolbarLayout.setTitle(title);
 			}
 			if (layout == LAYOUT_PROGRAM_PAGE) {
-				manager.beginTransaction().replace(R.id.container, ProgramPageFragment.newInstance()).commit();
+				manager.beginTransaction().replace(R.id.container, ProgramPageFragment
+						.newInstance()).commit();
 			} else if (layout == LAYOUT_PERSON_PROFILE) {
 				manager.beginTransaction().replace(R.id.container, PersonProfileFragment.newInstance
 						(mode, transitionId)).commit();
 			} else if(layout == LAYOUT_PLAYER){
 				manager.beginTransaction().replace(R.id.container, PlayerFragment.newInstance())
 						.commit();
+			}else if(layout == LAYOUT_ALBUM){
+				manager.beginTransaction().replace(R.id.container, AlbumFragment.newInstance())
+						.commit();
+			}else if(layout == LAYOUT_ARTIST){
+				manager.beginTransaction().replace(R.id.container, ArtistFragment.newInstance())
+						.commit();
 			}
 		}
+
 //		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //		fab.setOnClickListener(new View.OnClickListener() {
 //			@Override

@@ -21,7 +21,6 @@ import android.widget.TextView;
 
 import com.cyclone.R;
 import com.cyclone.StandardActivity;
-import com.cyclone.custom.ClubFeedAdapter;
 import com.cyclone.custom.Tools;
 import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Post;
