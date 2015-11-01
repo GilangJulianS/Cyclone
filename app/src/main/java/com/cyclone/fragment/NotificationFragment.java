@@ -12,6 +12,7 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.cyclone.R;
 import com.cyclone.custom.NotificationAdapter;
+import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Notification;
 import com.cyclone.model.Program;
 
@@ -26,7 +27,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 public class NotificationFragment extends Fragment {
 
 	private RecyclerView recyclerView;
-	private NotificationAdapter adapter;
+	private UniversalAdapter adapter;
 	private RecyclerView.LayoutManager manager;
 	private List<Notification> notifications;
 
@@ -52,7 +53,7 @@ public class NotificationFragment extends Fragment {
 		slideAnimator.setMoveDuration(500);
 		recyclerView.setItemAnimator(slideAnimator);
 
-		adapter = new NotificationAdapter(getActivity(), "");
+		adapter = new UniversalAdapter(getActivity(), "");
 		recyclerView.setAdapter(adapter);
 
 		notifications = parse("");

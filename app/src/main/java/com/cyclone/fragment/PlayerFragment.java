@@ -34,8 +34,9 @@ import android.widget.TextView;
 
 import com.cyclone.CollapseActivity;
 import com.cyclone.R;
-import com.cyclone.custom.SongAdapter;
-import com.cyclone.model.Song;
+import com.cyclone.custom.PlaylistAdapter;
+import com.cyclone.custom.UniversalAdapter;
+import com.cyclone.model.Playlist;
 import com.wunderlist.slidinglayer.SlidingLayer;
 
 import java.util.ArrayList;
@@ -52,8 +53,8 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 	public static final int STATE_STOP = 101;
 	public static int state;
 	private RecyclerView recyclerView;
-	private List<Song> datas, persistentDatas;
-	private SongAdapter adapter;
+	private List<Playlist> datas, persistentDatas;
+	private UniversalAdapter adapter;
 	private LinearLayoutManager layoutManager;
 	private CollapseActivity activity;
 	private GestureDetectorCompat gd;
@@ -82,7 +83,7 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		recyclerView.setLayoutManager(layoutManager);
 
 
-		adapter = new SongAdapter(getActivity(), "");
+		adapter = new UniversalAdapter(getActivity(), "");
 
 		SlideInUpAnimator slideAnimator = new SlideInUpAnimator(new
 				DecelerateInterpolator());
@@ -315,9 +316,9 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 
 	}
 
-	private void animate(final Song song){
+	private void animate(final Playlist playlist){
 		final Handler handler = new Handler();
-		final Song s = song;
+		final Playlist s = playlist;
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -331,34 +332,34 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		}, 200);
 	}
 
-	public List<Song> parse(String json){
-		List<Song> songs = new ArrayList<>();
-		songs.add(new Song("The Celestials", "The Smashing Pumpkins", "03:20"));
-		songs.add(new Song("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
-		songs.add(new Song("Drones", "Muse", "05:45"));
-		songs.add(new Song("Extraordinary", "Clean Bandit", "04:48"));
-		songs.add(new Song("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
-		songs.add(new Song("The Celestials", "The Smashing Pumpkins", "03:20"));
-		songs.add(new Song("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
-		songs.add(new Song("Drones", "Muse", "05:45"));
-		songs.add(new Song("Extraordinary", "Clean Bandit", "04:48"));
-		songs.add(new Song("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
-		songs.add(new Song("The Celestials", "The Smashing Pumpkins", "03:20"));
-		songs.add(new Song("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
-		songs.add(new Song("Drones", "Muse", "05:45"));
-		songs.add(new Song("Extraordinary", "Clean Bandit", "04:48"));
-		songs.add(new Song("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
-		songs.add(new Song("The Celestials", "The Smashing Pumpkins", "03:20"));
-		songs.add(new Song("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
-		songs.add(new Song("Drones", "Muse", "05:45"));
-		songs.add(new Song("Extraordinary", "Clean Bandit", "04:48"));
-		songs.add(new Song("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
-		songs.add(new Song("The Celestials", "The Smashing Pumpkins", "03:20"));
-		songs.add(new Song("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
-		songs.add(new Song("Drones", "Muse", "05:45"));
-		songs.add(new Song("Extraordinary", "Clean Bandit", "04:48"));
-		songs.add(new Song("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
-		return songs;
+	public List<Playlist> parse(String json){
+		List<Playlist> playlists = new ArrayList<>();
+		playlists.add(new Playlist("The Celestials", "The Smashing Pumpkins", "03:20"));
+		playlists.add(new Playlist("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
+		playlists.add(new Playlist("Drones", "Muse", "05:45"));
+		playlists.add(new Playlist("Extraordinary", "Clean Bandit", "04:48"));
+		playlists.add(new Playlist("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
+		playlists.add(new Playlist("The Celestials", "The Smashing Pumpkins", "03:20"));
+		playlists.add(new Playlist("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
+		playlists.add(new Playlist("Drones", "Muse", "05:45"));
+		playlists.add(new Playlist("Extraordinary", "Clean Bandit", "04:48"));
+		playlists.add(new Playlist("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
+		playlists.add(new Playlist("The Celestials", "The Smashing Pumpkins", "03:20"));
+		playlists.add(new Playlist("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
+		playlists.add(new Playlist("Drones", "Muse", "05:45"));
+		playlists.add(new Playlist("Extraordinary", "Clean Bandit", "04:48"));
+		playlists.add(new Playlist("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
+		playlists.add(new Playlist("The Celestials", "The Smashing Pumpkins", "03:20"));
+		playlists.add(new Playlist("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
+		playlists.add(new Playlist("Drones", "Muse", "05:45"));
+		playlists.add(new Playlist("Extraordinary", "Clean Bandit", "04:48"));
+		playlists.add(new Playlist("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
+		playlists.add(new Playlist("The Celestials", "The Smashing Pumpkins", "03:20"));
+		playlists.add(new Playlist("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
+		playlists.add(new Playlist("Drones", "Muse", "05:45"));
+		playlists.add(new Playlist("Extraordinary", "Clean Bandit", "04:48"));
+		playlists.add(new Playlist("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
+		return playlists;
 	}
 
 	@TargetApi(Build.VERSION_CODES.LOLLIPOP)

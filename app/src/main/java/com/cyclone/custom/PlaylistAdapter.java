@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cyclone.R;
-import com.cyclone.model.Song;
-
-import org.w3c.dom.Text;
+import com.cyclone.model.Playlist;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,24 +17,24 @@ import java.util.List;
 /**
  * Created by gilang on 31/10/2015.
  */
-public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
+public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHolder> {
 
-	public List<Song> datas;
+	public List<Playlist> datas;
 	private Context context;
 	private  Activity activity;
 
-	public SongAdapter(Activity activity, String json){
+	public PlaylistAdapter(Activity activity, String json){
 		datas = new ArrayList<>();
 		this.activity = activity;
 		this.context = (Context) activity;
 	}
 
-	public void add(Song song){
-		datas.add(song);
+	public void add(Playlist playlist){
+		datas.add(playlist);
 	}
 
-	public void add(Song song, int position){
-		datas.add(position, song);
+	public void add(Playlist playlist, int position){
+		datas.add(position, playlist);
 	}
 
 	@Override
@@ -49,10 +47,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
 	@Override
 	public void onBindViewHolder(ViewHolder holder, int position) {
-		Song song = datas.get(position);
-		holder.txtTitle.setText(song.artist + " - " + song.title);
-		holder.txtArtist.setText(song.artist);
-		holder.txtDuration.setText(song.duration);
+		Playlist playlist = datas.get(position);
+		holder.txtTitle.setText(playlist.artist + " - " + playlist.title);
+		holder.txtArtist.setText(playlist.artist);
+		holder.txtDuration.setText(playlist.duration);
 	}
 
 

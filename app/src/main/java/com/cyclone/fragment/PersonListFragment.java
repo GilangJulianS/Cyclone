@@ -12,6 +12,7 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.cyclone.R;
 import com.cyclone.custom.PersonAdapter;
+import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Person;
 import com.cyclone.model.Program;
 
@@ -27,7 +28,7 @@ public class PersonListFragment extends Fragment {
 
 	private RecyclerView recyclerView;
 	private List<Person> datas;
-	private PersonAdapter adapter;
+	private UniversalAdapter adapter;
 
 	public PersonListFragment(){}
 
@@ -44,7 +45,7 @@ public class PersonListFragment extends Fragment {
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-		adapter = new PersonAdapter(getActivity(), "");
+		adapter = new UniversalAdapter(getActivity(), "");
 		datas = parse("");
 		SlideInUpAnimator slideAnimator = new SlideInUpAnimator(new
 				DecelerateInterpolator());

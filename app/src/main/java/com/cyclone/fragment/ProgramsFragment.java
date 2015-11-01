@@ -6,27 +6,20 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.OvershootInterpolator;
 
 import com.cyclone.R;
 import com.cyclone.custom.ProgramsAdapter;
+import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Program;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
-import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.adapters.SlideInBottomAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.adapters.SlideInLeftAnimationAdapter;
 
 /**
  * Created by gilang on 10/10/2015.
@@ -35,7 +28,7 @@ public class ProgramsFragment extends Fragment {
 
 	private RecyclerView mRecyclerView;
 	private RecyclerView.LayoutManager mLayoutManager;
-	private ProgramsAdapter mAdapter;
+	private UniversalAdapter adapter;
 	private List<Program> programs;
 
 	public ProgramsFragment(){}
@@ -59,8 +52,8 @@ public class ProgramsFragment extends Fragment {
 		slideAnimator.setMoveDuration(500);
 		mRecyclerView.setItemAnimator(slideAnimator);
 
-		mAdapter = new ProgramsAdapter(getActivity(), "");
-		mRecyclerView.setAdapter(mAdapter);
+		adapter = new UniversalAdapter(getActivity(), "");
+		mRecyclerView.setAdapter(adapter);
 
 		programs = parse("");
 
@@ -102,9 +95,9 @@ public class ProgramsFragment extends Fragment {
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				mAdapter.add(p);
+				adapter.add(p);
 				programs.remove(p);
-				mAdapter.notifyItemInserted(mAdapter.datas.size()-1);
+				adapter.notifyItemInserted(adapter.datas.size()-1);
 				if(!programs.isEmpty()){
 					animate(programs.get(0));
 				}

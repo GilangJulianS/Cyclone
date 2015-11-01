@@ -12,6 +12,7 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.cyclone.R;
 import com.cyclone.custom.AnnouncersAdapter;
+import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Announcer;
 import com.cyclone.model.Program;
 
@@ -26,7 +27,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 public class AnnouncersFragment extends Fragment {
 
 	private RecyclerView recyclerView;
-	private AnnouncersAdapter adapter;
+	private UniversalAdapter adapter;
 	private RecyclerView.LayoutManager layoutManager;
 	private List<Announcer> announcers;
 
@@ -52,7 +53,7 @@ public class AnnouncersFragment extends Fragment {
 		slideAnimator.setMoveDuration(300);
 		recyclerView.setItemAnimator(slideAnimator);
 
-		adapter = new AnnouncersAdapter(getContext(), "");
+		adapter = new UniversalAdapter(getActivity(), "");
 		announcers = parseData("");
 
 		recyclerView.setAdapter(adapter);

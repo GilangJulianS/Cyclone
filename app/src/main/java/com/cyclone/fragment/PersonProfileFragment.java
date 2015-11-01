@@ -23,6 +23,7 @@ import com.cyclone.R;
 import com.cyclone.StandardActivity;
 import com.cyclone.custom.ClubFeedAdapter;
 import com.cyclone.custom.Tools;
+import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Post;
 
 /**
@@ -52,7 +53,7 @@ public class PersonProfileFragment extends Fragment {
 		recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-		ClubFeedAdapter adapter = new ClubFeedAdapter(getActivity(), "");
+		UniversalAdapter adapter = new UniversalAdapter(getActivity(), "");
 		parse("", adapter);
 
 		recyclerView.setAdapter(adapter);
@@ -60,7 +61,7 @@ public class PersonProfileFragment extends Fragment {
 		return v;
 	}
 
-	public void parse(String json, ClubFeedAdapter adapter){
+	public void parse(String json, UniversalAdapter adapter){
 		adapter.add(new Post("", "Imam Darto", "1 Hour ago", "Mix", "", "Funky Sunshine", "New " +
 				"playlist by me", "40 tracks", 52, 20, Post.TYPE_POST));
 		adapter.add(new Post("", "Desta", "2 Hour ago", "Playlist", "", "Pop 2015", "2015 top " +
