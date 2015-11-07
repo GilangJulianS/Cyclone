@@ -1,6 +1,7 @@
 package com.cyclone.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +55,7 @@ public class LiveStreamFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
+		setHasOptionsMenu(true);
 		View v = inflater.inflate(R.layout.fragment_recycler, parent, false);
 
 		recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
@@ -124,6 +129,26 @@ public class LiveStreamFragment extends Fragment {
 				}
 			}
 		}, 50);
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.streamplayer, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		switch(id){
+			case R.id.btn_new_request:
+				Intent i = new Intent(getContext(), DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_REQUEST);
+				i.putExtra("activity", R.layout.activity_drawer_standard);
+				i.putExtra("title", "Request");
+				getActivity().startActivity(i);
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }
 

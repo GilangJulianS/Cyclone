@@ -122,6 +122,10 @@ public class StreamPlayerFragment extends Fragment {
 			}
 		});
 
+		btnRepeat.setEnabled(false);
+		btnShuffle.setEnabled(false);
+		btnNext.setEnabled(false);
+		btnPrevious.setEnabled(false);
 
 		btnMenu.setOnClickListener(new View.OnClickListener() {
 			@Override

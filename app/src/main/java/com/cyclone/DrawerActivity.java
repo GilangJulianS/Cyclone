@@ -28,6 +28,7 @@ import com.cyclone.fragment.PlayerFragment;
 import com.cyclone.fragment.ProgramPageFragment;
 import com.cyclone.fragment.ProgramsFragment;
 import com.cyclone.fragment.RadioProfileFragment;
+import com.cyclone.fragment.RequestFragment;
 import com.cyclone.fragment.SettingsFragment;
 import com.cyclone.fragment.StreamPlayerFragment;
 import com.cyclone.fragment.VirtualCardFragment;
@@ -138,6 +139,10 @@ public class DrawerActivity extends MasterActivity
 				showMiniPlayer = false;
 				manager.beginTransaction().replace(R.id.container, StreamPlayerFragment
 						.newInstance()).commit();
+			}else if(layout == LAYOUT_REQUEST){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, RequestFragment.newInstance())
+						.commit();
 			}
 		}else{
 			isParentView = true;

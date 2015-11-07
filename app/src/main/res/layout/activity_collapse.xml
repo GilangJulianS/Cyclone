@@ -67,6 +67,16 @@
 			<!--android:layout_margin="@dimen/fab_margin"-->
 			<!--android:src="@android:drawable/ic_dialog_email"/>-->
 
+		<LinearLayout
+			android:id="@+id/container_fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/fab_margin"
+			android:layout_gravity="bottom|end"
+			android:orientation="vertical">
+
+		</LinearLayout>
+
 	</android.support.design.widget.CoordinatorLayout>
 
 	<include layout="@layout/part_minimized_player"
