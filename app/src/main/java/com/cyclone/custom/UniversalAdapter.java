@@ -15,6 +15,8 @@ import com.cyclone.model.Person;
 import com.cyclone.model.Post;
 import com.cyclone.model.Program;
 import com.cyclone.model.Playlist;
+import com.cyclone.model.ProgramContent;
+import com.cyclone.model.RunningProgram;
 import com.cyclone.model.Section;
 import com.cyclone.model.Song;
 
@@ -35,6 +37,8 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 	public static final int TYPE_SECTION = 107;
 	public static final int TYPE_SONG = 108;
 	public static final int TYPE_ALBUM = 109;
+	public static final int TYPE_RUNNING_PROGRAM = 110;
+	public static final int TYPE_PROGRAM_CONTENT = 111;
 
 	public List<Object> datas;
 	private Activity activity;
@@ -82,6 +86,8 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 		else if(o instanceof Section) return TYPE_SECTION;
 		else if(o instanceof Song) return TYPE_SONG;
 		else if(o instanceof Album) return TYPE_ALBUM;
+		else if(o instanceof RunningProgram) return TYPE_RUNNING_PROGRAM;
+		else if(o instanceof ProgramContent) return TYPE_PROGRAM_CONTENT;
 		return -1;
 	}
 
@@ -96,6 +102,8 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 			case TYPE_SECTION: return R.layout.card_section;
 			case TYPE_SONG: return R.layout.card_song;
 			case TYPE_ALBUM: return R.layout.card_album;
+			case TYPE_RUNNING_PROGRAM: return R.layout.card_running_program;
+			case TYPE_PROGRAM_CONTENT: return R.layout.card_program_content;
 			default: return -1;
 		}
 	}
@@ -112,6 +120,8 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 			case TYPE_SECTION: holder = new SectionHolder(v); break;
 			case TYPE_SONG: holder = new SongHolder(v); break;
 			case TYPE_ALBUM: holder = new AlbumHolder(v); break;
+			case TYPE_RUNNING_PROGRAM: holder = new RunningProgramHolder(v); break;
+			case TYPE_PROGRAM_CONTENT: holder = new ProgramContentHolder(v); break;
 		}
 		return holder;
 	}

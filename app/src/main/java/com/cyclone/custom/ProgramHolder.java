@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.cyclone.CollapseActivity;
+import com.cyclone.DrawerActivity;
 import com.cyclone.R;
 import com.cyclone.model.Program;
 
@@ -50,8 +50,8 @@ public class ProgramHolder extends UniversalHolder{
 		card.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-			Intent i = new Intent(activity, CollapseActivity.class);
-			i.putExtra("layout", CollapseActivity.LAYOUT_PROGRAM_PAGE);
+			Intent i = new Intent(activity, DrawerActivity.class);
+			i.putExtra("layout", DrawerActivity.LAYOUT_PROGRAM_PAGE);
 			if(Build.VERSION.SDK_INT >= 16) {
 				ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
 						(activity, imageView, "program");

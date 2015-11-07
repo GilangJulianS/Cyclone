@@ -22,9 +22,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cyclone.CollapseActivity;
+import com.cyclone.DrawerActivity;
 import com.cyclone.R;
-import com.cyclone.StandardActivity;
 import com.cyclone.custom.OnOffsetChangedListener;
 import com.cyclone.custom.Tools;
 import com.cyclone.custom.UniversalAdapter;
@@ -42,7 +41,7 @@ public class PersonProfileFragment extends Fragment implements OnOffsetChangedLi
 
 	public static final int MODE_OWN_PROFILE = 101;
 	public static final int MODE_OTHERS_PROFILE = 102;
-	private CollapseActivity activity;
+	private DrawerActivity activity;
 	private RecyclerView recyclerView;
 	private SwipeRefreshLayout swipeLayout;
 	private UniversalAdapter adapter;
@@ -138,8 +137,8 @@ public class PersonProfileFragment extends Fragment implements OnOffsetChangedLi
 			parallaxHeader.removeAllViews();
 			parallaxHeader.addView(header);
 		}
-		if(context instanceof CollapseActivity){
-			this.activity = (CollapseActivity) context;
+		if(context instanceof DrawerActivity){
+			this.activity = (DrawerActivity) context;
 		}
 	}
 
@@ -168,8 +167,8 @@ public class PersonProfileFragment extends Fragment implements OnOffsetChangedLi
 		txtShowlist.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getContext(), StandardActivity.class);
-				i.putExtra("layout", StandardActivity.LAYOUT_FEED);
+				Intent i = new Intent(getContext(), DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_FEED);
 				i.putExtra("title", "Showlist");
 				startActivity(i);
 			}
@@ -177,8 +176,8 @@ public class PersonProfileFragment extends Fragment implements OnOffsetChangedLi
 		txtContent.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getContext(), StandardActivity.class);
-				i.putExtra("layout", StandardActivity.LAYOUT_FEED);
+				Intent i = new Intent(getContext(), DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_FEED);
 				i.putExtra("title", "Content");
 				startActivity(i);
 			}
@@ -186,8 +185,8 @@ public class PersonProfileFragment extends Fragment implements OnOffsetChangedLi
 		txtFollower.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getContext(), StandardActivity.class);
-				i.putExtra("layout", StandardActivity.LAYOUT_PEOPLE);
+				Intent i = new Intent(getContext(), DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_PEOPLE);
 				i.putExtra("title", "Follower");
 				startActivity(i);
 			}
@@ -195,8 +194,8 @@ public class PersonProfileFragment extends Fragment implements OnOffsetChangedLi
 		txtFollowing.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getContext(), StandardActivity.class);
-				i.putExtra("layout", StandardActivity.LAYOUT_PEOPLE);
+				Intent i = new Intent(getContext(), DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_PEOPLE);
 				i.putExtra("title", "Following");
 				startActivity(i);
 			}

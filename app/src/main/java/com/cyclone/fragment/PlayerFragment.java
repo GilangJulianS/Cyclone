@@ -34,7 +34,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cyclone.CollapseActivity;
+import com.cyclone.DrawerActivity;
 import com.cyclone.R;
 import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Playlist;
@@ -57,7 +57,7 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 	private List<Playlist> datas, persistentDatas;
 	private UniversalAdapter adapter;
 	private LinearLayoutManager layoutManager;
-	private CollapseActivity activity;
+	private DrawerActivity activity;
 	private GestureDetectorCompat gd;
 	private ImageButton btnMinimize, btnRepeat, btnPrevious, btnPlay, btnNext, btnShuffle, btnMenu;
 	private ViewGroup groupInfo, groupControl;
@@ -88,7 +88,6 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 
 		layoutManager = new LinearLayoutManager(getActivity());
 		recyclerView.setLayoutManager(layoutManager);
-
 
 		adapter = new UniversalAdapter(getActivity(), "");
 
@@ -153,12 +152,9 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		persistentDatas = new ArrayList<>();
 		persistentDatas.addAll(datas);
 
-		AppCompatActivity activity;
-		if(context instanceof CollapseActivity){
-			this.activity = (CollapseActivity) context;
-		}
-		if(context instanceof AppCompatActivity) {
-			activity = (AppCompatActivity)context;
+		System.out.println("attached player");
+		if(context instanceof DrawerActivity){
+			activity = (DrawerActivity) context;
 			ViewGroup parallaxHeader = (ViewGroup) activity.findViewById(R.id
 					.parallax_header);
 			LayoutInflater inflater = activity.getLayoutInflater();
@@ -167,6 +163,7 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 			bindHeaderView(header);
 			minimizedPlayer = activity.findViewById(R.id.minimized_player);
 			minimizedPlayer.setVisibility(View.GONE);
+			System.out.println("hide mini player");
 			parallaxHeader.addView(header);
 		}
 	}
@@ -315,8 +312,8 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		btnArtist.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(activity, CollapseActivity.class);
-				i.putExtra("layout", CollapseActivity.LAYOUT_ARTIST);
+				Intent i = new Intent(activity, DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_ARTIST);
 				i.putExtra("title", "Artist Name");
 				activity.startActivity(i);
 			}
@@ -325,8 +322,8 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		btnAlbum.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(activity, CollapseActivity.class);
-				i.putExtra("layout", CollapseActivity.LAYOUT_ALBUM);
+				Intent i = new Intent(activity, DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_ALBUM);
 				i.putExtra("title", "Album Name");
 				activity.startActivity(i);
 			}

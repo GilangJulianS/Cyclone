@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cyclone.CollapseActivity;
+import com.cyclone.DrawerActivity;
 import com.cyclone.R;
 import com.cyclone.model.Person;
 
@@ -52,8 +52,8 @@ public class PersonHolder extends UniversalHolder{
 		card.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(activity, CollapseActivity.class);
-				i.putExtra("layout", CollapseActivity.LAYOUT_PERSON_PROFILE);
+				Intent i = new Intent(activity, DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_PERSON_PROFILE);
 				i.putExtra("title", person.name);
 				i.putExtra("transition", "profile" + transitionId);
 				if(Build.VERSION.SDK_INT >= 16) {

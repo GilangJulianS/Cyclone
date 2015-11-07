@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.cyclone.DrawerActivity;
 import com.cyclone.R;
-import com.cyclone.StandardActivity;
 
 /**
  * Created by gilang on 09/10/2015.
@@ -35,8 +35,8 @@ public class RadioProfileFragment extends Fragment {
 		btnMoreProgram.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getContext(), StandardActivity.class);
-				i.putExtra("layout", StandardActivity.LAYOUT_PROGRAMS);
+				Intent i = new Intent(getContext(), DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_PROGRAMS);
 				i.putExtra("title", "Programs");
 				startActivity(i);
 			}
@@ -45,8 +45,8 @@ public class RadioProfileFragment extends Fragment {
 		btnMoreAnnouncer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getContext(), StandardActivity.class);
-				i.putExtra("layout", StandardActivity.LAYOUT_ANNOUNCERS);
+				Intent i = new Intent(getContext(), DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_ANNOUNCERS);
 				i.putExtra("title", "DJs and Announcers");
 				startActivity(i);
 			}
