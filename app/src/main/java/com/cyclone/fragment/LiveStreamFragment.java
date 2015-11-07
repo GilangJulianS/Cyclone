@@ -4,20 +4,25 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 
+import com.cyclone.DrawerActivity;
 import com.cyclone.R;
 import com.cyclone.custom.CustomPagerAdapter;
+import com.cyclone.custom.SnapGestureListener;
 import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.ProgramContent;
+import com.cyclone.model.ProgramPager;
 import com.cyclone.model.RunningProgram;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -31,14 +36,11 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
  */
 public class LiveStreamFragment extends Fragment {
 
-	private ViewPager viewPager;
-	private CustomPagerAdapter pagerAdapter;
 	private RecyclerView recyclerView;
-	private RecyclerView.LayoutManager layoutManager;
+	private LinearLayoutManager layoutManager;
 	private UniversalAdapter adapter;
 	private List<Object> objects;
 	private SwipeRefreshLayout swipeLayout;
-	private CirclePageIndicator indicator;
 
 	public LiveStreamFragment(){}
 
@@ -85,36 +87,16 @@ public class LiveStreamFragment extends Fragment {
 
 		animate(objects.get(0));
 
-
 		return v;
-	}
-
-	@Override
-	public void onAttach(Context context) {
-		super.onAttach(context);
-
-		AppCompatActivity activity;
-		if(context instanceof AppCompatActivity) {
-			activity = (AppCompatActivity)context;
-			ViewGroup header = (ViewGroup) activity.findViewById(R.id.header);
-			LayoutInflater inflater = activity.getLayoutInflater();
-			View v = inflater.inflate(R.layout.part_header_live_streaming, header,false);
-			viewPager = (ViewPager) v.findViewById(R.id.view_pager);
-			indicator = (CirclePageIndicator) v.findViewById(R.id.view_pager_indicator);
-			pagerAdapter = new CustomPagerAdapter(activity.getSupportFragmentManager());
-			pagerAdapter.add(SimpleImageFragment.newInstance("/* your image url here */"));
-			pagerAdapter.add(SimpleImageFragment.newInstance("/* your image url here */"));
-			pagerAdapter.add(SimpleImageFragment.newInstance("/* your image url here */"));
-			viewPager.setAdapter(pagerAdapter);
-			viewPager.setCurrentItem(1);
-			indicator.setViewPager(viewPager);
-			header.removeAllViews();
-			header.addView(v);
-		}
 	}
 
 	public List<Object> parse(String json){
 		List<Object> datas = new ArrayList<>();
+		List<String> images = new ArrayList<>();
+		images.add("");
+		images.add("");
+		images.add("");
+		datas.add(new ProgramPager(images, 1));
 		datas.add(new RunningProgram("The Dandees", "The Most Wanted Guys In Town"));
 		datas.add(new ProgramContent(ProgramContent.TYPE_MUSIC, "10:21", "Biru - Afgan"));
 		datas.add(new ProgramContent(ProgramContent.TYPE_MUSIC, "10:18", "Stop Look Listen - " +

@@ -16,6 +16,7 @@ import com.cyclone.model.Post;
 import com.cyclone.model.Program;
 import com.cyclone.model.Playlist;
 import com.cyclone.model.ProgramContent;
+import com.cyclone.model.ProgramPager;
 import com.cyclone.model.RunningProgram;
 import com.cyclone.model.Section;
 import com.cyclone.model.Song;
@@ -39,6 +40,7 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 	public static final int TYPE_ALBUM = 109;
 	public static final int TYPE_RUNNING_PROGRAM = 110;
 	public static final int TYPE_PROGRAM_CONTENT = 111;
+	public static final int TYPE_PROGRAM_PAGER = 112;
 
 	public List<Object> datas;
 	private Activity activity;
@@ -88,6 +90,7 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 		else if(o instanceof Album) return TYPE_ALBUM;
 		else if(o instanceof RunningProgram) return TYPE_RUNNING_PROGRAM;
 		else if(o instanceof ProgramContent) return TYPE_PROGRAM_CONTENT;
+		else if(o instanceof ProgramPager) return TYPE_PROGRAM_PAGER;
 		return -1;
 	}
 
@@ -104,6 +107,7 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 			case TYPE_ALBUM: return R.layout.card_album;
 			case TYPE_RUNNING_PROGRAM: return R.layout.card_running_program;
 			case TYPE_PROGRAM_CONTENT: return R.layout.card_program_content;
+			case TYPE_PROGRAM_PAGER: return R.layout.card_image_pager;
 			default: return -1;
 		}
 	}
@@ -122,6 +126,7 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 			case TYPE_ALBUM: holder = new AlbumHolder(v); break;
 			case TYPE_RUNNING_PROGRAM: holder = new RunningProgramHolder(v); break;
 			case TYPE_PROGRAM_CONTENT: holder = new ProgramContentHolder(v); break;
+			case TYPE_PROGRAM_PAGER: holder = new ProgramPagerHolder(v); break;
 		}
 		return holder;
 	}

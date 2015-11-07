@@ -38,9 +38,10 @@ public abstract class MasterActivity extends AppCompatActivity implements Gestur
 	public static final int LAYOUT_FEED = 114;
 	public static final int LAYOUT_PEOPLE = 115;
 	public static final int LAYOUT_ACCOUNT_SETTINGS = 116;
+	public static final int LAYOUT_STREAM_PLAYER = 117;
 
 	public AppBarLayout appBarLayout;
-	public boolean changing = false;
+	public boolean isExpanded = true;
 
 	protected GestureDetectorCompat gd;
 	protected View miniPlayer;
@@ -76,10 +77,7 @@ public abstract class MasterActivity extends AppCompatActivity implements Gestur
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				System.out.println("touch");
-				if(!changing)
-					return gd.onTouchEvent(event);
-				else
-					return true;
+				return gd.onTouchEvent(event);
 			}
 		});
 	}
@@ -93,9 +91,16 @@ public abstract class MasterActivity extends AppCompatActivity implements Gestur
 						.getTotalScrollRange()
 						* 100;
 //				System.out.println(percent);
+				if(percent == 0) {
+					isExpanded = true;
+					System.out.println("expanded blalbla");
+				}
+				else if(percent == 100) {
+					isExpanded = false;
+					System.out.println("collapsed blalbla");
+				}
 				if(percent == 100 || percent == 0){
-					changing = false;
-//					System.out.println("finish");
+					System.out.println("finish");
 				}
 				if(callback != null) {
 					callback.onChanged(percent);
@@ -106,22 +111,31 @@ public abstract class MasterActivity extends AppCompatActivity implements Gestur
 
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-		System.out.println("fling header: " + velocityX + " " + velocityY);
-		if(Math.abs(velocityY) > 50){
-			changing = true;
-			if(velocityY < 0){
-				appBarLayout.setExpanded(false);
-				System.out.println("collapsed");
-			}else if(velocityY > 0){
-				appBarLayout.setExpanded(true);
-				System.out.println("expanded");
-			}
-		}
-		return true;
+//		System.out.println("fling header: " + velocityX + " " + velocityY);
+//		if(changing)
+//			return true;
+//		if(Math.abs(velocityY) > 50){
+//			changing = true;
+//			if(velocityY < 0){
+//				appBarLayout.setExpanded(false);
+//				System.out.println("collapsed");
+//			}else if(velocityY > 0){
+//				appBarLayout.setExpanded(true);
+//				System.out.println("expanded");
+//			}
+//		}
+		return false;
 	}
 
 	@Override
 	public boolean onDown(MotionEvent e) {
+//		if(changing && lastPercent > 50) {
+//			appBarLayout.setExpanded(false);
+//			return true;
+//		}else if(changing && lastPercent < 50){
+//			appBarLayout.setExpanded(true);
+//			return true;
+//		}
 		return false;
 	}
 
@@ -132,12 +146,24 @@ public abstract class MasterActivity extends AppCompatActivity implements Gestur
 
 	@Override
 	public boolean onSingleTapUp(MotionEvent e) {
+//		if(changing)
+//			return true;
 		return false;
 	}
 
 	@Override
 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+		if(distanceY > 0){
+			appBarLayout.setExpanded(false);
+			if(isExpanded)
+				return true;
+			else
+				return false;
+		}else{
+			appBarLayout.setExpanded(true);
+		}
 		return false;
+
 	}
 
 	@Override

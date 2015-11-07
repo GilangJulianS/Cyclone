@@ -10,11 +10,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
@@ -25,6 +27,7 @@ import android.widget.TextView;
 import com.cyclone.DrawerActivity;
 import com.cyclone.R;
 import com.cyclone.custom.OnOffsetChangedListener;
+import com.cyclone.custom.SnapGestureListener;
 import com.cyclone.custom.Tools;
 import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Post;
@@ -41,12 +44,14 @@ public class PersonProfileFragment extends Fragment implements OnOffsetChangedLi
 
 	public static final int MODE_OWN_PROFILE = 101;
 	public static final int MODE_OTHERS_PROFILE = 102;
-	private DrawerActivity activity;
 	private RecyclerView recyclerView;
 	private SwipeRefreshLayout swipeLayout;
 	private UniversalAdapter adapter;
 	private List<Object> datas;
 	private String transitionId;
+	private DrawerActivity activity;
+	private LinearLayoutManager layoutManager;
+	private GestureDetectorCompat gd;
 	private int mode;
 	private boolean swipeEnabled = true;
 
@@ -82,7 +87,8 @@ public class PersonProfileFragment extends Fragment implements OnOffsetChangedLi
 		});
 
 		recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		layoutManager = new LinearLayoutManager(getContext());
+		recyclerView.setLayoutManager(layoutManager);
 
 		SlideInUpAnimator slideAnimator = new SlideInUpAnimator(new
 				DecelerateInterpolator());
@@ -95,6 +101,19 @@ public class PersonProfileFragment extends Fragment implements OnOffsetChangedLi
 
 		datas = parse("");
 		animate(datas.get(0));
+
+		if(activity != null){
+			gd = new GestureDetectorCompat(activity, new SnapGestureListener(activity));
+			recyclerView.setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					System.out.println("touch recycler");
+					if(layoutManager.findFirstCompletelyVisibleItemPosition() == 0)
+						return gd.onTouchEvent(event);
+					return false;
+				}
+			});
+		}
 
 		return v;
 	}
@@ -125,9 +144,8 @@ public class PersonProfileFragment extends Fragment implements OnOffsetChangedLi
 	@Override
 	public void onAttach(Context context){
 		super.onAttach(context);
-		AppCompatActivity activity;
-		if(context instanceof AppCompatActivity) {
-			activity = (AppCompatActivity)context;
+		if(context instanceof DrawerActivity) {
+			activity = (DrawerActivity)context;
 			ViewGroup parallaxHeader = (ViewGroup) activity.findViewById(R.id
 					.parallax_header);
 			LayoutInflater inflater = activity.getLayoutInflater();

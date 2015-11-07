@@ -9,6 +9,7 @@
 	tools:context="com.cyclone.StandardActivity">
 
 	<android.support.design.widget.CoordinatorLayout
+		android:id="@+id/coordinator_layout"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_weight="1">
@@ -25,7 +26,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="?attr/actionBarSize"
 				android:background="?attr/colorPrimary"
-				app:layout_scrollFlags="scroll|enterAlways"
 				app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
 			<LinearLayout

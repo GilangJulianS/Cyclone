@@ -29,6 +29,7 @@ import com.cyclone.fragment.ProgramPageFragment;
 import com.cyclone.fragment.ProgramsFragment;
 import com.cyclone.fragment.RadioProfileFragment;
 import com.cyclone.fragment.SettingsFragment;
+import com.cyclone.fragment.StreamPlayerFragment;
 import com.cyclone.fragment.VirtualCardFragment;
 
 public class DrawerActivity extends MasterActivity
@@ -38,6 +39,7 @@ public class DrawerActivity extends MasterActivity
 	private boolean isCollapseLayout = false;
 	private ActionBarDrawerToggle toggle;
 	CollapsingToolbarLayout toolbarLayout;
+	private boolean showMiniPlayer = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +107,7 @@ public class DrawerActivity extends MasterActivity
 				manager.beginTransaction().replace(R.id.container, fragment).commit();
 			} else if (layout == LAYOUT_PLAYER) {
 				callback = null;
+				showMiniPlayer = false;
 				manager.beginTransaction().replace(R.id.container, PlayerFragment.newInstance())
 						.commit();
 			} else if (layout == LAYOUT_ALBUM) {
@@ -130,6 +133,11 @@ public class DrawerActivity extends MasterActivity
 			}else if (layout == LAYOUT_ACCOUNT_SETTINGS){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, AccountSettingFragment.newInstance()).commit();
+			}else if(layout == LAYOUT_STREAM_PLAYER){
+				callback = null;
+				showMiniPlayer = false;
+				manager.beginTransaction().replace(R.id.container, StreamPlayerFragment
+						.newInstance()).commit();
 			}
 		}else{
 			isParentView = true;
@@ -157,9 +165,10 @@ public class DrawerActivity extends MasterActivity
 		super.onResume();
 		SharedPreferences pref = getSharedPreferences(getString(R.string.preference_key), Context
 				.MODE_PRIVATE);
-		if(pref.getInt("state", PlayerFragment.STATE_STOP) == PlayerFragment.STATE_STOP){
+		if(!showMiniPlayer && pref.getInt("state", PlayerFragment.STATE_STOP) == PlayerFragment
+				.STATE_STOP){
 			miniPlayer.setVisibility(View.GONE);
-		}else{
+		}else if(showMiniPlayer){
 			miniPlayer.setVisibility(View.VISIBLE);
 		}
 	}

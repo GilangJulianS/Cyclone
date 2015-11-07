@@ -4,15 +4,19 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 
+import com.cyclone.DrawerActivity;
 import com.cyclone.R;
+import com.cyclone.custom.SnapGestureListener;
 import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Playlist;
 import com.cyclone.model.Post;
@@ -28,6 +32,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 public class ClubRadioFragment extends Fragment {
 
 	private RecyclerView recyclerView;
+	private LinearLayoutManager layoutManager;
 	private SwipeRefreshLayout swipeLayout;
 	private UniversalAdapter adapter;
 	private List<Object> datas;
@@ -60,7 +65,8 @@ public class ClubRadioFragment extends Fragment {
 		});
 
 		recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		layoutManager = new LinearLayoutManager(getContext());
+		recyclerView.setLayoutManager(layoutManager);
 
 		SlideInUpAnimator slideAnimator = new SlideInUpAnimator(new
 				DecelerateInterpolator());

@@ -36,6 +36,7 @@ import android.widget.TextView;
 
 import com.cyclone.DrawerActivity;
 import com.cyclone.R;
+import com.cyclone.custom.SnapGestureListener;
 import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Playlist;
 import com.wunderlist.slidinglayer.SlidingLayer;
@@ -48,7 +49,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 /**
  * Created by gilang on 29/10/2015.
  */
-public class PlayerFragment extends Fragment implements GestureDetector.OnGestureListener{
+public class PlayerFragment extends Fragment {
 
 	public static final int STATE_PLAYING = 100;
 	public static final int STATE_STOP = 101;
@@ -102,15 +103,13 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 		animate(datas.get(0));
 
 		if(activity != null){
-			gd = new GestureDetectorCompat(activity, this);
+			gd = new GestureDetectorCompat(activity, new SnapGestureListener(activity));
 			recyclerView.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
 					System.out.println("touch recycler");
-					if(layoutManager.findFirstCompletelyVisibleItemPosition() == 0 && !activity.changing)
+					if(layoutManager.findFirstCompletelyVisibleItemPosition() == 0)
 						return gd.onTouchEvent(event);
-					else if(activity.changing)
-						return true;
 					return false;
 				}
 			});
@@ -134,7 +133,6 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if(id == R.id.btn_collapse){
-			activity.changing = true;
 			activity.appBarLayout.setExpanded(true);
 		}
 		return super.onOptionsItemSelected(item);
@@ -171,7 +169,7 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		minimizedPlayer.setVisibility(View.VISIBLE);
+//		minimizedPlayer.setVisibility(View.VISIBLE);
 	}
 
 	public void bindHeaderView(View v){
@@ -262,8 +260,6 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 				setPlayerColor();
 				if(Build.VERSION.SDK_INT >= 21) {
 					showImage(imgCover);
-//					showImage(groupInfo);
-//					showImage(groupControl);
 				}
 				txtTitle.setText(persistentDatas.get(counter % persistentDatas.size()).title);
 				txtArtist.setText(persistentDatas.get(counter % persistentDatas.size()).artist);
@@ -285,8 +281,6 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 				setPlayerColor();
 				if(Build.VERSION.SDK_INT >= 21) {
 					showImage(imgCover);
-//					showImage(groupInfo);
-//					showImage(groupControl);
 				}
 				txtTitle.setText(persistentDatas.get(counter % persistentDatas.size()).title);
 				txtArtist.setText(persistentDatas.get(counter % persistentDatas.size()).artist);
@@ -300,7 +294,6 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 			@Override
 			public void onClick(View v) {
 				if (activity != null) {
-					activity.changing = true;
 					activity.appBarLayout.setExpanded(false);
 				}
 			}
@@ -357,48 +350,6 @@ public class PlayerFragment extends Fragment implements GestureDetector.OnGestur
 				groupControl.setBackgroundColor(lightColor);
 			}
 		});
-	}
-
-	@Override
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-		System.out.println("fling recycler: " + velocityX + " " + velocityY);
-		AppBarLayout appBarLayout = activity.appBarLayout;
-		if(Math.abs(velocityY) > 50){
-			activity.changing = true;
-			if(velocityY > 0){
-				appBarLayout.setExpanded(true);
-				System.out.println("expanded");
-			}else if(velocityY < 0){
-				appBarLayout.setExpanded(false);
-				System.out.println("collapsed");
-			}
-		}
-		return true;
-	}
-
-	@Override
-	public boolean onDown(MotionEvent e) {
-		return false;
-	}
-
-	@Override
-	public void onShowPress(MotionEvent e) {
-
-	}
-
-	@Override
-	public boolean onSingleTapUp(MotionEvent e) {
-		return false;
-	}
-
-	@Override
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-		return false;
-	}
-
-	@Override
-	public void onLongPress(MotionEvent e) {
-
 	}
 
 	private void animate(final Playlist playlist){

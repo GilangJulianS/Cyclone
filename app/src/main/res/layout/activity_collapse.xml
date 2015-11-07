@@ -31,7 +31,7 @@
 				app:expandedTitleMarginStart="48dp"
 				app:contentScrim="?attr/colorPrimary"
 				android:fitsSystemWindows="true"
-				app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+				app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 				<LinearLayout
 					android:id="@+id/parallax_header"
