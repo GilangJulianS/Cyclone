@@ -38,61 +38,44 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 /**
  * Created by gilang on 06/11/2015.
  */
-public class LiveStreamFragment extends Fragment {
-
-	private RecyclerView recyclerView;
-	private LinearLayoutManager layoutManager;
-	private UniversalAdapter adapter;
-	private List<Object> objects;
-	private SwipeRefreshLayout swipeLayout;
+public class LiveStreamFragment extends RecyclerFragment {
 
 	public LiveStreamFragment(){}
 
-	public static LiveStreamFragment newInstance(){
+	public static LiveStreamFragment newInstance(String json){
 		LiveStreamFragment fragment = new LiveStreamFragment();
+		fragment.json = json;
 		return fragment;
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
+	public List<Object> getDatas() {
+		return parse(json);
+	}
+
+	@Override
+	public void onCreateView(View v, ViewGroup parent, Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
-		View v = inflater.inflate(R.layout.fragment_recycler, parent, false);
+	}
 
-		recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
-		swipeLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
-		swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-			@Override
-			public void onRefresh() {
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						swipeLayout.setRefreshing(false);
-						adapter.datas.clear();
-						adapter.notifyDataSetChanged();
-						objects = parse("");
-						animate(objects.get(0));
-					}
-				}, 5000);
-			}
-		});
+	@Override
+	public int getColumnNumber() {
+		return 1;
+	}
 
-		layoutManager = new LinearLayoutManager(getContext());
-		recyclerView.setLayoutManager(layoutManager);
+	@Override
+	public boolean isRefreshEnabled() {
+		return true;
+	}
 
-		SlideInUpAnimator slideAnimator = new SlideInUpAnimator(new
-				DecelerateInterpolator());
-		slideAnimator.setAddDuration(500);
-		slideAnimator.setMoveDuration(500);
-		recyclerView.setItemAnimator(slideAnimator);
+	@Override
+	public int getHeaderLayoutId() {
+		return 0;
+	}
 
-		adapter = new UniversalAdapter(getActivity(), "");
-		recyclerView.setAdapter(adapter);
+	@Override
+	public void prepareHeader(View v) {
 
-		objects = parse("");
-
-		animate(objects.get(0));
-
-		return v;
 	}
 
 	public List<Object> parse(String json){
@@ -113,22 +96,6 @@ public class LiveStreamFragment extends Fragment {
 		datas.add(new ProgramContent(ProgramContent.TYPE_SOUND, "10:11", "ID Station Closing 1"));
 
 		return datas;
-	}
-
-	private void animate(final Object object){
-		final Handler handler = new Handler();
-		final Object o = object;
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				adapter.add(o);
-				objects.remove(o);
-				adapter.notifyItemInserted(adapter.datas.size() - 1);
-				if (!objects.isEmpty()) {
-					animate(objects.get(0));
-				}
-			}
-		}, 50);
 	}
 
 	@Override

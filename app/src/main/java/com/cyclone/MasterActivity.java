@@ -27,7 +27,7 @@ public abstract class MasterActivity extends AppCompatActivity implements Gestur
 	public static final int LAYOUT_PLAYER = 103;
 	public static final int LAYOUT_ALBUM = 104;
 	public static final int LAYOUT_ARTIST = 105;
-	public static final int LAYOUT_HOME = 106;
+	public static final int LAYOUT_RADIO_PROFILE = 106;
 	public static final int LAYOUT_VIRTUAL_CARD = 107;
 	public static final int LAYOUT_CLUB = 108;
 	public static final int LAYOUT_NOTIFICATION = 109;
@@ -40,6 +40,7 @@ public abstract class MasterActivity extends AppCompatActivity implements Gestur
 	public static final int LAYOUT_ACCOUNT_SETTINGS = 116;
 	public static final int LAYOUT_STREAM_PLAYER = 117;
 	public static final int LAYOUT_REQUEST = 118;
+	public static final int LAYOUT_HOME = 119;
 
 	public AppBarLayout appBarLayout;
 	public boolean isExpanded = true;

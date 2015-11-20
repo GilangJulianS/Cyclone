@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.cyclone.DrawerActivity;
 import com.cyclone.R;
 import com.cyclone.model.Playlist;
 
@@ -17,8 +18,8 @@ public class PlaylistHolder extends UniversalHolder{
 	public TextView txtArtist;
 	public TextView txtDuration;
 
-	public PlaylistHolder(View v) {
-		super(v);
+	public PlaylistHolder(View v, Activity activity) {
+		super(v, activity);
 		txtTitle = (TextView) v.findViewById(R.id.txt_song_title);
 		txtArtist = (TextView) v.findViewById(R.id.txt_song_artist);
 		txtDuration = (TextView) v.findViewById(R.id.txt_duration);

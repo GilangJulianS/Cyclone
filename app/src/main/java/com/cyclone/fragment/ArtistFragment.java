@@ -31,78 +31,44 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 /**
  * Created by gilang on 02/11/2015.
  */
-public class ArtistFragment extends Fragment {
-
-	private RecyclerView recyclerView;
-	private LinearLayoutManager layoutManager;
-	private UniversalAdapter adapter;
-	private List<Object> objects;
-	private SwipeRefreshLayout swipeLayout;
-	private DrawerActivity activity;
-	private GestureDetectorCompat gd;
+public class ArtistFragment extends RecyclerFragment {
 
 	public ArtistFragment(){}
 
-	public static ArtistFragment newInstance(){
+	public static ArtistFragment newInstance(String json){
 		ArtistFragment fragment = new ArtistFragment();
+		fragment.json = json;
 		return fragment;
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-		View v = inflater.inflate(R.layout.fragment_recycler, parent, false);
-
-		swipeLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
-		swipeLayout.setEnabled(false);
-
-		recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
-
-		layoutManager = new LinearLayoutManager(getContext());
-		recyclerView.setLayoutManager(layoutManager);
-
-		SlideInUpAnimator slideAnimator = new SlideInUpAnimator(new
-				DecelerateInterpolator());
-		slideAnimator.setAddDuration(500);
-		slideAnimator.setMoveDuration(500);
-		recyclerView.setItemAnimator(slideAnimator);
-
-		adapter = new UniversalAdapter(getActivity(), "");
-		recyclerView.setAdapter(adapter);
-
-		objects = parse("");
-
-		animate(objects.get(0));
-
-		if(activity != null){
-			gd = new GestureDetectorCompat(activity, new SnapGestureListener(activity));
-			recyclerView.setOnTouchListener(new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					System.out.println("touch recycler");
-					if(layoutManager.findFirstCompletelyVisibleItemPosition() == 0)
-						return gd.onTouchEvent(event);
-					return false;
-				}
-			});
-		}
-
-		return v;
+	public List<Object> getDatas() {
+		return parse(json);
 	}
 
 	@Override
-	public void onAttach(Context context){
-		super.onAttach(context);
-		if(context instanceof DrawerActivity) {
-			activity = (DrawerActivity) context;
-			ViewGroup parallaxHeader = (ViewGroup) activity.findViewById(R.id
-					.parallax_header);
-			LayoutInflater inflater = activity.getLayoutInflater();
-			View header = inflater.inflate(R.layout.part_header_artist, parallaxHeader,
-					false);
-			setupHeader(header, "");
-			parallaxHeader.removeAllViews();
-			parallaxHeader.addView(header);
-		}
+	public void onCreateView(View v, ViewGroup parent, Bundle savedInstanceState) {
+
+	}
+
+	@Override
+	public int getColumnNumber() {
+		return 1;
+	}
+
+	@Override
+	public boolean isRefreshEnabled() {
+		return false;
+	}
+
+	@Override
+	public int getHeaderLayoutId() {
+		return R.layout.part_header_artist;
+	}
+
+	@Override
+	public void prepareHeader(View v) {
+		setupHeader(v, json);
 	}
 
 	public void setupHeader(View v, String json){
@@ -126,21 +92,5 @@ public class ArtistFragment extends Fragment {
 		datas.add(new Album("", "Funky Sunshine", "Playlist - By Imam Darto"));
 		datas.add(new Album("", "Waking Up", "Mix - By Dimas Danang"));
 		return datas;
-	}
-
-	private void animate(final Object object){
-		final Handler handler = new Handler();
-		final Object o = object;
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				adapter.add(o);
-				objects.remove(o);
-				adapter.notifyItemInserted(adapter.datas.size() - 1);
-				if (!objects.isEmpty()) {
-					animate(objects.get(0));
-				}
-			}
-		}, 50);
 	}
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.cyclone.DrawerActivity;
 import com.cyclone.R;
 import com.cyclone.model.Section;
 
@@ -16,8 +17,8 @@ public class SectionHolder extends UniversalHolder {
 
 	public TextView txtTitle;
 
-	public SectionHolder(View v){
-		super(v);
+	public SectionHolder(View v, Activity activity){
+		super(v, activity);
 		txtTitle = (TextView) v.findViewById(R.id.txt_section_title);
 	}
 

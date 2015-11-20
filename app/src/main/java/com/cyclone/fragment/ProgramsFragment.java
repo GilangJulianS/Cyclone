@@ -24,53 +24,53 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 /**
  * Created by gilang on 10/10/2015.
  */
-public class ProgramsFragment extends Fragment {
-
-	private RecyclerView mRecyclerView;
-	private RecyclerView.LayoutManager mLayoutManager;
-	private UniversalAdapter adapter;
-	private List<Program> programs;
-	private SwipeRefreshLayout swipeLayout;
+public class ProgramsFragment extends RecyclerFragment {
 
 	public ProgramsFragment(){}
 
-	public static ProgramsFragment newInstance(){
+	public static ProgramsFragment newInstance(String json){
 		ProgramsFragment fragment = new ProgramsFragment();
+		fragment.json = json;
 		return fragment;
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-		View v = inflater.inflate(R.layout.fragment_recycler, parent, false);
-
-		swipeLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
-		swipeLayout.setEnabled(false);
-
-		mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
-
-		mLayoutManager = new GridLayoutManager(getActivity(), 2);
-		mRecyclerView.setLayoutManager(mLayoutManager);
-
-		SlideInUpAnimator slideAnimator = new SlideInUpAnimator(new
-				DecelerateInterpolator());
-		slideAnimator.setAddDuration(500);
-		slideAnimator.setMoveDuration(500);
-		mRecyclerView.setItemAnimator(slideAnimator);
-
-		adapter = new UniversalAdapter(getActivity(), "");
-		mRecyclerView.setAdapter(adapter);
-
-		programs = parse("");
-
-		animate(programs.get(0));
-
-		((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Programs");
-
-		return v;
+	public List<Object> getDatas() {
+		return parse(json);
 	}
 
-	public List<Program> parse(String json){
-		List<Program> datas = new ArrayList<>();
+	@Override
+	public void onCreateView(View v, ViewGroup parent, Bundle savedInstanceState) {
+
+	}
+
+	@Override
+	public int getColumnNumber() {
+		return 2;
+	}
+
+	@Override
+	public boolean isRefreshEnabled() {
+		return false;
+	}
+
+	@Override
+	public int getHeaderLayoutId() {
+		return 0;
+	}
+
+	@Override
+	public boolean hasHeader() {
+		return false;
+	}
+
+	@Override
+	public void prepareHeader(View v) {
+
+	}
+
+	public List<Object> parse(String json){
+		List<Object> datas = new ArrayList<>();
 		datas.add(new Program("http://imgurl.com", "Inspiring Life", "Sen - Jum, 04.00 - 05" +
 				".00", 4));
 		datas.add(new Program("http://imgurl.com", "Inspiring Morning", "Sen - Jum, 04.00 - 05" +
@@ -92,21 +92,5 @@ public class ProgramsFragment extends Fragment {
 		datas.add(new Program("http://imgurl.com", "Wild Life", "Sen - Jum, 04.00 - 05" +
 				".00", 4));
 		return datas;
-	}
-
-	private void animate(final Program program){
-		final Handler handler = new Handler();
-		final Program p = program;
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				adapter.add(p);
-				programs.remove(p);
-				adapter.notifyItemInserted(adapter.datas.size()-1);
-				if(!programs.isEmpty()){
-					animate(programs.get(0));
-				}
-			}
-		}, 50);
 	}
 }

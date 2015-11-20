@@ -14,12 +14,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.cyclone.fragment.AccountSettingFragment;
 import com.cyclone.fragment.AlbumFragment;
 import com.cyclone.fragment.AnnouncersFragment;
 import com.cyclone.fragment.ArtistFragment;
 import com.cyclone.fragment.ClubRadioFragment;
+import com.cyclone.fragment.HomeFragment;
 import com.cyclone.fragment.LiveStreamFragment;
 import com.cyclone.fragment.NotificationFragment;
 import com.cyclone.fragment.PersonListFragment;
@@ -76,7 +78,7 @@ public class DrawerActivity extends MasterActivity
 		if(caller != null && caller.getExtras() != null) {
 			isParentView = caller.getExtras().getBoolean("parent", false);
 			String title = caller.getExtras().getString("title", "");
-			int layout = caller.getExtras().getInt("layout", LAYOUT_HOME);
+			int layout = caller.getExtras().getInt("layout", LAYOUT_RADIO_PROFILE);
 			int mode = caller.getExtras().getInt("mode", -1);
 			String transitionId = caller.getExtras().getString("transition", "profile");
 			FragmentManager manager = getSupportFragmentManager();
@@ -86,51 +88,54 @@ public class DrawerActivity extends MasterActivity
 				else
 					getSupportActionBar().setTitle(title);
 			}
-			if(layout == LAYOUT_HOME){
+			if(layout == LAYOUT_RADIO_PROFILE){
 				manager.beginTransaction().replace(R.id.container, RadioProfileFragment.newInstance()).commit();
+			}else if(layout == LAYOUT_HOME){
+				manager.beginTransaction().replace(R.id.container, HomeFragment.newInstance("")).commit();
 			}else if(layout == LAYOUT_VIRTUAL_CARD){
 				manager.beginTransaction().replace(R.id.container, VirtualCardFragment.newInstance()).commit();
 			}else if(layout == LAYOUT_CLUB){
-				manager.beginTransaction().replace(R.id.container, ClubRadioFragment.newInstance()).commit();
+				manager.beginTransaction().replace(R.id.container, ClubRadioFragment.newInstance("")).commit();
 			}else if(layout == LAYOUT_NOTIFICATION){
-				manager.beginTransaction().replace(R.id.container, NotificationFragment.newInstance()).commit();
+				manager.beginTransaction().replace(R.id.container, NotificationFragment.newInstance("")).commit();
 			}else if(layout == LAYOUT_SETTINGS){
 				manager.beginTransaction().replace(R.id.container, SettingsFragment.newInstance()).commit();
 			}else if(layout == LAYOUT_LIVE){
-				manager.beginTransaction().replace(R.id.container, LiveStreamFragment.newInstance()).commit();
+				manager.beginTransaction().replace(R.id.container, LiveStreamFragment.newInstance("")).commit();
 			}else if (layout == LAYOUT_PROGRAM_PAGE) {
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, ProgramPageFragment
 						.newInstance()).commit();
 			} else if (layout == LAYOUT_PERSON_PROFILE) {
-				PersonProfileFragment fragment = PersonProfileFragment.newInstance(mode, transitionId);
+				PersonProfileFragment fragment = PersonProfileFragment.newInstance(mode,
+						transitionId, "");
 				callback = fragment;
 				manager.beginTransaction().replace(R.id.container, fragment).commit();
 			} else if (layout == LAYOUT_PLAYER) {
 				callback = null;
 				showMiniPlayer = false;
-				manager.beginTransaction().replace(R.id.container, PlayerFragment.newInstance())
+				manager.beginTransaction().replace(R.id.container, PlayerFragment.newInstance(""))
 						.commit();
 			} else if (layout == LAYOUT_ALBUM) {
 				callback = null;
-				manager.beginTransaction().replace(R.id.container, AlbumFragment.newInstance())
+				manager.beginTransaction().replace(R.id.container, AlbumFragment.newInstance(""))
 						.commit();
 			} else if (layout == LAYOUT_ARTIST) {
 				callback = null;
-				manager.beginTransaction().replace(R.id.container, ArtistFragment.newInstance())
+				manager.beginTransaction().replace(R.id.container, ArtistFragment.newInstance(""))
 						.commit();
 			} else if (layout == LAYOUT_PROGRAMS){
 				callback = null;
-				manager.beginTransaction().replace(R.id.container, ProgramsFragment.newInstance()).commit();
+				manager.beginTransaction().replace(R.id.container, ProgramsFragment.newInstance("")).commit();
 			}else if (layout == LAYOUT_ANNOUNCERS){
 				callback = null;
-				manager.beginTransaction().replace(R.id.container, AnnouncersFragment.newInstance()).commit();
+				manager.beginTransaction().replace(R.id.container, AnnouncersFragment.newInstance("")).commit();
 			}else if (layout == LAYOUT_FEED){
 				callback = null;
-				manager.beginTransaction().replace(R.id.container, ClubRadioFragment.newInstance()).commit();
+				manager.beginTransaction().replace(R.id.container, ClubRadioFragment.newInstance("")).commit();
 			}else if (layout == LAYOUT_PEOPLE){
 				callback = null;
-				manager.beginTransaction().replace(R.id.container, PersonListFragment.newInstance()).commit();
+				manager.beginTransaction().replace(R.id.container, PersonListFragment.newInstance("")).commit();
 			}else if (layout == LAYOUT_ACCOUNT_SETTINGS){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, AccountSettingFragment.newInstance()).commit();
@@ -141,7 +146,7 @@ public class DrawerActivity extends MasterActivity
 						.newInstance()).commit();
 			}else if(layout == LAYOUT_REQUEST){
 				callback = null;
-				manager.beginTransaction().replace(R.id.container, RequestFragment.newInstance())
+				manager.beginTransaction().replace(R.id.container, RequestFragment.newInstance(""))
 						.commit();
 			}
 		}else{

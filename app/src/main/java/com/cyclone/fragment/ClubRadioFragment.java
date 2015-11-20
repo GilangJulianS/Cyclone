@@ -29,60 +29,44 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 /**
  * Created by gilang on 17/10/2015.
  */
-public class ClubRadioFragment extends Fragment {
-
-	private RecyclerView recyclerView;
-	private LinearLayoutManager layoutManager;
-	private SwipeRefreshLayout swipeLayout;
-	private UniversalAdapter adapter;
-	private List<Object> datas;
+public class ClubRadioFragment extends RecyclerFragment {
 
 	public ClubRadioFragment(){}
 
-	public static ClubRadioFragment newInstance(){
+	public static ClubRadioFragment newInstance(String json){
 		ClubRadioFragment fragment = new ClubRadioFragment();
+		fragment.json = json;
 		return fragment;
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-		View v = inflater.inflate(R.layout.fragment_recycler, parent, false);
-		swipeLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
-		swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-			@Override
-			public void onRefresh() {
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						swipeLayout.setRefreshing(false);
-						adapter.datas.clear();
-						adapter.notifyDataSetChanged();
-						datas = parse("");
-						animate(datas.get(0));
-					}
-				}, 5000);
-			}
-		});
+	public List<Object> getDatas() {
+		return parse(json);
+	}
 
-		recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
-		layoutManager = new LinearLayoutManager(getContext());
-		recyclerView.setLayoutManager(layoutManager);
+	@Override
+	public void onCreateView(View v, ViewGroup parent, Bundle savedInstanceState) {
 
-		SlideInUpAnimator slideAnimator = new SlideInUpAnimator(new
-				DecelerateInterpolator());
-		slideAnimator.setAddDuration(500);
-		slideAnimator.setMoveDuration(500);
-		recyclerView.setItemAnimator(slideAnimator);
+	}
 
-		adapter = new UniversalAdapter(getActivity(), "");
+	@Override
+	public int getColumnNumber() {
+		return 1;
+	}
 
-		recyclerView.setAdapter(adapter);
+	@Override
+	public boolean isRefreshEnabled() {
+		return true;
+	}
 
-		datas = parse("");
+	@Override
+	public int getHeaderLayoutId() {
+		return 0;
+	}
 
-		animate(datas.get(0));
+	@Override
+	public void prepareHeader(View v) {
 
-		return v;
 	}
 
 	public List<Object> parse(String json){
@@ -106,20 +90,5 @@ public class ClubRadioFragment extends Fragment {
 		datas.add(new Post("", "<b>Desta</b> shared a <b>Playlist</b>", "4 Hour ago", "Playlist",
 				"", "Pop 2015", "2015 top hits", "20 tracks", 1024, 56, Post.TYPE_POST));
 		return datas;
-	}
-
-	private void animate(final Object o){
-		final Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				adapter.add(o);
-				datas.remove(o);
-				adapter.notifyItemInserted(adapter.datas.size() - 1);
-				if (!datas.isEmpty()) {
-					animate(datas.get(0));
-				}
-			}
-		}, 200);
 	}
 }
