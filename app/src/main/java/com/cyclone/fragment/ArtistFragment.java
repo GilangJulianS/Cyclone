@@ -77,18 +77,18 @@ public class ArtistFragment extends RecyclerFragment {
 
 	public List<Object> parse(String json){
 		List<Object> datas = new ArrayList<>();
-		datas.add(new Section("Popular Tracks"));
+		datas.add(new Section("Popular Tracks", null));
 		datas.add(new Song("Counting Stars", "389,233"));
 		datas.add(new Song("Love Runs Out", "210,321"));
 		datas.add(new Song("If I Lose Myself", "231,312"));
 		datas.add(new Song("Feel Again", "255,912"));
 		datas.add(new Song("What You Wanted", "187,512"));
-		datas.add(new Section("Albums"));
+		datas.add(new Section("Albums", null));
 		datas.add(new Album("", "Native", "2014"));
 		datas.add(new Album("", "Waking Up", "2009"));
 		datas.add(new Album("", "Native", "2014"));
 		datas.add(new Album("", "Waking Up", "2009"));
-		datas.add(new Section("Appears on Showlist"));
+		datas.add(new Section("Appears on Showlist", null));
 		datas.add(new Album("", "Funky Sunshine", "Playlist - By Imam Darto"));
 		datas.add(new Album("", "Waking Up", "Mix - By Dimas Danang"));
 		return datas;

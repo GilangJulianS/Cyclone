@@ -23,6 +23,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cyclone.DrawerActivity;
 import com.cyclone.R;
@@ -115,6 +116,9 @@ public class PersonProfileFragment extends RecyclerFragment{
 		TextView txtContent = (TextView) header.findViewById(R.id.txt_contents_count);
 		TextView txtFollower = (TextView) header.findViewById(R.id.txt_followers_count);
 		TextView txtFollowing = (TextView) header.findViewById(R.id.txt_following_count);
+		Button btnAddShowList = (Button) header.findViewById(R.id.btn_add_showlist);
+		Button btnUpload = (Button) header.findViewById(R.id.btn_upload);
+		Button btnFollow = (Button) header.findViewById(R.id.btn_follow);
 		ImageView imgUser = (ImageView) header.findViewById(R.id.img_user);
 
 		setupBackground(header);
@@ -174,6 +178,27 @@ public class PersonProfileFragment extends RecyclerFragment{
 				i.putExtra("activity", R.layout.activity_drawer_standard);
 				i.putExtra("title", "Following");
 				startActivity(i);
+			}
+		});
+
+		btnAddShowList.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(activity, "Add showlist button pressed", Toast.LENGTH_SHORT).show();
+			}
+		});
+
+		btnUpload.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(activity, "Upload button pressed", Toast.LENGTH_SHORT).show();
+			}
+		});
+
+		btnFollow.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(activity, "Follow button pressed", Toast.LENGTH_SHORT).show();
 			}
 		});
 

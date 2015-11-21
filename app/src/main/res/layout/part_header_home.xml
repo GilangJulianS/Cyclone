@@ -25,23 +25,36 @@
 
 		<Button
 			android:id="@+id/btn_play"
-			android:layout_width="wrap_content"
+			android:layout_width="220dp"
 			android:layout_height="wrap_content"
-			android:theme="@style/ButtonTransparent"
+			android:layout_marginTop="20dp"
+			android:layout_marginLeft="30dp"
+			android:layout_marginRight="30dp"
+			android:paddingLeft="50dp"
+			android:paddingRight="50dp"
+			android:background="@drawable/btn_header_dark"
+			android:drawableLeft="@drawable/ic_play_circle_outline_white_24dp"
+			android:drawablePadding="5dp"
 			android:textColor="#fff"
 			android:text="Play Radio"/>
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
 			android:textColor="#fff"
 			android:text="Or"/>
 
 		<Button
 			android:id="@+id/btn_mix"
-			android:layout_width="wrap_content"
+			android:layout_width="220dp"
 			android:layout_height="wrap_content"
-			android:theme="@style/ButtonTransparent"
+			android:layout_marginTop="10dp"
+			android:paddingLeft="50dp"
+			android:paddingRight="50dp"
+			android:background="@drawable/btn_header_dark"
+			android:drawableLeft="@drawable/ic_play_circle_outline_white_24dp"
+			android:drawablePadding="5dp"
 			android:textColor="#fff"
 			android:text="Mix For You"/>
 

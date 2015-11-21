@@ -4,6 +4,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_margin="5dp"
+	android:layout_weight="1"
 	app:cardElevation="2dp"
 	app:cardCornerRadius="2dp"
 	android:clipToPadding="false"
@@ -14,58 +15,65 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="match_parent"
 		android:background="#fff"
 		android:orientation="vertical">
 
-		<ImageView
+		<com.cyclone.custom.SquareImageView
 			android:id="@+id/img_cover"
-			android:transitionName="program"
 			android:layout_width="match_parent"
-			android:layout_height="160dp"
+			android:layout_height="wrap_content"
+			android:transitionName="thumbnail"
+			app:layout_widthPercent="100%"
+			app:layout_aspectRatio="100%"
 			android:scaleType="centerCrop"
-			android:src="@drawable/background_login"/>
+			android:src="@drawable/wallpaper"/>
 
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:paddingTop="5dp"
 			android:paddingLeft="10dp"
 			android:paddingRight="10dp"
+			android:paddingTop="5dp"
 			android:paddingBottom="10dp"
 			android:orientation="horizontal">
 
 			<LinearLayout
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
 				android:layout_weight="1"
+				android:layout_height="wrap_content"
 				android:orientation="vertical">
 
 				<TextView
-					android:id="@+id/txt_title"
+					android:id="@+id/txt_primary"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="5dp"
+					android:singleLine="true"
+					android:ellipsize="marquee"
 					android:textStyle="bold"
-					android:text="Hit The Beat"/>
+					android:text="Melawan Asap"/>
 
 				<TextView
-					android:id="@+id/txt_schedule"
+					android:id="@+id/txt_secondary"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="5dp"
-					android:textSize="10sp"
-					android:text="Sen - Jum, 12:00 - 15:00"/>
+					android:singleLine="true"
+					android:ellipsize="marquee"
+					android:textSize="11sp"
+					android:text="Prambors FM Jakarta"/>
 
-				<RatingBar
-					android:id="@+id/ratingbar"
+				<TextView
+					android:id="@+id/txt_tertiary"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="5dp"
-					style="?android:attr/ratingBarStyleSmall"
-					android:numStars="5"
-					android:stepSize="1"
-					android:rating="2"/>
+					android:singleLine="true"
+					android:ellipsize="marquee"
+					android:textSize="10sp"
+					android:text="17 Sept 2015 - 10:09"/>
+
 
 			</LinearLayout>
 

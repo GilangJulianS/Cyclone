@@ -95,7 +95,7 @@ public class AlbumFragment extends RecyclerFragment {
 		datas.add(new Song("I Lived", "OneRepublic"));
 		datas.add(new Song("Light It Up", "OneRepublic"));
 		datas.add(new Song("Life In Color", "OneRepublic"));
-		datas.add(new Section("More By OneRepublic"));
+		datas.add(new Section("More By OneRepublic", null));
 		datas.add(new Album("", "Native", "2014"));
 		datas.add(new Album("", "Waking Up", "2009"));
 		datas.add(new Album("", "Native", "2014"));
