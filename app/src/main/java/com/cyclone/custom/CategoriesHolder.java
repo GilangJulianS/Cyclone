@@ -1,6 +1,7 @@
 package com.cyclone.custom;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.cyclone.DrawerActivity;
+import com.cyclone.MasterActivity;
 import com.cyclone.R;
 import com.cyclone.model.Categories;
 import com.cyclone.model.Category;
@@ -42,10 +44,18 @@ public class CategoriesHolder extends UniversalHolder{
 					group1, false);
 			button.setText(c.text);
 
+			final Category temp = c;
 			button.setOnClickListener(new View.OnClickListener() {
+
+				String label = temp.text;
+
 				@Override
 				public void onClick(View v) {
-
+					Intent i = new Intent(activity, DrawerActivity.class);
+					i.putExtra("layout", MasterActivity.LAYOUT_CATEGORY);
+					i.putExtra("activity", R.layout.activity_drawer_standard);
+					i.putExtra("title", label);
+					activity.startActivity(i);
 				}
 			});
 			if(counter % 4 == 0){

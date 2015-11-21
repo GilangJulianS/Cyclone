@@ -1,12 +1,14 @@
 package com.cyclone.custom;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cyclone.DrawerActivity;
+import com.cyclone.MasterActivity;
 import com.cyclone.R;
 import com.cyclone.model.Section;
 
@@ -37,11 +39,15 @@ public class SectionHolder extends UniversalHolder {
 			btnMore.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Toast.makeText(activity, "See more " + section.category, Toast.LENGTH_SHORT).show();
+					Intent i = new Intent(activity, DrawerActivity.class);
+					i.putExtra("layout", MasterActivity.LAYOUT_SUBCATEGORY);
+					i.putExtra("activity", R.layout.activity_drawer_standard);
+					i.putExtra("title", section.name);
+					activity.startActivity(i);
 				}
 			});
 		}else{
-			btnMore.setVisibility(View.GONE);
+			btnMore.setVisibility(View.INVISIBLE);
 		}
 	}
 }

@@ -22,6 +22,7 @@ import com.cyclone.model.Request;
 import com.cyclone.model.RunningProgram;
 import com.cyclone.model.Section;
 import com.cyclone.model.Song;
+import com.cyclone.model.SubcategoryItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,7 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 	public static final int TYPE_REQUEST = 113;
 	public static final int TYPE_CATEGORIES = 114;
 	public static final int TYPE_CONTENTS = 115;
+	public static final int TYPE_SUBCATEGORY_ITEM = 116;
 
 	public List<Object> datas;
 	private Activity activity;
@@ -97,6 +99,7 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 		else if(o instanceof Request) return TYPE_REQUEST;
 		else if(o instanceof Categories) return  TYPE_CATEGORIES;
 		else if(o instanceof Contents) return TYPE_CONTENTS;
+		else if(o instanceof SubcategoryItem) return TYPE_SUBCATEGORY_ITEM;
 		return -1;
 	}
 
@@ -117,6 +120,7 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 			case TYPE_REQUEST: return R.layout.card_request;
 			case TYPE_CATEGORIES: return R.layout.card_categories;
 			case TYPE_CONTENTS: return R.layout.card_contents;
+			case TYPE_SUBCATEGORY_ITEM: return R.layout.card_subcategory_item;
 			default: return -1;
 		}
 	}
@@ -140,6 +144,7 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 			case TYPE_REQUEST: holder = new RequestHolder(v, activity); break;
 			case TYPE_CATEGORIES: holder = new CategoriesHolder(v, activity); break;
 			case TYPE_CONTENTS: holder = new ContentsHolder(v, activity); break;
+			case TYPE_SUBCATEGORY_ITEM: holder = new SubcategoryHolder(v, activity); break;
 		}
 		return holder;
 	}

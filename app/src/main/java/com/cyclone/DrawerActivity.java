@@ -20,6 +20,7 @@ import com.cyclone.fragment.AccountSettingFragment;
 import com.cyclone.fragment.AlbumFragment;
 import com.cyclone.fragment.AnnouncersFragment;
 import com.cyclone.fragment.ArtistFragment;
+import com.cyclone.fragment.CategoryFragment;
 import com.cyclone.fragment.ClubRadioFragment;
 import com.cyclone.fragment.HomeFragment;
 import com.cyclone.fragment.LiveStreamFragment;
@@ -33,6 +34,7 @@ import com.cyclone.fragment.RadioProfileFragment;
 import com.cyclone.fragment.RequestFragment;
 import com.cyclone.fragment.SettingsFragment;
 import com.cyclone.fragment.StreamPlayerFragment;
+import com.cyclone.fragment.SubcategoryFragment;
 import com.cyclone.fragment.VirtualCardFragment;
 
 public class DrawerActivity extends MasterActivity
@@ -68,6 +70,7 @@ public class DrawerActivity extends MasterActivity
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
 
+
 		if(isCollapseLayout) {
 			toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id
 					.collapsing_toolbar_layout);
@@ -80,6 +83,7 @@ public class DrawerActivity extends MasterActivity
 			String title = caller.getExtras().getString("title", "");
 			int layout = caller.getExtras().getInt("layout", LAYOUT_RADIO_PROFILE);
 			int mode = caller.getExtras().getInt("mode", -1);
+			int menuId = caller.getExtras().getInt("menuId", 0);
 			String transitionId = caller.getExtras().getString("transition", "profile");
 			FragmentManager manager = getSupportFragmentManager();
 			if(title != null && !title.equals("")) {
@@ -148,11 +152,21 @@ public class DrawerActivity extends MasterActivity
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, RequestFragment.newInstance(""))
 						.commit();
+			}else if(layout == LAYOUT_CATEGORY){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, CategoryFragment.newInstance(""))
+						.commit();
+			}else if(layout == LAYOUT_SUBCATEGORY){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, SubcategoryFragment.newInstance(""))
+						.commit();
 			}
+			navigationView.getMenu().getItem(menuId).setChecked(true);
 		}else{
 			isParentView = true;
 			FragmentManager manager = getSupportFragmentManager();
 			manager.beginTransaction().replace(R.id.container, RadioProfileFragment.newInstance()).commit();
+			navigationView.getMenu().getItem(0).setChecked(true);
 		}
 
 		if(isParentView){
@@ -230,12 +244,14 @@ public class DrawerActivity extends MasterActivity
 			case R.id.nav_home:
 				intent.putExtra("layout", MasterActivity.LAYOUT_HOME);
 				intent.putExtra("activity", R.layout.activity_drawer);
+				intent.putExtra("menuId", 0);
 				startActivity(intent);
 				finish();
 				break;
 			case R.id.nav_live:
 				intent.putExtra("layout", MasterActivity.LAYOUT_LIVE);
 				intent.putExtra("activity", R.layout.activity_drawer_standard);
+				intent.putExtra("menuId", 1);
 				startActivity(intent);
 				finish();
 				break;
@@ -243,37 +259,49 @@ public class DrawerActivity extends MasterActivity
 				intent.putExtra("title", "Imam Darto");
 				intent.putExtra("layout", MasterActivity.LAYOUT_CLUB);
 				intent.putExtra("activity", R.layout.activity_drawer_standard);
+				intent.putExtra("menuId", 2);
 				startActivity(intent);
+				finish();
 				break;
 			case R.id.nav_profile:
 				intent.putExtra("layout", MasterActivity.LAYOUT_PERSON_PROFILE);
 				intent.putExtra("title", "Dimas Danang");
 				intent.putExtra("activity", R.layout.activity_drawer);
+				intent.putExtra("menuId", 3);
 				startActivity(intent);
+				finish();
 				break;
 			case R.id.nav_notification:
 				intent.putExtra("title", "Notifications");
 				intent.putExtra("layout", MasterActivity.LAYOUT_NOTIFICATION);
 				intent.putExtra("activity", R.layout.activity_drawer_standard);
+				intent.putExtra("menuId", 5);
 				startActivity(intent);
+				finish();
 				break;
 			case R.id.nav_virtual_card:
 				intent.putExtra("title", "Virtual Card");
 				intent.putExtra("layout", MasterActivity.LAYOUT_VIRTUAL_CARD);
 				intent.putExtra("activity", R.layout.activity_drawer);
+				intent.putExtra("menuId", 6);
 				startActivity(intent);
+				finish();
 				break;
 			case R.id.nav_setting:
 				intent.putExtra("title", "Settings");
 				intent.putExtra("layout", MasterActivity.LAYOUT_SETTINGS);
 				intent.putExtra("activity", R.layout.activity_drawer_standard);
+				intent.putExtra("menuId", 7);
 				startActivity(intent);
+				finish();
 				break;
 			case R.id.nav_player:
 				intent.putExtra("title", "Player");
 				intent.putExtra("layout", MasterActivity.LAYOUT_PLAYER);
 				intent.putExtra("activity", R.layout.activity_drawer);
+				intent.putExtra("menuId", 8);
 				startActivity(intent);
+				finish();
 				break;
 		}
 
