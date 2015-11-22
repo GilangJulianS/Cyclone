@@ -28,10 +28,9 @@
 
 			<de.hdodenhof.circleimageview.CircleImageView
 				android:id="@+id/img_photo_icon"
-				android:layout_width="25dp"
-				android:layout_height="25dp"
+				android:layout_width="30dp"
+				android:layout_height="30dp"
 				android:layout_alignRight="@id/img_user"
-				android:background="#fff"
 				android:src="@drawable/ic_camera_alt_black_36dp"/>
 
 			<LinearLayout

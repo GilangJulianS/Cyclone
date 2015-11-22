@@ -177,12 +177,14 @@
 			android:orientation="horizontal">
 
 			<include layout="@layout/card_program"
+			 	android:id="@+id/card_featured_program_1"
 				android:layout_width="0dp"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
 				android:layout_margin="5dp"/>
 
 			<include layout="@layout/card_program"
+				 android:id="@+id/card_featured_program_2"
 				 android:layout_width="0dp"
 				 android:layout_weight="1"
 				 android:layout_height="wrap_content"
@@ -227,6 +229,7 @@
 
 			<include
 				layout="@layout/card_announcer"
+				android:id="@+id/card_featured_announcer_1"
 				android:layout_width="0dp"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
@@ -234,6 +237,7 @@
 
 			<include
 				layout="@layout/card_announcer"
+				android:id="@+id/card_featured_announcer_2"
 				android:layout_width="0dp"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
@@ -241,6 +245,7 @@
 
 			<include
 				layout="@layout/card_announcer"
+				android:id="@+id/card_featured_announcer_3"
 				android:layout_width="0dp"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"

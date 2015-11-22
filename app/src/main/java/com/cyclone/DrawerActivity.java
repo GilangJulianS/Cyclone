@@ -251,12 +251,13 @@ public class DrawerActivity extends MasterActivity
 			case R.id.nav_live:
 				intent.putExtra("layout", MasterActivity.LAYOUT_LIVE);
 				intent.putExtra("activity", R.layout.activity_drawer_standard);
+				intent.putExtra("title", "Live Stream");
 				intent.putExtra("menuId", 1);
 				startActivity(intent);
 				finish();
 				break;
 			case R.id.nav_klub:
-				intent.putExtra("title", "Imam Darto");
+				intent.putExtra("title", "Klub Radio");
 				intent.putExtra("layout", MasterActivity.LAYOUT_CLUB);
 				intent.putExtra("activity", R.layout.activity_drawer_standard);
 				intent.putExtra("menuId", 2);

@@ -63,6 +63,7 @@
 							android:id="@+id/txt_artist"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
+							android:singleLine="true"
 							android:textSize="24sp"
 							android:textColor="#fff"
 							android:textStyle="bold"
@@ -73,6 +74,7 @@
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="5dp"
+							android:singleLine="true"
 							android:textSize="18sp"
 							android:textColor="#fff"
 							android:text="The Smashing Pumpkins"/>
@@ -85,7 +87,7 @@
 						android:layout_height="wrap_content"
 						android:padding="10dp"
 						android:background="@drawable/btn_flat_transparent_oval"
-						android:src="@drawable/ic_more_vert_white_36dp"/>
+						android:src="@drawable/ic_more_vert_white_24dp"/>
 
 				</LinearLayout>
 
@@ -205,7 +207,7 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_horizontal"
 					android:background="@drawable/btn_flat_transparent_oval"
-					android:src="@drawable/ic_arrow_drop_down_white_36dp"/>
+					android:src="@drawable/ic_expand_more_white_36dp"/>
 
 			</LinearLayout>
 

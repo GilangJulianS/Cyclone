@@ -106,7 +106,7 @@
 				android:paddingLeft="10dp"
 				android:layout_gravity="center_vertical"
 				android:background="@drawable/btn_flat_transparent"
-				android:src="@drawable/ic_more_horiz_white_48dp"/>
+				android:src="@drawable/ic_more_horiz_white_24dp"/>
 
 		</LinearLayout>
 
@@ -126,7 +126,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="30dp"
 				android:layout_marginRight="10dp"
-				android:drawableLeft="@drawable/ic_play_arrow_black_36dp"
+				android:drawableLeft="@drawable/ic_play_arrow_black_24dp"
 				style="@style/Button.Header.White"
 				android:text="Play"/>
 
@@ -135,7 +135,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="30dp"
 				android:layout_marginLeft="10dp"
-				android:drawableLeft="@drawable/ic_add_black_36dp"
+				android:drawableLeft="@drawable/ic_add_black_24dp"
 				style="@style/Button.Header.White"
 				android:text="Add to Favorites"/>
 

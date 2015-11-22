@@ -43,7 +43,7 @@ public class RunningProgramHolder extends UniversalHolder {
 			public void onClick(View v) {
 				Intent i = new Intent(activity, DrawerActivity.class);
 				i.putExtra("layout", DrawerActivity.LAYOUT_STREAM_PLAYER);
-				i.putExtra("activity", R.layout.activity_drawer);
+				i.putExtra("activity", R.layout.activity_drawer_standard);
 				activity.startActivity(i);
 			}
 		});

@@ -64,6 +64,8 @@ public abstract class RecyclerFragment extends Fragment implements OnOffsetChang
 		if(datas != null && datas.size() > 0)
 			animate(datas.get(0));
 
+		onCreateView(v, parent, savedInstanceState);
+
 		return v;
 	}
 

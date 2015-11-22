@@ -7,14 +7,26 @@
 	android:padding="10dp"
 	android:orientation="horizontal">
 
-	<ImageButton
-		android:id="@+id/btn_play"
-		android:layout_width="50dp"
-		android:layout_height="50dp"
-		android:padding="10dp"
-		android:scaleType="centerCrop"
-		android:background="#8000"
-		android:src="@drawable/ic_play_arrow_white_48dp"/>
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+
+		<ImageView
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:scaleType="centerCrop"
+			android:src="@drawable/wallpaper"/>
+
+		<ImageButton
+			android:id="@+id/btn_play"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:padding="10dp"
+			android:scaleType="centerCrop"
+			android:background="#8000"
+			android:src="@drawable/ic_play_arrow_white_48dp"/>
+
+	</RelativeLayout>
 
 
 	<LinearLayout

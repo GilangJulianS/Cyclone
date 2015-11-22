@@ -68,12 +68,12 @@ public class ClubFeedHolder extends UniversalHolder{
 		if(Build.VERSION.SDK_INT >= 21)
 			imgUser.setTransitionName("profile" + transitionId);
 		txtHeaderName.setText(Html.fromHtml(p.headerName));
-		txtHeaderInfo.setText(p.timestamp + " | " + p.playlistType);
+		txtHeaderInfo.setText(p.timestamp + " • " + p.playlistType);
 		imgPost.setImageResource(R.drawable.background_login);
 		txtPostTitle.setText(p.postTitle);
 		txtPostContent.setText(p.postContent);
 		txtPostInfo.setText(p.postInfo);
-		txtLikesInfo.setText(p.likesCount + " likes | " + p.commentCount + " comments");
+		txtLikesInfo.setText(p.likesCount + " likes • " + p.commentCount + " comments");
 		btnLike.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

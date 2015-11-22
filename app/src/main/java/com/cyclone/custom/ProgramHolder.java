@@ -50,15 +50,17 @@ public class ProgramHolder extends UniversalHolder{
 		card.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-			Intent i = new Intent(activity, DrawerActivity.class);
-			i.putExtra("layout", DrawerActivity.LAYOUT_PROGRAM_PAGE);
-			if(Build.VERSION.SDK_INT >= 16) {
-				ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
-						(activity, imageView, "program");
-				activity.startActivity(i, options.toBundle());
-			}else{
-				activity.startActivity(i);
-			}
+				Intent i = new Intent(activity, DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_PROGRAM_PAGE);
+				i.putExtra("activity", R.layout.activity_drawer);
+				i.putExtra("title", "Hit the Beat");
+				if(Build.VERSION.SDK_INT >= 16) {
+					ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
+							(activity, imageView, "program");
+					activity.startActivity(i, options.toBundle());
+				}else{
+					activity.startActivity(i);
+				}
 			}
 		});
 	}

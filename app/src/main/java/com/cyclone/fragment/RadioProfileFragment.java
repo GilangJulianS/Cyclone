@@ -2,16 +2,20 @@ package com.cyclone.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.cyclone.DrawerActivity;
 import com.cyclone.R;
@@ -27,6 +31,8 @@ public class RadioProfileFragment extends Fragment {
 	private NestedScrollView nestedScrollView;
 	private DrawerActivity activity;
 	private GestureDetectorCompat gd;
+	private CardView cardProgram1, cardProgram2;
+	private CardView cardDj1, cardDj2, cardDj3;
 
 	public RadioProfileFragment(){}
 
@@ -76,7 +82,75 @@ public class RadioProfileFragment extends Fragment {
 				startActivity(i);
 			}
 		});
+
+		bindViews(v);
 		return v;
+	}
+
+
+	public void bindViews(View v){
+		cardProgram1 = (CardView) v.findViewById(R.id.card_featured_program_1);
+		cardProgram2 = (CardView) v.findViewById(R.id.card_featured_program_2);
+		cardDj1 = (CardView) v.findViewById(R.id.card_featured_announcer_1);
+		cardDj2 = (CardView) v.findViewById(R.id.card_featured_announcer_2);
+		cardDj3 = (CardView) v.findViewById(R.id.card_featured_announcer_3);
+
+		cardProgram1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(activity, DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_PROGRAM_PAGE);
+				i.putExtra("activity", R.layout.activity_drawer);
+				i.putExtra("title", "Hit the Beat");
+				if(Build.VERSION.SDK_INT >= 16) {
+					ImageView imageView = (ImageView) cardProgram1.findViewById(R.id.img_cover);
+					ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
+							(activity, imageView, "program");
+					activity.startActivity(i, options.toBundle());
+				}else{
+					activity.startActivity(i);
+				}
+			}
+		});
+
+		cardProgram2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(activity, DrawerActivity.class);
+				i.putExtra("layout", DrawerActivity.LAYOUT_PROGRAM_PAGE);
+				i.putExtra("activity", R.layout.activity_drawer);
+				i.putExtra("title", "Hit the Beat");
+				if(Build.VERSION.SDK_INT >= 16) {
+					ImageView imageView = (ImageView) cardProgram2.findViewById(R.id.img_cover);
+					ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
+							(activity, imageView, "program");
+					activity.startActivity(i, options.toBundle());
+				}else{
+					activity.startActivity(i);
+				}
+			}
+		});
+
+		cardDj1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
+
+		cardDj2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
+
+		cardDj3.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
 	}
 
 	@Override
