@@ -33,6 +33,8 @@ import com.cyclone.custom.Tools;
 import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Post;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,6 +114,10 @@ public class PersonProfileFragment extends RecyclerFragment{
 	}
 
 	public void setupHeader(View header, String json){
+		ViewGroup btnShowlist = (ViewGroup) header.findViewById(R.id.group_showlist);
+		ViewGroup btnContent = (ViewGroup) header.findViewById(R.id.group_content);
+		ViewGroup btnFollower = (ViewGroup) header.findViewById(R.id.group_follower);
+		ViewGroup btnFollowing = (ViewGroup) header.findViewById(R.id.group_following);
 		TextView txtShowlist = (TextView) header.findViewById(R.id.txt_showlist_count);
 		TextView txtContent = (TextView) header.findViewById(R.id.txt_contents_count);
 		TextView txtFollower = (TextView) header.findViewById(R.id.txt_followers_count);
@@ -140,7 +146,7 @@ public class PersonProfileFragment extends RecyclerFragment{
 			});
 		}
 
-		txtShowlist.setOnClickListener(new View.OnClickListener() {
+		btnShowlist.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getContext(), DrawerActivity.class);
@@ -150,7 +156,7 @@ public class PersonProfileFragment extends RecyclerFragment{
 				startActivity(i);
 			}
 		});
-		txtContent.setOnClickListener(new View.OnClickListener() {
+		btnContent.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getContext(), DrawerActivity.class);
@@ -160,7 +166,7 @@ public class PersonProfileFragment extends RecyclerFragment{
 				startActivity(i);
 			}
 		});
-		txtFollower.setOnClickListener(new View.OnClickListener() {
+		btnFollower.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getContext(), DrawerActivity.class);
@@ -170,7 +176,7 @@ public class PersonProfileFragment extends RecyclerFragment{
 				startActivity(i);
 			}
 		});
-		txtFollowing.setOnClickListener(new View.OnClickListener() {
+		btnFollowing.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getContext(), DrawerActivity.class);
@@ -201,6 +207,12 @@ public class PersonProfileFragment extends RecyclerFragment{
 				Toast.makeText(activity, "Follow button pressed", Toast.LENGTH_SHORT).show();
 			}
 		});
+
+
+//		txtContent.setText("");
+//		txtShowlist.setText("");
+//		txtFollower.setText("");
+//		txtFollowing.setText("");
 
 		imgUser.setImageResource(R.drawable.background_login);
 		if(Build.VERSION.SDK_INT >= 21)

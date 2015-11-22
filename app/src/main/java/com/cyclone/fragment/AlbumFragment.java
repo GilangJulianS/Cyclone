@@ -16,6 +16,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.cyclone.DrawerActivity;
 import com.cyclone.R;
@@ -74,7 +77,14 @@ public class AlbumFragment extends RecyclerFragment {
 	}
 
 	public void setupHeader(View v, String json){
+		ImageButton btnMenu = (ImageButton) v.findViewById(R.id.btn_menu);
 
+		btnMenu.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(activity, "Menu button clicked", Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	public List<Object> parse(String json){

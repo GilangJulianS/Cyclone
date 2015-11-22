@@ -32,6 +32,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.cyclone.DrawerActivity;
@@ -62,6 +63,7 @@ public class PlayerFragment extends RecyclerFragment {
 	private View minimizedPlayer;
 	private TextView txtTitle, txtArtist, txtTotalTime;
 	private SlidingLayer slidingLayer;
+	private SeekBar seekbar;
 
 
 	public PlayerFragment(){}
@@ -141,9 +143,12 @@ public class PlayerFragment extends RecyclerFragment {
 		btnMenu = (ImageButton) v.findViewById(R.id.btn_menu);
 		btnArtist = (ViewGroup) v.findViewById(R.id.btn_artist);
 		btnAlbum = (ViewGroup) v.findViewById(R.id.btn_album);
+		seekbar = (SeekBar) v.findViewById(R.id.seekbar);
 
 		if(state == STATE_PLAYING)
 			btnPlay.setImageResource(R.drawable.ic_pause_white_48dp);
+
+		seekbar.setPadding(0, 0, 0, 0);
 
 		btnPlay.setOnClickListener(new View.OnClickListener() {
 			@Override
