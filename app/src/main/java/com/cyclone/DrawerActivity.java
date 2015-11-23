@@ -17,13 +17,17 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.cyclone.fragment.AccountSettingFragment;
+import com.cyclone.fragment.AddMixFragment;
 import com.cyclone.fragment.AlbumFragment;
 import com.cyclone.fragment.AnnouncersFragment;
 import com.cyclone.fragment.ArtistFragment;
 import com.cyclone.fragment.CategoryFragment;
 import com.cyclone.fragment.ClubRadioFragment;
+import com.cyclone.fragment.CommentFragment;
+import com.cyclone.fragment.GridMixFragment;
 import com.cyclone.fragment.HomeFragment;
 import com.cyclone.fragment.LiveStreamFragment;
+import com.cyclone.fragment.MixFragment;
 import com.cyclone.fragment.NotificationFragment;
 import com.cyclone.fragment.PersonListFragment;
 import com.cyclone.fragment.PersonProfileFragment;
@@ -68,6 +72,21 @@ public class DrawerActivity extends MasterActivity
 		setupGestureListener();
 
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+		View headerView = getLayoutInflater().inflate(R.layout.nav_header_main, navigationView, false);
+		ImageView radioLogo = (ImageView) headerView.findViewById(R.id.img_drawer_logo);
+		radioLogo.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getApplicationContext(), DrawerActivity.class);
+				i.putExtra("activity", R.layout.activity_drawer);
+				i.putExtra("layout", MasterActivity.LAYOUT_RADIO_PROFILE);
+				i.putExtra("parent", true);
+				i.putExtra("title", "K-Lite FM Bandung");
+				startActivity(i);
+				finish();
+			}
+		});
+		navigationView.addHeaderView(headerView);
 		navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -160,6 +179,22 @@ public class DrawerActivity extends MasterActivity
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, SubcategoryFragment.newInstance(""))
 						.commit();
+			}else if(layout == LAYOUT_ADD_MIX){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, AddMixFragment.newInstance(""))
+						.commit();
+			}else if(layout == LAYOUT_GRID_MIX){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, GridMixFragment.newInstance(""))
+						.commit();
+			}else if(layout == LAYOUT_COMMENT){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, CommentFragment.newInstance(""))
+						.commit();
+			}else if(layout == LAYOUT_MIX){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, MixFragment.newInstance(""))
+						.commit();
 			}
 			navigationView.getMenu().getItem(menuId).setChecked(true);
 		}else{
@@ -233,6 +268,7 @@ public class DrawerActivity extends MasterActivity
 		return super.onOptionsItemSelected(item);
 	}
 
+
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public boolean onNavigationItemSelected(MenuItem item) {
@@ -305,7 +341,6 @@ public class DrawerActivity extends MasterActivity
 				finish();
 				break;
 		}
-
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
 		return true;

@@ -20,8 +20,8 @@ public class ContentsHolder extends UniversalHolder {
 
 	public ViewGroup container;
 
-	public ContentsHolder(View v, Activity activity) {
-		super(v, activity);
+	public ContentsHolder(View v, Activity activity, UniversalAdapter adapter) {
+		super(v, activity, adapter);
 		container = (ViewGroup) v.findViewById(R.id.content_container);
 	}
 

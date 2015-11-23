@@ -10,11 +10,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cyclone.DrawerActivity;
+import com.cyclone.MasterActivity;
 import com.cyclone.R;
 import com.cyclone.fragment.PersonProfileFragment;
 import com.cyclone.model.Post;
@@ -35,12 +37,13 @@ public class ClubFeedHolder extends UniversalHolder{
 	public ImageButton btnLike;
 	public ImageButton btnShare;
 	public ImageButton btnComment;
+	public ViewGroup container;
 	private Activity activity;
 	private int transitionId;
 	public static int autoId = 0;
 
-	public ClubFeedHolder(View v, Activity activity) {
-		super(v, activity);
+	public ClubFeedHolder(View v, Activity activity, UniversalAdapter adapter) {
+		super(v, activity, adapter);
 		imgUser = (ImageView) v.findViewById(R.id.img_user);
 		txtHeaderName = (TextView) v.findViewById(R.id.txt_header_name);
 		txtHeaderInfo = (TextView) v.findViewById(R.id.txt_header_info);
@@ -52,6 +55,8 @@ public class ClubFeedHolder extends UniversalHolder{
 		btnLike = (ImageButton) v.findViewById(R.id.btn_like);
 		btnShare = (ImageButton) v.findViewById(R.id.btn_share);
 		btnComment = (ImageButton) v.findViewById(R.id.btn_comment);
+		if(v instanceof ViewGroup)
+			container = (ViewGroup) v;
 		transitionId = autoId;
 		autoId++;
 	}
@@ -105,6 +110,7 @@ public class ClubFeedHolder extends UniversalHolder{
 				i.putExtra("layout", DrawerActivity.LAYOUT_PERSON_PROFILE);
 				i.putExtra("mode", PersonProfileFragment.MODE_OTHERS_PROFILE);
 				i.putExtra("transition", "profile" + transitionId);
+
 				if(Build.VERSION.SDK_INT >= 16) {
 					ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
 							(activity, imageView, "profile" + transitionId);
@@ -114,8 +120,21 @@ public class ClubFeedHolder extends UniversalHolder{
 				}
 				}
 			};
+
 			imgUser.setOnClickListener(listener);
 			txtHeaderName.setOnClickListener(listener);
+			if(p.playlistType.equals("Mix")){
+				container.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent i = new Intent(activity, DrawerActivity.class);
+						i.putExtra("activity", R.layout.activity_drawer);
+						i.putExtra("layout", MasterActivity.LAYOUT_MIX);
+						i.putExtra("title", "Mix max");
+						activity.startActivity(i);
+					}
+				});
+			}
 		}
 	}
 }

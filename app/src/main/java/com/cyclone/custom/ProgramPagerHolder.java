@@ -20,8 +20,8 @@ public class ProgramPagerHolder extends UniversalHolder {
 	private CirclePageIndicator indicator;
 	private CustomPagerAdapter adapter;
 
-	public ProgramPagerHolder(View v, Activity activity) {
-		super(v, activity);
+	public ProgramPagerHolder(View v, Activity activity, UniversalAdapter adapter) {
+		super(v, activity, adapter);
 		viewPager = (ViewPager) v.findViewById(R.id.view_pager);
 		indicator = (CirclePageIndicator) v.findViewById(R.id.view_pager_indicator);
 	}

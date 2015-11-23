@@ -1,13 +1,11 @@
 package com.cyclone.custom;
 
 import android.app.Activity;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.cyclone.DrawerActivity;
 import com.cyclone.R;
-import com.cyclone.model.Playlist;
+import com.cyclone.model.Queue;
 
 /**
  * Created by gilang on 01/11/2015.
@@ -18,8 +16,8 @@ public class PlaylistHolder extends UniversalHolder{
 	public TextView txtArtist;
 	public TextView txtDuration;
 
-	public PlaylistHolder(View v, Activity activity) {
-		super(v, activity);
+	public PlaylistHolder(View v, Activity activity, UniversalAdapter adapter) {
+		super(v, activity, adapter);
 		txtTitle = (TextView) v.findViewById(R.id.txt_song_title);
 		txtArtist = (TextView) v.findViewById(R.id.txt_song_artist);
 		txtDuration = (TextView) v.findViewById(R.id.txt_duration);
@@ -27,12 +25,12 @@ public class PlaylistHolder extends UniversalHolder{
 
 	@Override
 	public void bind(Object object, Activity activity, int position) {
-		bind((Playlist)object);
+		bind((Queue)object);
 	}
 
-	public void bind(Playlist playlist){
-		txtTitle.setText(playlist.artist + " - " + playlist.title);
-		txtArtist.setText(playlist.artist);
-		txtDuration.setText(playlist.duration);
+	public void bind(Queue queue){
+		txtTitle.setText(queue.artist + " - " + queue.title);
+		txtArtist.setText(queue.artist);
+		txtDuration.setText(queue.duration);
 	}
 }

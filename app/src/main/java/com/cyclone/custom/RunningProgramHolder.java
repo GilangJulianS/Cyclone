@@ -22,8 +22,8 @@ public class RunningProgramHolder extends UniversalHolder {
 	public TextView txtSecondary;
 	public ImageButton btnPlay;
 
-	public RunningProgramHolder(View v, Activity activity) {
-		super(v, activity);
+	public RunningProgramHolder(View v, Activity activity, UniversalAdapter adapter) {
+		super(v, activity, adapter);
 		txtPrimary = (TextView) v.findViewById(R.id.txt_primary);
 		txtSecondary = (TextView) v.findViewById(R.id.txt_secondary);
 		btnPlay = (ImageButton) v.findViewById(R.id.btn_play);

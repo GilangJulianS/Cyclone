@@ -20,8 +20,8 @@ public class NotificationHolder extends UniversalHolder{
 	public TextView txtInfo;
 	public TextView txtTime;
 
-	public NotificationHolder(View v, Activity activity) {
-		super(v, activity);
+	public NotificationHolder(View v, Activity activity, UniversalAdapter adapter) {
+		super(v, activity, adapter);
 		imgUser = (ImageView) v.findViewById(R.id.img_user);
 		txtInfo = (TextView) v.findViewById(R.id.txt_info);
 		txtTime = (TextView) v.findViewById(R.id.txt_time);

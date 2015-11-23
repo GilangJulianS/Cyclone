@@ -1,6 +1,8 @@
 package com.cyclone.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cyclone.DrawerActivity;
+import com.cyclone.MasterActivity;
 import com.cyclone.R;
 import com.cyclone.custom.OnOffsetChangedListener;
 import com.cyclone.custom.SnapGestureListener;
@@ -190,7 +193,26 @@ public class PersonProfileFragment extends RecyclerFragment{
 		btnAddShowList.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(activity, "Add showlist button pressed", Toast.LENGTH_SHORT).show();
+				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+				builder.setMessage("")
+						.setTitle("Select showlist type")
+						.setPositiveButton("Add a mix", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Intent i = new Intent(activity, DrawerActivity.class);
+								i.putExtra("title", "Add a mix");
+								i.putExtra("activity", R.layout.activity_drawer_standard);
+								i.putExtra("layout", MasterActivity.LAYOUT_ADD_MIX);
+								activity.startActivity(i);
+							}
+						})
+						.setNegativeButton("Add a playlist", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+
+							}
+						});
+				builder.create().show();
 			}
 		});
 

@@ -37,18 +37,18 @@ public class ProgramPageFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_program_page, parent, false);
 		nestedScrollView = (NestedScrollView) v.findViewById(R.id.nested_scroll_view);
 
-		if(activity != null){
-			gd = new GestureDetectorCompat(activity, new SnapGestureListener(activity));
-			nestedScrollView.setOnTouchListener(new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					System.out.println("touch recycler");
-					if(nestedScrollView.computeVerticalScrollOffset() == 0)
-						return gd.onTouchEvent(event);
-					return false;
-				}
-			});
-		}
+//		if(activity != null){
+//			gd = new GestureDetectorCompat(activity, new SnapGestureListener(activity));
+//			nestedScrollView.setOnTouchListener(new View.OnTouchListener() {
+//				@Override
+//				public boolean onTouch(View v, MotionEvent event) {
+//					System.out.println("touch recycler");
+//					if(nestedScrollView.computeVerticalScrollOffset() == 0)
+//						return gd.onTouchEvent(event);
+//					return false;
+//				}
+//			});
+//		}
 
 		return v;
 	}

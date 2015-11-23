@@ -10,26 +10,14 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -37,15 +25,11 @@ import android.widget.TextView;
 
 import com.cyclone.DrawerActivity;
 import com.cyclone.R;
-import com.cyclone.custom.SnapGestureListener;
-import com.cyclone.custom.UniversalAdapter;
-import com.cyclone.model.Playlist;
+import com.cyclone.model.Queue;
 import com.wunderlist.slidinglayer.SlidingLayer;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 /**
  * Created by gilang on 29/10/2015.
@@ -218,7 +202,7 @@ public class PlayerFragment extends RecyclerFragment {
 				if(Build.VERSION.SDK_INT >= 21) {
 					showImage(imgCover);
 				}
-				Playlist p = (Playlist) persistentDatas.get(counter % persistentDatas.size());
+				Queue p = (Queue) persistentDatas.get(counter % persistentDatas.size());
 				txtTitle.setText(p.title);
 				txtArtist.setText(p.artist);
 				txtTotalTime.setText(p.duration);
@@ -240,7 +224,7 @@ public class PlayerFragment extends RecyclerFragment {
 				if(Build.VERSION.SDK_INT >= 21) {
 					showImage(imgCover);
 				}
-				Playlist p = (Playlist) persistentDatas.get(counter % persistentDatas.size());
+				Queue p = (Queue) persistentDatas.get(counter % persistentDatas.size());
 				txtTitle.setText(p.title);
 				txtArtist.setText(p.artist);
 				txtTotalTime.setText(p.duration);
@@ -313,31 +297,31 @@ public class PlayerFragment extends RecyclerFragment {
 
 	public List<Object> parse(String json){
 		List<Object> playlists = new ArrayList<>();
-		playlists.add(new Playlist("The Celestials", "The Smashing Pumpkins", "03:20"));
-		playlists.add(new Playlist("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
-		playlists.add(new Playlist("Drones", "Muse", "05:45"));
-		playlists.add(new Playlist("Extraordinary", "Clean Bandit", "04:48"));
-		playlists.add(new Playlist("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
-		playlists.add(new Playlist("The Celestials", "The Smashing Pumpkins", "03:20"));
-		playlists.add(new Playlist("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
-		playlists.add(new Playlist("Drones", "Muse", "05:45"));
-		playlists.add(new Playlist("Extraordinary", "Clean Bandit", "04:48"));
-		playlists.add(new Playlist("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
-		playlists.add(new Playlist("The Celestials", "The Smashing Pumpkins", "03:20"));
-		playlists.add(new Playlist("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
-		playlists.add(new Playlist("Drones", "Muse", "05:45"));
-		playlists.add(new Playlist("Extraordinary", "Clean Bandit", "04:48"));
-		playlists.add(new Playlist("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
-		playlists.add(new Playlist("The Celestials", "The Smashing Pumpkins", "03:20"));
-		playlists.add(new Playlist("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
-		playlists.add(new Playlist("Drones", "Muse", "05:45"));
-		playlists.add(new Playlist("Extraordinary", "Clean Bandit", "04:48"));
-		playlists.add(new Playlist("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
-		playlists.add(new Playlist("The Celestials", "The Smashing Pumpkins", "03:20"));
-		playlists.add(new Playlist("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
-		playlists.add(new Playlist("Drones", "Muse", "05:45"));
-		playlists.add(new Playlist("Extraordinary", "Clean Bandit", "04:48"));
-		playlists.add(new Playlist("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
+		playlists.add(new Queue("The Celestials", "The Smashing Pumpkins", "03:20"));
+		playlists.add(new Queue("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
+		playlists.add(new Queue("Drones", "Muse", "05:45"));
+		playlists.add(new Queue("Extraordinary", "Clean Bandit", "04:48"));
+		playlists.add(new Queue("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
+		playlists.add(new Queue("The Celestials", "The Smashing Pumpkins", "03:20"));
+		playlists.add(new Queue("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
+		playlists.add(new Queue("Drones", "Muse", "05:45"));
+		playlists.add(new Queue("Extraordinary", "Clean Bandit", "04:48"));
+		playlists.add(new Queue("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
+		playlists.add(new Queue("The Celestials", "The Smashing Pumpkins", "03:20"));
+		playlists.add(new Queue("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
+		playlists.add(new Queue("Drones", "Muse", "05:45"));
+		playlists.add(new Queue("Extraordinary", "Clean Bandit", "04:48"));
+		playlists.add(new Queue("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
+		playlists.add(new Queue("The Celestials", "The Smashing Pumpkins", "03:20"));
+		playlists.add(new Queue("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
+		playlists.add(new Queue("Drones", "Muse", "05:45"));
+		playlists.add(new Queue("Extraordinary", "Clean Bandit", "04:48"));
+		playlists.add(new Queue("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
+		playlists.add(new Queue("The Celestials", "The Smashing Pumpkins", "03:20"));
+		playlists.add(new Queue("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
+		playlists.add(new Queue("Drones", "Muse", "05:45"));
+		playlists.add(new Queue("Extraordinary", "Clean Bandit", "04:48"));
+		playlists.add(new Queue("Heart Like Yours", "Willamette Willamette Willamette", "03:15"));
 		return playlists;
 	}
 

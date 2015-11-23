@@ -46,18 +46,18 @@ public class RadioProfileFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_radio_profile, parent, false);
 
 		nestedScrollView = (NestedScrollView) v.findViewById(R.id.nested_scroll_view);
-		if(activity != null){
-			gd = new GestureDetectorCompat(activity, new SnapGestureListener(activity));
-			nestedScrollView.setOnTouchListener(new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					System.out.println("touch recycler");
-					if(nestedScrollView.computeVerticalScrollOffset() == 0)
-						return gd.onTouchEvent(event);
-					return false;
-				}
-			});
-		}
+//		if(activity != null){
+//			gd = new GestureDetectorCompat(activity, new SnapGestureListener(activity));
+//			nestedScrollView.setOnTouchListener(new View.OnTouchListener() {
+//				@Override
+//				public boolean onTouch(View v, MotionEvent event) {
+//					System.out.println("touch recycler");
+//					if(nestedScrollView.computeVerticalScrollOffset() == 0)
+//						return gd.onTouchEvent(event);
+//					return false;
+//				}
+//			});
+//		}
 
 
 		btnMoreProgram = (Button) v.findViewById(R.id.btn_more_program);

@@ -12,10 +12,12 @@ import com.cyclone.DrawerActivity;
 public abstract class UniversalHolder extends RecyclerView.ViewHolder {
 
 	protected Activity activity;
+	protected UniversalAdapter adapter;
 
-	public UniversalHolder(View itemView, Activity activity) {
+	public UniversalHolder(View itemView, Activity activity, UniversalAdapter adapter) {
 		super(itemView);
 		this.activity = activity;
+		this.adapter = adapter;
 	}
 
 	public abstract void bind(Object object, Activity activity, int position);
