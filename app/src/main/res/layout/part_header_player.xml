@@ -126,7 +126,7 @@
 					android:layout_height="7dp"
 					android:progress="50"
 					android:progressDrawable="@drawable/seekbar_progress"
-					android:thumb="@android:color/transparent"
+					android:thumb="@android:color/white"
 					android:layout_marginTop="10dp"/>
 
 

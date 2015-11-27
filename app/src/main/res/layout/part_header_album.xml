@@ -6,13 +6,13 @@
 	<ImageView
 		android:id="@+id/img_header_background"
 		android:layout_width="match_parent"
-		android:layout_height="215dp"
+		android:layout_height="230dp"
 		android:scaleType="centerCrop"
 		android:src="@drawable/wallpaper"/>
 
 	<View
 		android:layout_width="match_parent"
-		android:layout_height="215dp"
+		android:layout_height="230dp"
 		android:background="@color/dim_filter"/>
 
 	<LinearLayout

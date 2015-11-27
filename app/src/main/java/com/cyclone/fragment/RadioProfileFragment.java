@@ -84,6 +84,7 @@ public class RadioProfileFragment extends Fragment {
 		});
 
 		bindViews(v);
+
 		return v;
 	}
 

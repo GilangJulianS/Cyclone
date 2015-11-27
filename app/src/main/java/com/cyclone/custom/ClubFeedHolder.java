@@ -68,7 +68,7 @@ public class ClubFeedHolder extends UniversalHolder{
 	}
 
 	public void bind(Post post, final Activity activity){
-		Post p = post;
+		final Post p = post;
 		imgUser.setImageResource(R.drawable.background_login);
 		if(Build.VERSION.SDK_INT >= 21)
 			imgUser.setTransitionName("profile" + transitionId);
@@ -82,7 +82,13 @@ public class ClubFeedHolder extends UniversalHolder{
 		btnLike.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				btnLike.setColorFilter(Color.parseColor("#E91E63"));
+				if(!p.isLiked) {
+					btnLike.setColorFilter(Color.parseColor("#E91E63"));
+					p.isLiked = true;
+				}else{
+					btnLike.setColorFilter(null);
+					p.isLiked = false;
+				}
 			}
 		});
 		btnShare.setOnClickListener(new View.OnClickListener() {

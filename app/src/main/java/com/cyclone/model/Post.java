@@ -18,10 +18,11 @@ public class Post {
 	public int likesCount;
 	public int commentCount;
 	public int type;
+	public boolean isLiked;
 
 	public Post(String imgUrl, String headerName, String timestamp, String playlistType, String
 			postImgUrl, String postTitle, String postContent, String postInfo, int likesCount,
-				int commentCount, int type){
+				int commentCount, int type, boolean isLiked){
 		this.imgUrl = imgUrl;
 		this.headerName = headerName;
 		this.timestamp = timestamp;
@@ -33,5 +34,6 @@ public class Post {
 		this.likesCount = likesCount;
 		this.commentCount = commentCount;
 		this.type = type;
+		this.isLiked = isLiked;
 	}
 }

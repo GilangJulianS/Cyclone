@@ -35,12 +35,23 @@ public class MixHolder extends UniversalHolder {
 		imgCover.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				imgHeart.setVisibility(View.VISIBLE);
-				int oldPosition = adapter.datas.indexOf(mix);
-				adapter.datas.remove(mix);
-				adapter.add(mix, getLastLikedEntry());
-				adapter.notifyItemMoved(oldPosition, getLastLikedEntry());
-				mix.isFavorite = true;
+				if(!mix.isFavorite) {
+					imgHeart.setVisibility(View.VISIBLE);
+					int oldPosition = adapter.datas.indexOf(mix);
+					adapter.datas.remove(mix);
+					adapter.add(mix, getLastLikedEntry());
+					adapter.notifyItemMoved(oldPosition, getLastLikedEntry());
+					mix.isFavorite = true;
+					addRecommend(oldPosition);
+				}else{
+					imgHeart.setVisibility(View.GONE);
+					int oldPosition = adapter.datas.indexOf(mix);
+					int newPosition = getLastLikedEntry() + 1;
+					adapter.datas.remove(mix);
+					adapter.add(mix, newPosition);
+					adapter.notifyItemMoved(oldPosition, newPosition);
+					mix.isFavorite = false;
+				}
 			}
 		});
 		txtTitle.setText(mix.text);
@@ -49,6 +60,15 @@ public class MixHolder extends UniversalHolder {
 		}else{
 			imgHeart.setVisibility(View.GONE);
 		}
+	}
+
+	public void addRecommend(int curPosition){
+		adapter.datas.add(curPosition + 1, new Mix("", "Test"));
+		adapter.datas.add(curPosition + 2, new Mix("", "Test2"));
+		adapter.datas.add(curPosition + 3, new Mix("", "Test3"));
+		adapter.notifyItemInserted(curPosition + 1);
+		adapter.notifyItemInserted(curPosition + 2);
+		adapter.notifyItemInserted(curPosition + 3);
 	}
 
 	public int getLastLikedEntry(){
