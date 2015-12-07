@@ -18,7 +18,9 @@ import android.widget.ImageView;
 
 import com.cyclone.fragment.AboutFragment;
 import com.cyclone.fragment.AccountSettingFragment;
+import com.cyclone.fragment.AddMixFormFragment;
 import com.cyclone.fragment.AddMixFragment;
+import com.cyclone.fragment.AddPlaylistFormFragment;
 import com.cyclone.fragment.AlbumFragment;
 import com.cyclone.fragment.AnnouncersFragment;
 import com.cyclone.fragment.AppSettingFragment;
@@ -186,6 +188,19 @@ public class DrawerActivity extends MasterActivity
 			}else if(layout == LAYOUT_ADD_MIX){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, AddMixFragment.newInstance(""))
+						.commit();
+			}else if(layout == LAYOUT_ADD_PLAYLIST){
+				callback = null;
+
+//				manager.beginTransaction().replace(R.id.container, AddPlaylistFragment.newInstance(""))
+//						.commit();
+			}else if(layout == LAYOUT_ADD_MIX_FORM){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, AddMixFormFragment.newInstance())
+						.commit();
+			}else if(layout == LAYOUT_ADD_PLAYLIST_FORM){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, AddPlaylistFormFragment.newInstance())
 						.commit();
 			}else if(layout == LAYOUT_GRID_MIX){
 				callback = null;

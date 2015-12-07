@@ -200,16 +200,20 @@ public class PersonProfileFragment extends RecyclerFragment{
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								Intent i = new Intent(activity, DrawerActivity.class);
-								i.putExtra("title", "Add a mix");
+								i.putExtra("title", "Create New Mix");
 								i.putExtra("activity", R.layout.activity_drawer_standard);
-								i.putExtra("layout", MasterActivity.LAYOUT_ADD_MIX);
+								i.putExtra("layout", MasterActivity.LAYOUT_ADD_MIX_FORM);
 								activity.startActivity(i);
 							}
 						})
 						.setNegativeButton("Add a playlist", new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-
+								Intent i = new Intent(activity, DrawerActivity.class);
+								i.putExtra("title", "Create New Playlist");
+								i.putExtra("activity", R.layout.activity_drawer_standard);
+								i.putExtra("layout", MasterActivity.LAYOUT_ADD_PLAYLIST_FORM);
+								activity.startActivity(i);
 							}
 						});
 				builder.create().show();
