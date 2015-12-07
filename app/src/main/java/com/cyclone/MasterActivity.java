@@ -47,6 +47,10 @@ public abstract class MasterActivity extends AppCompatActivity implements Gestur
 	public static final int LAYOUT_ADD_MIX = 123;
 	public static final int LAYOUT_COMMENT = 124;
 	public static final int LAYOUT_MIX = 125;
+	public static final int LAYOUT_FAVORITES = 126;
+	public static final int LAYOUT_APP_SETTINGS = 127;
+	public static final int LAYOUT_NOTIFICATION_SETTINGS = 128;
+	public static final int LAYOUT_ABOUT = 129;
 
 	public AppBarLayout appBarLayout;
 	public boolean isExpanded = true;

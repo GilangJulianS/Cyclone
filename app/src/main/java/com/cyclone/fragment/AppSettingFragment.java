@@ -9,21 +9,24 @@ import android.view.ViewGroup;
 import com.cyclone.R;
 
 /**
- * Created by gilang on 26/10/2015.
+ * Created by gilang on 06/12/2015.
  */
-public class AccountSettingFragment extends Fragment {
+public class AppSettingFragment extends Fragment {
 
-	public AccountSettingFragment(){}
+	private String json;
 
-	public static AccountSettingFragment newInstance(){
-		AccountSettingFragment fragment = new AccountSettingFragment();
+	public AppSettingFragment(){}
+
+	public static AppSettingFragment newInstance(String json){
+		AppSettingFragment fragment = new AppSettingFragment();
+		fragment.json = json;
 		return fragment;
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-		View v = inflater.inflate(R.layout.fragment_setting_account, parent, false);
+		View v = inflater.inflate(R.layout.fragment_setting_app, parent, false);
+
 		return v;
 	}
-
 }

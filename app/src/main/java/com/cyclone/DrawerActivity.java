@@ -16,19 +16,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.cyclone.fragment.AboutFragment;
 import com.cyclone.fragment.AccountSettingFragment;
 import com.cyclone.fragment.AddMixFragment;
 import com.cyclone.fragment.AlbumFragment;
 import com.cyclone.fragment.AnnouncersFragment;
+import com.cyclone.fragment.AppSettingFragment;
 import com.cyclone.fragment.ArtistFragment;
 import com.cyclone.fragment.CategoryFragment;
 import com.cyclone.fragment.ClubRadioFragment;
 import com.cyclone.fragment.CommentFragment;
+import com.cyclone.fragment.FavoritesFragment;
 import com.cyclone.fragment.GridMixFragment;
 import com.cyclone.fragment.HomeFragment;
 import com.cyclone.fragment.LiveStreamFragment;
 import com.cyclone.fragment.MixFragment;
 import com.cyclone.fragment.NotificationFragment;
+import com.cyclone.fragment.NotificationSettingFragment;
 import com.cyclone.fragment.PersonListFragment;
 import com.cyclone.fragment.PersonProfileFragment;
 import com.cyclone.fragment.PlayerFragment;
@@ -195,7 +199,24 @@ public class DrawerActivity extends MasterActivity
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, MixFragment.newInstance(""))
 						.commit();
+			}else if(layout == LAYOUT_FAVORITES){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, FavoritesFragment.newInstance(""))
+						.commit();
+			}else if(layout == LAYOUT_APP_SETTINGS){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, AppSettingFragment.newInstance(""))
+						.commit();
+			}else if(layout == LAYOUT_NOTIFICATION_SETTINGS){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, NotificationSettingFragment.newInstance(""))
+						.commit();
+			}else if(layout == LAYOUT_ABOUT){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, AboutFragment.newInstance(""))
+						.commit();
 			}
+
 			navigationView.getMenu().getItem(menuId).setChecked(true);
 		}else{
 			isParentView = true;
@@ -305,6 +326,14 @@ public class DrawerActivity extends MasterActivity
 				intent.putExtra("title", "Dimas Danang");
 				intent.putExtra("activity", R.layout.activity_drawer);
 				intent.putExtra("menuId", 3);
+				startActivity(intent);
+				finish();
+				break;
+			case R.id.nav_favorite:
+				intent.putExtra("layout", MasterActivity.LAYOUT_FAVORITES);
+				intent.putExtra("activity", R.layout.activity_drawer_standard);
+				intent.putExtra("title", "Favorites");
+				intent.putExtra("menuId", 4);
 				startActivity(intent);
 				finish();
 				break;
