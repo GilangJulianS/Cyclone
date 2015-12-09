@@ -24,7 +24,6 @@ import com.cyclone.model.ProgramPager;
 import com.cyclone.model.Request;
 import com.cyclone.model.RunningProgram;
 import com.cyclone.model.Section;
-import com.cyclone.model.Section2;
 import com.cyclone.model.Song;
 import com.cyclone.model.SubcategoryItem;
 
@@ -54,8 +53,7 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 	public static final int TYPE_SUBCATEGORY_ITEM = 116;
 	public static final int TYPE_MIXES = 117;
 	public static final int TYPE_MIX = 118;
-	public static final int TYPE_SECTION_2 = 119;
-	public static final int TYPE_COMMENT = 120;
+	public static final int TYPE_COMMENT = 119;
 
 	public List<Object> datas;
 	private Activity activity;
@@ -110,7 +108,6 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 		else if(o instanceof SubcategoryItem) return TYPE_SUBCATEGORY_ITEM;
 		else if(o instanceof Mixes) return TYPE_MIXES;
 		else if(o instanceof Mix) return TYPE_MIX;
-		else if(o instanceof Section2) return TYPE_SECTION_2;
 		else if(o instanceof Comment) return TYPE_COMMENT;
 		return -1;
 	}
@@ -135,7 +132,6 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 			case TYPE_SUBCATEGORY_ITEM: return R.layout.card_subcategory_item;
 			case TYPE_MIXES: return R.layout.card_contents;
 			case TYPE_MIX: return R.layout.card_mix;
-			case TYPE_SECTION_2: return R.layout.card_section_2;
 			case TYPE_COMMENT: return R.layout.card_comment;
 			default: return -1;
 		}
@@ -162,7 +158,6 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 			case TYPE_SUBCATEGORY_ITEM: holder = new SubcategoryHolder(v, activity, this); break;
 			case TYPE_MIXES: holder = new MixesHolder(v, activity, this); break;
 			case TYPE_MIX: holder = new MixHolder(v, activity, this); break;
-			case TYPE_SECTION_2: holder = new Section2Holder(v, activity, this); break;
 			case TYPE_COMMENT: holder = new CommentHolder(v, activity, this); break;
 		}
 		return holder;

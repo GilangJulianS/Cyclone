@@ -8,10 +8,8 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,7 +17,6 @@ import android.widget.ImageView;
 
 import com.cyclone.DrawerActivity;
 import com.cyclone.R;
-import com.cyclone.custom.SnapGestureListener;
 
 /**
  * Created by gilang on 09/10/2015.
@@ -65,8 +62,7 @@ public class RadioProfileFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getContext(), DrawerActivity.class);
-				i.putExtra("layout", DrawerActivity.LAYOUT_PROGRAMS);
-				i.putExtra("activity", R.layout.activity_drawer_standard);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_PROGRAMS);
 				i.putExtra("title", "Programs");
 				startActivity(i);
 			}
@@ -76,8 +72,7 @@ public class RadioProfileFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getContext(), DrawerActivity.class);
-				i.putExtra("layout", DrawerActivity.LAYOUT_ANNOUNCERS);
-				i.putExtra("activity", R.layout.activity_drawer_standard);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_ANNOUNCERS);
 				i.putExtra("title", "DJs and Announcers");
 				startActivity(i);
 			}
@@ -100,8 +95,7 @@ public class RadioProfileFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(activity, DrawerActivity.class);
-				i.putExtra("layout", DrawerActivity.LAYOUT_PROGRAM_PAGE);
-				i.putExtra("activity", R.layout.activity_drawer);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_PROGRAM_PAGE);
 				i.putExtra("title", "Hit the Beat");
 				if(Build.VERSION.SDK_INT >= 16) {
 					ImageView imageView = (ImageView) cardProgram1.findViewById(R.id.img_cover);
@@ -118,8 +112,7 @@ public class RadioProfileFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(activity, DrawerActivity.class);
-				i.putExtra("layout", DrawerActivity.LAYOUT_PROGRAM_PAGE);
-				i.putExtra("activity", R.layout.activity_drawer);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_PROGRAM_PAGE);
 				i.putExtra("title", "Hit the Beat");
 				if(Build.VERSION.SDK_INT >= 16) {
 					ImageView imageView = (ImageView) cardProgram2.findViewById(R.id.img_cover);

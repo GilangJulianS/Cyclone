@@ -4,9 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cyclone.MasterActivity;
 import com.cyclone.model.Mix;
 import com.cyclone.model.Mixes;
-import com.cyclone.model.Section2;
+import com.cyclone.model.Section;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,7 @@ public class AddMixFragment extends RecyclerFragment {
 		List<Mix> mixList;
 		Mixes mixes;
 
-		datas.add(new Section2("Genre", "genre"));
+		datas.add(new Section("Genre", "genre", Section.TYPE_TRANSPARENT, MasterActivity.FRAGMENT_GRID_MIX));
 		mixList = new ArrayList<>();
 		mixList.add(new Mix("", "Rock"));
 		mixList.add(new Mix("", "Pop"));
@@ -67,7 +68,7 @@ public class AddMixFragment extends RecyclerFragment {
 		mixes = new Mixes(mixList);
 		datas.add(mixes);
 
-		datas.add(new Section2("Artist", "artist"));
+		datas.add(new Section("Artist", "artist", Section.TYPE_TRANSPARENT, MasterActivity.FRAGMENT_GRID_MIX));
 		mixList = new ArrayList<>();
 		mixList.add(new Mix("", "Raisa"));
 		mixList.add(new Mix("", "Daft Punk"));
@@ -75,7 +76,7 @@ public class AddMixFragment extends RecyclerFragment {
 		mixes = new Mixes(mixList);
 		datas.add(mixes);
 
-		datas.add(new Section2("Radio Content", "content"));
+		datas.add(new Section("Radio Content", "content", Section.TYPE_TRANSPARENT, MasterActivity.FRAGMENT_GRID_MIX));
 		mixList = new ArrayList<>();
 		mixList.add(new Mix("", "News"));
 		mixList.add(new Mix("", "Travel"));

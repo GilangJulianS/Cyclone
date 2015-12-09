@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cyclone.DrawerActivity;
-import com.cyclone.MasterActivity;
 import com.cyclone.R;
 
 import java.util.ArrayList;
@@ -63,8 +62,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
 			public void onClick(View v) {
 				Intent i = new Intent(context, DrawerActivity.class);
 				i.putExtra("title", getTitle(pos));
-				i.putExtra("activity", R.layout.activity_drawer_standard);
-				i.putExtra("layout", getLayout(pos));
+				i.putExtra("fragmentType", getLayout(pos));
 				activity.startActivity(i);
 			}
 		});
@@ -77,12 +75,12 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
 
 	public int getLayout(int position){
 		switch (position){
-			case 0: return DrawerActivity.LAYOUT_APP_SETTINGS;
-			case 1: return DrawerActivity.LAYOUT_ACCOUNT_SETTINGS;
-			case 2: return DrawerActivity.LAYOUT_NOTIFICATION_SETTINGS;
-			case 5: return DrawerActivity.LAYOUT_ABOUT;
+			case 0: return DrawerActivity.FRAGMENT_APP_SETTINGS;
+			case 1: return DrawerActivity.FRAGMENT_ACCOUNT_SETTINGS;
+			case 2: return DrawerActivity.FRAGMENT_NOTIFICATION_SETTINGS;
+			case 5: return DrawerActivity.FRAGMENT_ABOUT;
 		}
-		return DrawerActivity.LAYOUT_ACCOUNT_SETTINGS;
+		return DrawerActivity.FRAGMENT_ACCOUNT_SETTINGS;
 	}
 
 	public String getTitle(int position){

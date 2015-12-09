@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,6 +22,7 @@ import com.cyclone.fragment.AccountSettingFragment;
 import com.cyclone.fragment.AddMixFormFragment;
 import com.cyclone.fragment.AddMixFragment;
 import com.cyclone.fragment.AddPlaylistFormFragment;
+import com.cyclone.fragment.AddPlaylistFragment;
 import com.cyclone.fragment.AlbumFragment;
 import com.cyclone.fragment.AnnouncersFragment;
 import com.cyclone.fragment.AppSettingFragment;
@@ -53,8 +55,15 @@ public class DrawerActivity extends MasterActivity
 	private boolean isParentView = false;
 	private boolean isCollapseLayout = false;
 	private ActionBarDrawerToggle toggle;
-	CollapsingToolbarLayout toolbarLayout;
+	private CollapsingToolbarLayout toolbarLayout;
+	public CoordinatorLayout coordinatorLayout;
 	private boolean showMiniPlayer = true;
+	private boolean hasExtras;
+	private String title;
+	private int fragmentType;
+	private int mode;
+	private int menuId;
+	private String transitionId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +71,16 @@ public class DrawerActivity extends MasterActivity
 
 		Intent caller = getIntent();
 		if(caller != null && caller.getExtras() != null) {
-			int rootLayout = caller.getExtras().getInt("activity", R.layout.activity_drawer);
+			hasExtras = true;
+			isParentView = caller.getExtras().getBoolean("parent", false);
+			title = caller.getExtras().getString("title", "");
+			fragmentType = caller.getExtras().getInt("fragmentType", FRAGMENT_RADIO_PROFILE);
+			mode = caller.getExtras().getInt("mode", -1);
+			menuId = caller.getExtras().getInt("menuId", 0);
+			transitionId = caller.getExtras().getString("transition", "profile");
+
+			int rootLayout = getBaseLayout(fragmentType);
+
 			setContentView(rootLayout);
 			if(rootLayout == R.layout.activity_drawer)
 				isCollapseLayout = true;
@@ -84,8 +102,7 @@ public class DrawerActivity extends MasterActivity
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getApplicationContext(), DrawerActivity.class);
-				i.putExtra("activity", R.layout.activity_drawer);
-				i.putExtra("layout", MasterActivity.LAYOUT_RADIO_PROFILE);
+				i.putExtra("fragmentType", MasterActivity.FRAGMENT_RADIO_PROFILE);
 				i.putExtra("parent", true);
 				i.putExtra("title", "K-Lite FM Bandung");
 				startActivity(i);
@@ -95,6 +112,7 @@ public class DrawerActivity extends MasterActivity
 		navigationView.addHeaderView(headerView);
 		navigationView.setNavigationItemSelectedListener(this);
 
+		coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
 
 		if(isCollapseLayout) {
 			toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id
@@ -103,13 +121,7 @@ public class DrawerActivity extends MasterActivity
 			toolbarLayout.setTitle("K-Lite FM Bandung");
 		}
 
-		if(caller != null && caller.getExtras() != null) {
-			isParentView = caller.getExtras().getBoolean("parent", false);
-			String title = caller.getExtras().getString("title", "");
-			int layout = caller.getExtras().getInt("layout", LAYOUT_RADIO_PROFILE);
-			int mode = caller.getExtras().getInt("mode", -1);
-			int menuId = caller.getExtras().getInt("menuId", 0);
-			String transitionId = caller.getExtras().getString("transition", "profile");
+		if(hasExtras) {
 			FragmentManager manager = getSupportFragmentManager();
 			if(title != null && !title.equals("")) {
 				if(toolbarLayout != null)
@@ -117,116 +129,116 @@ public class DrawerActivity extends MasterActivity
 				else
 					getSupportActionBar().setTitle(title);
 			}
-			if(layout == LAYOUT_RADIO_PROFILE){
+			if(fragmentType == FRAGMENT_RADIO_PROFILE){
 				manager.beginTransaction().replace(R.id.container, RadioProfileFragment.newInstance()).commit();
-			}else if(layout == LAYOUT_HOME){
+			}else if(fragmentType == FRAGMENT_HOME){
 				manager.beginTransaction().replace(R.id.container, HomeFragment.newInstance("")).commit();
-			}else if(layout == LAYOUT_VIRTUAL_CARD){
+			}else if(fragmentType == FRAGMENT_VIRTUAL_CARD){
 				manager.beginTransaction().replace(R.id.container, VirtualCardFragment.newInstance()).commit();
-			}else if(layout == LAYOUT_CLUB){
+			}else if(fragmentType == FRAGMENT_CLUB){
 				manager.beginTransaction().replace(R.id.container, ClubRadioFragment.newInstance("")).commit();
-			}else if(layout == LAYOUT_NOTIFICATION){
+			}else if(fragmentType == FRAGMENT_NOTIFICATION){
 				manager.beginTransaction().replace(R.id.container, NotificationFragment.newInstance("")).commit();
-			}else if(layout == LAYOUT_SETTINGS){
+			}else if(fragmentType == FRAGMENT_SETTINGS){
 				manager.beginTransaction().replace(R.id.container, SettingsFragment.newInstance()).commit();
-			}else if(layout == LAYOUT_LIVE){
+			}else if(fragmentType == FRAGMENT_LIVE){
 				manager.beginTransaction().replace(R.id.container, LiveStreamFragment.newInstance("")).commit();
-			}else if (layout == LAYOUT_PROGRAM_PAGE) {
+			}else if (fragmentType == FRAGMENT_PROGRAM_PAGE) {
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, ProgramPageFragment
 						.newInstance()).commit();
-			} else if (layout == LAYOUT_PERSON_PROFILE) {
+			} else if (fragmentType == FRAGMENT_PERSON_PROFILE) {
 				PersonProfileFragment fragment = PersonProfileFragment.newInstance(mode,
 						transitionId, "");
 				callback = fragment;
 				manager.beginTransaction().replace(R.id.container, fragment).commit();
-			} else if (layout == LAYOUT_PLAYER) {
+			} else if (fragmentType == FRAGMENT_PLAYER) {
 				callback = null;
 				showMiniPlayer = false;
 				manager.beginTransaction().replace(R.id.container, PlayerFragment.newInstance(""))
 						.commit();
-			} else if (layout == LAYOUT_ALBUM) {
+			} else if (fragmentType == FRAGMENT_ALBUM) {
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, AlbumFragment.newInstance(""))
 						.commit();
-			} else if (layout == LAYOUT_ARTIST) {
+			} else if (fragmentType == FRAGMENT_ARTIST) {
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, ArtistFragment.newInstance(""))
 						.commit();
-			} else if (layout == LAYOUT_PROGRAMS){
+			} else if (fragmentType == FRAGMENT_PROGRAMS){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, ProgramsFragment.newInstance("")).commit();
-			}else if (layout == LAYOUT_ANNOUNCERS){
+			}else if (fragmentType == FRAGMENT_ANNOUNCERS){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, AnnouncersFragment.newInstance("")).commit();
-			}else if (layout == LAYOUT_FEED){
+			}else if (fragmentType == FRAGMENT_FEED){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, ClubRadioFragment.newInstance("")).commit();
-			}else if (layout == LAYOUT_PEOPLE){
+			}else if (fragmentType == FRAGMENT_PEOPLE){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, PersonListFragment.newInstance("")).commit();
-			}else if (layout == LAYOUT_ACCOUNT_SETTINGS){
+			}else if (fragmentType == FRAGMENT_ACCOUNT_SETTINGS){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, AccountSettingFragment.newInstance()).commit();
-			}else if(layout == LAYOUT_STREAM_PLAYER){
+			}else if(fragmentType == FRAGMENT_STREAM_PLAYER){
 				callback = null;
 				showMiniPlayer = false;
 				manager.beginTransaction().replace(R.id.container, StreamPlayerFragment
 						.newInstance()).commit();
-			}else if(layout == LAYOUT_REQUEST){
+			}else if(fragmentType == FRAGMENT_REQUEST){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, RequestFragment.newInstance(""))
 						.commit();
-			}else if(layout == LAYOUT_CATEGORY){
+			}else if(fragmentType == FRAGMENT_CATEGORY){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, CategoryFragment.newInstance(""))
 						.commit();
-			}else if(layout == LAYOUT_SUBCATEGORY){
+			}else if(fragmentType == FRAGMENT_SUBCATEGORY){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, SubcategoryFragment.newInstance(""))
 						.commit();
-			}else if(layout == LAYOUT_ADD_MIX){
+			}else if(fragmentType == FRAGMENT_ADD_MIX){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, AddMixFragment.newInstance(""))
 						.commit();
-			}else if(layout == LAYOUT_ADD_PLAYLIST){
+			}else if(fragmentType == FRAGMENT_ADD_PLAYLIST){
 				callback = null;
 
-//				manager.beginTransaction().replace(R.id.container, AddPlaylistFragment.newInstance(""))
-//						.commit();
-			}else if(layout == LAYOUT_ADD_MIX_FORM){
+				manager.beginTransaction().replace(R.id.container, AddPlaylistFragment.newInstance(""))
+						.commit();
+			}else if(fragmentType == FRAGMENT_ADD_MIX_FORM){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, AddMixFormFragment.newInstance())
 						.commit();
-			}else if(layout == LAYOUT_ADD_PLAYLIST_FORM){
+			}else if(fragmentType == FRAGMENT_ADD_PLAYLIST_FORM){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, AddPlaylistFormFragment.newInstance())
 						.commit();
-			}else if(layout == LAYOUT_GRID_MIX){
+			}else if(fragmentType == FRAGMENT_GRID_MIX){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, GridMixFragment.newInstance(""))
 						.commit();
-			}else if(layout == LAYOUT_COMMENT){
+			}else if(fragmentType == FRAGMENT_COMMENT){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, CommentFragment.newInstance(""))
 						.commit();
-			}else if(layout == LAYOUT_MIX){
+			}else if(fragmentType == FRAGMENT_MIX){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, MixFragment.newInstance(""))
 						.commit();
-			}else if(layout == LAYOUT_FAVORITES){
+			}else if(fragmentType == FRAGMENT_FAVORITES){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, FavoritesFragment.newInstance(""))
 						.commit();
-			}else if(layout == LAYOUT_APP_SETTINGS){
+			}else if(fragmentType == FRAGMENT_APP_SETTINGS){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, AppSettingFragment.newInstance(""))
 						.commit();
-			}else if(layout == LAYOUT_NOTIFICATION_SETTINGS){
+			}else if(fragmentType == FRAGMENT_NOTIFICATION_SETTINGS){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, NotificationSettingFragment.newInstance(""))
 						.commit();
-			}else if(layout == LAYOUT_ABOUT){
+			}else if(fragmentType == FRAGMENT_ABOUT){
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, AboutFragment.newInstance(""))
 						.commit();
@@ -314,15 +326,13 @@ public class DrawerActivity extends MasterActivity
 		intent.putExtra("parent", true);
 		switch (id){
 			case R.id.nav_home:
-				intent.putExtra("layout", MasterActivity.LAYOUT_HOME);
-				intent.putExtra("activity", R.layout.activity_drawer);
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_HOME);
 				intent.putExtra("menuId", 0);
 				startActivity(intent);
 				finish();
 				break;
 			case R.id.nav_live:
-				intent.putExtra("layout", MasterActivity.LAYOUT_LIVE);
-				intent.putExtra("activity", R.layout.activity_drawer_standard);
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_LIVE);
 				intent.putExtra("title", "Live Stream");
 				intent.putExtra("menuId", 1);
 				startActivity(intent);
@@ -330,23 +340,20 @@ public class DrawerActivity extends MasterActivity
 				break;
 			case R.id.nav_klub:
 				intent.putExtra("title", "Klub Radio");
-				intent.putExtra("layout", MasterActivity.LAYOUT_CLUB);
-				intent.putExtra("activity", R.layout.activity_drawer_standard);
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_CLUB);
 				intent.putExtra("menuId", 2);
 				startActivity(intent);
 				finish();
 				break;
 			case R.id.nav_profile:
-				intent.putExtra("layout", MasterActivity.LAYOUT_PERSON_PROFILE);
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_PERSON_PROFILE);
 				intent.putExtra("title", "Dimas Danang");
-				intent.putExtra("activity", R.layout.activity_drawer);
 				intent.putExtra("menuId", 3);
 				startActivity(intent);
 				finish();
 				break;
 			case R.id.nav_favorite:
-				intent.putExtra("layout", MasterActivity.LAYOUT_FAVORITES);
-				intent.putExtra("activity", R.layout.activity_drawer_standard);
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_FAVORITES);
 				intent.putExtra("title", "Favorites");
 				intent.putExtra("menuId", 4);
 				startActivity(intent);
@@ -354,32 +361,28 @@ public class DrawerActivity extends MasterActivity
 				break;
 			case R.id.nav_notification:
 				intent.putExtra("title", "Notifications");
-				intent.putExtra("layout", MasterActivity.LAYOUT_NOTIFICATION);
-				intent.putExtra("activity", R.layout.activity_drawer_standard);
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_NOTIFICATION);
 				intent.putExtra("menuId", 5);
 				startActivity(intent);
 				finish();
 				break;
 			case R.id.nav_virtual_card:
 				intent.putExtra("title", "Virtual Card");
-				intent.putExtra("layout", MasterActivity.LAYOUT_VIRTUAL_CARD);
-				intent.putExtra("activity", R.layout.activity_drawer);
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_VIRTUAL_CARD);
 				intent.putExtra("menuId", 6);
 				startActivity(intent);
 				finish();
 				break;
 			case R.id.nav_setting:
 				intent.putExtra("title", "Settings");
-				intent.putExtra("layout", MasterActivity.LAYOUT_SETTINGS);
-				intent.putExtra("activity", R.layout.activity_drawer_standard);
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_SETTINGS);
 				intent.putExtra("menuId", 7);
 				startActivity(intent);
 				finish();
 				break;
 			case R.id.nav_player:
 				intent.putExtra("title", "Player");
-				intent.putExtra("layout", MasterActivity.LAYOUT_PLAYER);
-				intent.putExtra("activity", R.layout.activity_drawer);
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_PLAYER);
 				intent.putExtra("menuId", 8);
 				startActivity(intent);
 				finish();
@@ -388,5 +391,43 @@ public class DrawerActivity extends MasterActivity
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
+	}
+
+	public int getBaseLayout(int fragmentType){
+		switch (fragmentType){
+			case MasterActivity.FRAGMENT_PROGRAM_PAGE : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_PERSON_PROFILE : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_PLAYER : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_ALBUM : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_ARTIST : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_RADIO_PROFILE : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_VIRTUAL_CARD : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_CLUB : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_NOTIFICATION : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_SETTINGS : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_LIVE : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_PROGRAMS : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_ANNOUNCERS : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_FEED : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_PEOPLE : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_ACCOUNT_SETTINGS : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_STREAM_PLAYER : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_REQUEST : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_HOME : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_CATEGORY : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_SUBCATEGORY : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_GRID_MIX : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_ADD_MIX : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_COMMENT : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_MIX : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_FAVORITES : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_APP_SETTINGS : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_NOTIFICATION_SETTINGS : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_ABOUT : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_ADD_PLAYLIST : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_ADD_MIX_FORM : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_ADD_PLAYLIST_FORM : return R.layout.activity_drawer_standard;
+			default : return R.layout.activity_drawer;
+		}
 	}
 }

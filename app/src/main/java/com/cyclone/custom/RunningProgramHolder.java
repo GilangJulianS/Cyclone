@@ -2,12 +2,9 @@ package com.cyclone.custom;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cyclone.DrawerActivity;
 import com.cyclone.R;
@@ -42,8 +39,7 @@ public class RunningProgramHolder extends UniversalHolder {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(activity, DrawerActivity.class);
-				i.putExtra("layout", DrawerActivity.LAYOUT_STREAM_PLAYER);
-				i.putExtra("activity", R.layout.activity_drawer_standard);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_STREAM_PLAYER);
 				activity.startActivity(i);
 			}
 		});

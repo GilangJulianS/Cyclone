@@ -1,7 +1,6 @@
 package com.cyclone.fragment;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,19 +8,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,18 +19,11 @@ import android.widget.Toast;
 import com.cyclone.DrawerActivity;
 import com.cyclone.MasterActivity;
 import com.cyclone.R;
-import com.cyclone.custom.OnOffsetChangedListener;
-import com.cyclone.custom.SnapGestureListener;
 import com.cyclone.custom.Tools;
-import com.cyclone.custom.UniversalAdapter;
 import com.cyclone.model.Post;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 /**
  * Created by gilang on 18/10/2015.
@@ -153,8 +135,7 @@ public class PersonProfileFragment extends RecyclerFragment{
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getContext(), DrawerActivity.class);
-				i.putExtra("layout", DrawerActivity.LAYOUT_FEED);
-				i.putExtra("activity", R.layout.activity_drawer_standard);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_FEED);
 				i.putExtra("title", "Showlist");
 				startActivity(i);
 			}
@@ -163,8 +144,7 @@ public class PersonProfileFragment extends RecyclerFragment{
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getContext(), DrawerActivity.class);
-				i.putExtra("layout", DrawerActivity.LAYOUT_FEED);
-				i.putExtra("activity", R.layout.activity_drawer_standard);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_FEED);
 				i.putExtra("title", "Content");
 				startActivity(i);
 			}
@@ -173,8 +153,7 @@ public class PersonProfileFragment extends RecyclerFragment{
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getContext(), DrawerActivity.class);
-				i.putExtra("layout", DrawerActivity.LAYOUT_PEOPLE);
-				i.putExtra("activity", R.layout.activity_drawer_standard);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_PEOPLE);
 				i.putExtra("title", "Follower");
 				startActivity(i);
 			}
@@ -183,8 +162,7 @@ public class PersonProfileFragment extends RecyclerFragment{
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getContext(), DrawerActivity.class);
-				i.putExtra("layout", DrawerActivity.LAYOUT_PEOPLE);
-				i.putExtra("activity", R.layout.activity_drawer_standard);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_PEOPLE);
 				i.putExtra("title", "Following");
 				startActivity(i);
 			}
@@ -201,8 +179,7 @@ public class PersonProfileFragment extends RecyclerFragment{
 							public void onClick(DialogInterface dialog, int which) {
 								Intent i = new Intent(activity, DrawerActivity.class);
 								i.putExtra("title", "Create New Mix");
-								i.putExtra("activity", R.layout.activity_drawer_standard);
-								i.putExtra("layout", MasterActivity.LAYOUT_ADD_MIX_FORM);
+								i.putExtra("fragmentType", MasterActivity.FRAGMENT_ADD_MIX_FORM);
 								activity.startActivity(i);
 							}
 						})
@@ -211,8 +188,7 @@ public class PersonProfileFragment extends RecyclerFragment{
 							public void onClick(DialogInterface dialog, int which) {
 								Intent i = new Intent(activity, DrawerActivity.class);
 								i.putExtra("title", "Create New Playlist");
-								i.putExtra("activity", R.layout.activity_drawer_standard);
-								i.putExtra("layout", MasterActivity.LAYOUT_ADD_PLAYLIST_FORM);
+								i.putExtra("fragmentType", MasterActivity.FRAGMENT_ADD_PLAYLIST_FORM);
 								activity.startActivity(i);
 							}
 						});

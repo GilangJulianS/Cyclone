@@ -2,8 +2,6 @@ package com.cyclone.custom;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -13,7 +11,6 @@ import com.cyclone.MasterActivity;
 import com.cyclone.R;
 import com.cyclone.model.Categories;
 import com.cyclone.model.Category;
-import com.cyclone.model.Section;
 
 /**
  * Created by gilang on 20/11/2015.
@@ -52,8 +49,7 @@ public class CategoriesHolder extends UniversalHolder{
 				@Override
 				public void onClick(View v) {
 					Intent i = new Intent(activity, DrawerActivity.class);
-					i.putExtra("layout", MasterActivity.LAYOUT_CATEGORY);
-					i.putExtra("activity", R.layout.activity_drawer_standard);
+					i.putExtra("fragmentType", MasterActivity.FRAGMENT_CATEGORY);
 					i.putExtra("title", label);
 					activity.startActivity(i);
 				}

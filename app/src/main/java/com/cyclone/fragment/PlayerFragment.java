@@ -249,7 +249,7 @@ public class PlayerFragment extends RecyclerFragment {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(activity, DrawerActivity.class);
-				i.putExtra("layout", DrawerActivity.LAYOUT_ARTIST);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_ARTIST);
 				i.putExtra("title", "Artist Name");
 				activity.startActivity(i);
 			}
@@ -259,7 +259,7 @@ public class PlayerFragment extends RecyclerFragment {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(activity, DrawerActivity.class);
-				i.putExtra("layout", DrawerActivity.LAYOUT_ALBUM);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_ALBUM);
 				i.putExtra("title", "Album Name");
 				activity.startActivity(i);
 			}

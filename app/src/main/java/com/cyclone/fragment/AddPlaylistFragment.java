@@ -18,14 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gilang on 20/11/2015.
+ * Created by gilang on 09/12/2015.
  */
-public class HomeFragment extends RecyclerFragment {
+public class AddPlaylistFragment extends RecyclerFragment {
 
-	public HomeFragment(){}
+	public AddPlaylistFragment(){}
 
-	public static HomeFragment newInstance(String json){
-		HomeFragment fragment = new HomeFragment();
+	public static AddPlaylistFragment newInstance(String json){
+		AddPlaylistFragment fragment = new AddPlaylistFragment();
 		fragment.json = json;
 		return fragment;
 	}
@@ -52,31 +52,12 @@ public class HomeFragment extends RecyclerFragment {
 
 	@Override
 	public int getHeaderLayoutId() {
-		return R.layout.part_header_home;
+		return 0;
 	}
 
 	@Override
 	public void prepareHeader(View v) {
-		bindHeader(v, json);
-	}
 
-	public void bindHeader(View v, String json){
-		Button btnPlay = (Button) v.findViewById(R.id.btn_play);
-		Button btnMix = (Button) v.findViewById(R.id.btn_mix);
-
-		btnPlay.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(activity, "Play radio pressed", Toast.LENGTH_SHORT).show();
-			}
-		});
-
-		btnMix.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(activity, "Mix for you pressed", Toast.LENGTH_SHORT).show();
-			}
-		});
 	}
 
 	public List<Object> parse(String json){
@@ -96,61 +77,61 @@ public class HomeFragment extends RecyclerFragment {
 
 		datas.add(new Section("Latest News", "news", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Dua Aturan Pemerintah", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
-		contentList.add(new Content("", "Hampir 30 film", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
-		contentList.add(new Content("", "Melawan Asap", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Dua Aturan Pemerintah", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Hampir 30 film", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Melawan Asap", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Talk", "talk", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Talkshow GOWASDSA", "Prambors FM Jakarta", null));
-		contentList.add(new Content("", "Hampir 30 film", "Prambors FM Jakarta", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Talkshow GOWASDSA", "Prambors FM Jakarta", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Hampir 30 film", "Prambors FM Jakarta", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("New Release", "release", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Love never feel", "Michael Jackson", null));
-		contentList.add(new Content("", "Demons", "Imagine Dragons", null));
-		contentList.add(new Content("", "Smells like te", "Nirvana", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Love never feel", "Michael Jackson", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Demons", "Imagine Dragons", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Smells like te", "Nirvana", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Recommended Music", "recommended", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Its My Life", "Bon Jovi", null));
-		contentList.add(new Content("", "Don't Look Back", "Oasis", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Its My Life", "Bon Jovi", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Don't Look Back", "Oasis", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Hits Playlist", "hits", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Morning Sunshine", "Dimas Danang", null));
-		contentList.add(new Content("", "Rock Yeah", "Imam Darto", null));
-		contentList.add(new Content("", "HipHopYo!", "Desta", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Morning Sunshine", "Dimas Danang", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Rock Yeah", "Imam Darto", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "HipHopYo!", "Desta", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Top mix", "mix", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Mix max", "Nycta Gina", null));
-		contentList.add(new Content("", "DUbldbldb", "Julio", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Mix max", "Nycta Gina", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "DUbldbldb", "Julio", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Most Played Upload", "popular_upload", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Cover Love", "Dimas Danang", null));
-		contentList.add(new Content("", "Cover Demons", "Imam Darto", null));
-		contentList.add(new Content("", "Cover Smells Like", "Desta", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Cover Love", "Dimas Danang", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Cover Demons", "Imam Darto", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Cover Smells Like", "Desta", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Newly Uploaded", "new_upload", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Cover Its-me", "Nycta Gina", null));
-		contentList.add(new Content("", "Cover Don't Look Back", "Julio", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Cover Its-me", "Nycta Gina", null));
+		contentList.add(new Content("", Content.TYPE_FAVORITABLE, "Cover Don't Look Back", "Julio", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 

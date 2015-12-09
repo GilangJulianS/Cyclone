@@ -3,11 +3,8 @@ package com.cyclone.custom;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,7 +110,7 @@ public class ClubFeedHolder extends UniversalHolder{
 				@Override
 				public void onClick(View v) {
 				Intent i = new Intent(activity, DrawerActivity.class);
-				i.putExtra("layout", DrawerActivity.LAYOUT_PERSON_PROFILE);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_PERSON_PROFILE);
 				i.putExtra("mode", PersonProfileFragment.MODE_OTHERS_PROFILE);
 				i.putExtra("transition", "profile" + transitionId);
 
@@ -134,8 +131,7 @@ public class ClubFeedHolder extends UniversalHolder{
 					@Override
 					public void onClick(View v) {
 						Intent i = new Intent(activity, DrawerActivity.class);
-						i.putExtra("activity", R.layout.activity_drawer);
-						i.putExtra("layout", MasterActivity.LAYOUT_MIX);
+						i.putExtra("fragmentType", MasterActivity.FRAGMENT_MIX);
 						i.putExtra("title", "Mix max");
 						activity.startActivity(i);
 					}

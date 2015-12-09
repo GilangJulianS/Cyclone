@@ -3,6 +3,7 @@ package com.cyclone.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.Button;
 
 import com.cyclone.DrawerActivity;
 import com.cyclone.R;
+import com.cyclone.model.Data;
 
 /**
  * Created by gilang on 07/12/2015.
@@ -33,11 +35,13 @@ public class AddMixFormFragment extends Fragment {
 		btnNext.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getActivity(), DrawerActivity.class);
-				i.putExtra("activity", R.layout.activity_drawer_standard);
-				i.putExtra("layout", DrawerActivity.LAYOUT_ADD_MIX);
-				i.putExtra("title", "Add Mix");
-				startActivity(i);
+				Data.reset();
+//				Intent i = new Intent(getActivity(), DrawerActivity.class);
+//				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_ADD_MIX);
+//				i.putExtra("title", "Add Mix");
+//				startActivity(i);
+				FragmentManager manager = getActivity().getSupportFragmentManager();
+				manager.beginTransaction().replace(R.id.container, AddMixFragment.newInstance("")).commit();
 			}
 		});
 
