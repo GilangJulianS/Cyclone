@@ -54,6 +54,10 @@ public abstract class MasterActivity extends AppCompatActivity implements Gestur
 	public static final int FRAGMENT_ADD_PLAYLIST = 130;
 	public static final int FRAGMENT_ADD_MIX_FORM = 131;
 	public static final int FRAGMENT_ADD_PLAYLIST_FORM = 132;
+	public static final int FRAGMENT_TRACK_LIST = 133;
+	public static final int FRAGMENT_PLAYLIST = 134;
+	public static final int FRAGMENT_UPLOAD = 135;
+	public static final int FRAGMENT_UPLOAD_FINISHED = 136;
 
 	public AppBarLayout appBarLayout;
 	public boolean isExpanded = true;

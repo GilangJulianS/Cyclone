@@ -60,6 +60,16 @@ public class HomeFragment extends RecyclerFragment {
 		bindHeader(v, json);
 	}
 
+	@Override
+	public int getSlidingLayoutId() {
+		return 0;
+	}
+
+	@Override
+	public void prepareSlidingMenu(View v) {
+
+	}
+
 	public void bindHeader(View v, String json){
 		Button btnPlay = (Button) v.findViewById(R.id.btn_play);
 		Button btnMix = (Button) v.findViewById(R.id.btn_mix);

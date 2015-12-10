@@ -75,6 +75,16 @@ public class PersonProfileFragment extends RecyclerFragment{
 		setupHeader(v, "");
 	}
 
+	@Override
+	public int getSlidingLayoutId() {
+		return 0;
+	}
+
+	@Override
+	public void prepareSlidingMenu(View v) {
+
+	}
+
 	public List<Object> parse(String json){
 		List<Object> datas = new ArrayList<>();
 		datas.add(new Post("", "<b>Imam Darto</b> created new <b>Mix</b>", "1 Hour ago", "Mix",
@@ -199,7 +209,10 @@ public class PersonProfileFragment extends RecyclerFragment{
 		btnUpload.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(activity, "Upload button pressed", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(activity, DrawerActivity.class);
+				i.putExtra("fragmentType", MasterActivity.FRAGMENT_UPLOAD);
+				i.putExtra("title", "Upload New Content");
+				startActivity(i);
 			}
 		});
 
@@ -209,7 +222,6 @@ public class PersonProfileFragment extends RecyclerFragment{
 				Toast.makeText(activity, "Follow button pressed", Toast.LENGTH_SHORT).show();
 			}
 		});
-
 
 //		txtContent.setText("");
 //		txtShowlist.setText("");

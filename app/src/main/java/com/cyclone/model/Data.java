@@ -8,21 +8,31 @@ import java.util.List;
  */
 public class Data {
 
-	private static List<Object> data = new ArrayList<>();
+	private static List<MasterModel> data = new ArrayList<>();
 
 	public static void reset(){
 		data = new ArrayList<>();
 	}
 
-	public static void add(Object o){
+	public static void add(MasterModel o){
 		data.add(o);
 	}
 
-	public static void remove(Object o){
-		data.remove(o);
+
+	public static void remove(MasterModel o){
+		data.remove(searchObject(o));
 	}
 
-	public static List<Object> getData(){
+	public static MasterModel searchObject(MasterModel model){
+		for(MasterModel m : data){
+			if(m.txtPrimary.equals(model.txtPrimary) && m.txtSecondary.equals(model.txtSecondary)){
+				return m;
+			}
+		}
+		return null;
+	}
+
+	public static List<MasterModel> getData(){
 		return data;
 	}
 }

@@ -19,6 +19,7 @@ import com.cyclone.R;
 import com.cyclone.model.Content;
 import com.cyclone.model.Contents;
 import com.cyclone.model.Data;
+import com.cyclone.model.MasterModel;
 
 /**
  * Created by gilang on 21/11/2015.
@@ -34,7 +35,7 @@ public class ContentsHolder extends UniversalHolder {
 
 	@Override
 	public void bind(Object object, Activity activity, int position) {
-		bind((Contents)object);
+		bind((Contents) object);
 	}
 
 	public void bind(Contents contents){
@@ -56,19 +57,22 @@ public class ContentsHolder extends UniversalHolder {
 						temp.isFavorited = !temp.isFavorited;
 						if(temp.isFavorited) {
 							imgHeart.setVisibility(View.VISIBLE);
-							Data.add(temp);
-							createSnackBar().show();
+							Data.add((MasterModel)temp);
+							createSnackBar(activity).show();
 						}
 						else {
 							imgHeart.setVisibility(View.GONE);
-							Data.remove(temp);
-							createSnackBar().show();
+							Data.remove((MasterModel)temp);
+							createSnackBar(activity).show();
 						}
 					}
 				}
 			});
-			if(temp.isFavorited)
+			if(temp.isFavorited) {
 				imgHeart.setVisibility(View.VISIBLE);
+			}else{
+				imgHeart.setVisibility(View.GONE);
+			}
 
 			if(c.txtPrimary != null)
 				txtPrimary.setText(c.txtPrimary);
@@ -87,7 +91,7 @@ public class ContentsHolder extends UniversalHolder {
 		}
 	}
 
-	public Snackbar createSnackBar(){
+	public static Snackbar createSnackBar(final Activity activity){
 		Snackbar snackbar =
 				Snackbar.make(((DrawerActivity) activity).coordinatorLayout, Data.getData().size()
 						+ " items added", Snackbar.LENGTH_INDEFINITE)
@@ -103,7 +107,7 @@ public class ContentsHolder extends UniversalHolder {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(activity, DrawerActivity.class);
-				i.putExtra("fragmentType", MasterActivity.FRAGMENT_SUBCATEGORY);
+				i.putExtra("fragmentType", MasterActivity.FRAGMENT_TRACK_LIST);
 				i.putExtra("title", "Track List");
 				activity.startActivity(i);
 			}

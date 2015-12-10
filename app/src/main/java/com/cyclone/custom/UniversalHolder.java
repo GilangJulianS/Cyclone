@@ -13,6 +13,7 @@ public abstract class UniversalHolder extends RecyclerView.ViewHolder {
 
 	protected Activity activity;
 	protected UniversalAdapter adapter;
+	protected boolean isSelected;
 
 	public UniversalHolder(View itemView, Activity activity, UniversalAdapter adapter) {
 		super(itemView);
@@ -21,4 +22,8 @@ public abstract class UniversalHolder extends RecyclerView.ViewHolder {
 	}
 
 	public abstract void bind(Object object, Activity activity, int position);
+
+	public void setSelected(boolean selected){
+		isSelected = selected;
+	}
 }

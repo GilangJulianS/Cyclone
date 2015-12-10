@@ -2,6 +2,7 @@ package com.cyclone.custom;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,11 +57,13 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 	public static final int TYPE_COMMENT = 119;
 
 	public List<Object> datas;
+	private SparseBooleanArray selectedItems;
 	private Activity activity;
 
 	public UniversalAdapter(Activity activity){
 		datas = new ArrayList<>();
 		this.activity = activity;
+		selectedItems = new SparseBooleanArray();
 	}
 
 	public void add(Object o){
@@ -80,6 +83,7 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 	@Override
 	public void onBindViewHolder(UniversalHolder holder, int position) {
 		holder.bind(datas.get(position), activity, position);
+		holder.setSelected(isSelected(position));
 	}
 
 	@Override
@@ -161,5 +165,38 @@ public class UniversalAdapter extends Adapter<UniversalHolder> {
 			case TYPE_COMMENT: holder = new CommentHolder(v, activity, this); break;
 		}
 		return holder;
+	}
+
+	public boolean isSelected(int position){
+		return getSelectedItems().contains(position);
+	}
+
+	public List<Integer> getSelectedItems(){
+		List<Integer> items = new ArrayList<>(selectedItems.size());
+		for (int i = 0; i < selectedItems.size(); ++i) {
+			items.add(selectedItems.keyAt(i));
+		}
+		return items;
+	}
+
+	public void toggleSelect(int position){
+		if(selectedItems.get(position, false)){
+			selectedItems.delete(position);
+		}else{
+			selectedItems.put(position, true);
+		}
+		notifyItemChanged(position);
+	}
+
+	public void clearSelection() {
+		List<Integer> selection = getSelectedItems();
+		selectedItems.clear();
+		for (Integer i : selection) {
+			notifyItemChanged(i);
+		}
+	}
+
+	public int getSelectedItemCount() {
+		return selectedItems.size();
 	}
 }

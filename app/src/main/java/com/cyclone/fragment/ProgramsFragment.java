@@ -69,6 +69,16 @@ public class ProgramsFragment extends RecyclerFragment {
 
 	}
 
+	@Override
+	public int getSlidingLayoutId() {
+		return 0;
+	}
+
+	@Override
+	public void prepareSlidingMenu(View v) {
+
+	}
+
 	public List<Object> parse(String json){
 		List<Object> datas = new ArrayList<>();
 		datas.add(new Program("http://imgurl.com", "Inspiring Life", "Sen - Jum, 04.00 - 05" +

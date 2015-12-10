@@ -136,6 +136,16 @@ public class ClubFeedHolder extends UniversalHolder{
 						activity.startActivity(i);
 					}
 				});
+			}else if(p.playlistType.equals("Playlist")){
+				container.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent i = new Intent(activity, DrawerActivity.class);
+						i.putExtra("fragmentType", MasterActivity.FRAGMENT_PLAYLIST);
+						i.putExtra("title", "Funky Sunshine");
+						activity.startActivity(i);
+					}
+				});
 			}
 		}
 	}

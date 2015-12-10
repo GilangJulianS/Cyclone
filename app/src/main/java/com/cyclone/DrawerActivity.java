@@ -40,6 +40,7 @@ import com.cyclone.fragment.NotificationSettingFragment;
 import com.cyclone.fragment.PersonListFragment;
 import com.cyclone.fragment.PersonProfileFragment;
 import com.cyclone.fragment.PlayerFragment;
+import com.cyclone.fragment.PlaylistFragment;
 import com.cyclone.fragment.ProgramPageFragment;
 import com.cyclone.fragment.ProgramsFragment;
 import com.cyclone.fragment.RadioProfileFragment;
@@ -47,6 +48,9 @@ import com.cyclone.fragment.RequestFragment;
 import com.cyclone.fragment.SettingsFragment;
 import com.cyclone.fragment.StreamPlayerFragment;
 import com.cyclone.fragment.SubcategoryFragment;
+import com.cyclone.fragment.TrackListFragment;
+import com.cyclone.fragment.UploadFinishedFragment;
+import com.cyclone.fragment.UploadFragment;
 import com.cyclone.fragment.VirtualCardFragment;
 
 public class DrawerActivity extends MasterActivity
@@ -242,8 +246,23 @@ public class DrawerActivity extends MasterActivity
 				callback = null;
 				manager.beginTransaction().replace(R.id.container, AboutFragment.newInstance(""))
 						.commit();
+			}else if(fragmentType == FRAGMENT_TRACK_LIST){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, TrackListFragment.newInstance(""))
+						.commit();
+			}else if(fragmentType == FRAGMENT_PLAYLIST){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, PlaylistFragment.newInstance(""))
+						.commit();
+			}else if(fragmentType == FRAGMENT_UPLOAD){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, UploadFragment.newInstance())
+						.commit();
+			}else if(fragmentType == FRAGMENT_UPLOAD_FINISHED){
+				callback = null;
+				manager.beginTransaction().replace(R.id.container, UploadFinishedFragment.newInstance())
+						.commit();
 			}
-
 			navigationView.getMenu().getItem(menuId).setChecked(true);
 		}else{
 			isParentView = true;
@@ -402,7 +421,7 @@ public class DrawerActivity extends MasterActivity
 			case MasterActivity.FRAGMENT_ARTIST : return R.layout.activity_drawer;
 			case MasterActivity.FRAGMENT_RADIO_PROFILE : return R.layout.activity_drawer;
 			case MasterActivity.FRAGMENT_VIRTUAL_CARD : return R.layout.activity_drawer;
-			case MasterActivity.FRAGMENT_CLUB : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_CLUB : return R.layout.activity_drawer_standard;
 			case MasterActivity.FRAGMENT_NOTIFICATION : return R.layout.activity_drawer_standard;
 			case MasterActivity.FRAGMENT_SETTINGS : return R.layout.activity_drawer_standard;
 			case MasterActivity.FRAGMENT_LIVE : return R.layout.activity_drawer_standard;
@@ -427,7 +446,11 @@ public class DrawerActivity extends MasterActivity
 			case MasterActivity.FRAGMENT_ADD_PLAYLIST : return R.layout.activity_drawer_standard;
 			case MasterActivity.FRAGMENT_ADD_MIX_FORM : return R.layout.activity_drawer_standard;
 			case MasterActivity.FRAGMENT_ADD_PLAYLIST_FORM : return R.layout.activity_drawer_standard;
-			default : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_TRACK_LIST : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_PLAYLIST : return R.layout.activity_drawer;
+			case MasterActivity.FRAGMENT_UPLOAD : return R.layout.activity_drawer_standard;
+			case MasterActivity.FRAGMENT_UPLOAD_FINISHED : return R.layout.activity_drawer_standard;
+			default : return R.layout.activity_drawer_standard;
 		}
 	}
 }

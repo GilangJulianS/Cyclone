@@ -46,9 +46,7 @@ public class PlayerFragment extends RecyclerFragment {
 	private ImageView imgCover, imgTemp;
 	private View minimizedPlayer;
 	private TextView txtTitle, txtArtist, txtTotalTime;
-	private SlidingLayer slidingLayer;
 	private SeekBar seekbar;
-
 
 	public PlayerFragment(){}
 
@@ -96,6 +94,36 @@ public class PlayerFragment extends RecyclerFragment {
 	}
 
 	@Override
+	public int getSlidingLayoutId() {
+		return R.layout.menu_song;
+	}
+
+	@Override
+	public void prepareSlidingMenu(View v) {
+		btnArtist = (ViewGroup) v.findViewById(R.id.btn_artist);
+		btnAlbum = (ViewGroup) v.findViewById(R.id.btn_album);
+		btnArtist.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(activity, DrawerActivity.class);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_ARTIST);
+				i.putExtra("title", "Artist Name");
+				activity.startActivity(i);
+			}
+		});
+
+		btnAlbum.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(activity, DrawerActivity.class);
+				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_ALBUM);
+				i.putExtra("title", "Album Name");
+				activity.startActivity(i);
+			}
+		});
+	}
+
+	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.player, menu);
 		super.onCreateOptionsMenu(menu, inflater);
@@ -123,10 +151,7 @@ public class PlayerFragment extends RecyclerFragment {
 		groupControl = (ViewGroup) v.findViewById(R.id.group_player_control);
 		imgCover = (ImageView) v.findViewById(R.id.img_cover);
 		imgTemp = (ImageView) v.findViewById(R.id.img_temp);
-		slidingLayer = (SlidingLayer) v.findViewById(R.id.sliding_layer);
 		btnMenu = (ImageButton) v.findViewById(R.id.btn_menu);
-		btnArtist = (ViewGroup) v.findViewById(R.id.btn_artist);
-		btnAlbum = (ViewGroup) v.findViewById(R.id.btn_album);
 		seekbar = (SeekBar) v.findViewById(R.id.seekbar);
 
 		if(state == STATE_PLAYING)
@@ -243,27 +268,6 @@ public class PlayerFragment extends RecyclerFragment {
 		});
 		imgCover.setImageResource(R.drawable.wallpaper);
 		setPlayerColor();
-
-
-		btnArtist.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(activity, DrawerActivity.class);
-				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_ARTIST);
-				i.putExtra("title", "Artist Name");
-				activity.startActivity(i);
-			}
-		});
-
-		btnAlbum.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(activity, DrawerActivity.class);
-				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_ALBUM);
-				i.putExtra("title", "Album Name");
-				activity.startActivity(i);
-			}
-		});
 	}
 
 	public void setPlayerColor(){

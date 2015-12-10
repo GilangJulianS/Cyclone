@@ -59,6 +59,16 @@ public class MixFragment extends RecyclerFragment {
 		bindHeader(v);
 	}
 
+	@Override
+	public int getSlidingLayoutId() {
+		return R.layout.menu_mix;
+	}
+
+	@Override
+	public void prepareSlidingMenu(View v) {
+
+	}
+
 	public void bindHeader(View v){
 		ViewGroup groupLikes = (ViewGroup) v.findViewById(R.id.group_likes);
 		ViewGroup groupComments = (ViewGroup) v.findViewById(R.id.group_comments);
@@ -88,7 +98,7 @@ public class MixFragment extends RecyclerFragment {
 		btnMenu.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				slidingLayer.openLayer(true);
 			}
 		});
 	}

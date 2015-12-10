@@ -20,6 +20,7 @@ import com.cyclone.R;
 import com.cyclone.custom.OnOffsetChangedListener;
 import com.cyclone.custom.SnapGestureListener;
 import com.cyclone.custom.UniversalAdapter;
+import com.wunderlist.slidinglayer.SlidingLayer;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ public abstract class RecyclerFragment extends Fragment implements OnOffsetChang
 	protected List<Object> datas;
 	protected SwipeRefreshLayout swipeLayout;
 	protected DrawerActivity activity;
+	protected SlidingLayer slidingLayer;
 	protected GestureDetectorCompat gd;
 	protected String json;
 	protected boolean swipeEnabled = true;
@@ -53,6 +55,10 @@ public abstract class RecyclerFragment extends Fragment implements OnOffsetChang
 	public abstract int getHeaderLayoutId();
 
 	public abstract void prepareHeader(View v);
+
+	public abstract int getSlidingLayoutId();
+
+	public abstract void prepareSlidingMenu(View v);
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
@@ -173,19 +179,26 @@ public abstract class RecyclerFragment extends Fragment implements OnOffsetChang
 	@Override
 	public void onAttach(Context context){
 		super.onAttach(context);
-		if(hasHeader()){
-			if(context instanceof DrawerActivity) {
-				activity = (DrawerActivity)context;
-				ViewGroup parallaxHeader = (ViewGroup) activity.findViewById(R.id
-						.parallax_header);
-				LayoutInflater inflater = activity.getLayoutInflater();
-				View header = inflater.inflate(getHeaderLayoutId(), parallaxHeader, false);
-				prepareHeader(header);
-				parallaxHeader.removeAllViews();
-				parallaxHeader.addView(header);
-			}
-		}else if(context instanceof DrawerActivity) {
+		if(context instanceof DrawerActivity) {
 			activity = (DrawerActivity)context;
+		}
+		if(hasSlidingLayout()){
+			LayoutInflater inflater = activity.getLayoutInflater();
+			slidingLayer = (SlidingLayer) activity.findViewById(R.id.sliding_layer);
+			View slidingMenu = inflater.inflate(getSlidingLayoutId(), slidingLayer, false);
+			prepareSlidingMenu(slidingMenu);
+			slidingLayer.removeAllViews();
+			slidingLayer.addView(slidingMenu);
+		}
+		if(hasHeader()){
+			activity = (DrawerActivity)context;
+			ViewGroup parallaxHeader = (ViewGroup) activity.findViewById(R.id
+					.parallax_header);
+			LayoutInflater inflater = activity.getLayoutInflater();
+			View header = inflater.inflate(getHeaderLayoutId(), parallaxHeader, false);
+			prepareHeader(header);
+			parallaxHeader.removeAllViews();
+			parallaxHeader.addView(header);
 		}
 	}
 
@@ -204,5 +217,9 @@ public abstract class RecyclerFragment extends Fragment implements OnOffsetChang
 
 	public boolean hasHeader(){
 		return getHeaderLayoutId() != 0;
+	}
+
+	public boolean hasSlidingLayout(){
+		return getSlidingLayoutId() != 0;
 	}
 }

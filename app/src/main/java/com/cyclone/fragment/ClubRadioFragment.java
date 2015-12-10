@@ -83,6 +83,16 @@ public class ClubRadioFragment extends RecyclerFragment {
 
 	}
 
+	@Override
+	public int getSlidingLayoutId() {
+		return 0;
+	}
+
+	@Override
+	public void prepareSlidingMenu(View v) {
+
+	}
+
 	public List<Object> parse(String json){
 		List<Object> datas = new ArrayList<>();
 		datas.add(new Post("", "<b>Imam Darto</b> created new <b>Mix</b>", "1 Hour ago", "Mix",
