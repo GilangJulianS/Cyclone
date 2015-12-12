@@ -63,9 +63,9 @@ public class MixHolder extends UniversalHolder {
 	}
 
 	public void addRecommend(int curPosition){
-		adapter.datas.add(curPosition + 1, new Mix("", "Test"));
-		adapter.datas.add(curPosition + 2, new Mix("", "Test2"));
-		adapter.datas.add(curPosition + 3, new Mix("", "Test3"));
+		adapter.datas.add(curPosition + 1, new Mix("", "Test", ""));
+		adapter.datas.add(curPosition + 2, new Mix("", "Test2", ""));
+		adapter.datas.add(curPosition + 3, new Mix("", "Test3", ""));
 		adapter.notifyItemInserted(curPosition + 1);
 		adapter.notifyItemInserted(curPosition + 2);
 		adapter.notifyItemInserted(curPosition + 3);

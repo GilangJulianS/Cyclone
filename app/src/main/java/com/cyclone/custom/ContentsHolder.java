@@ -5,10 +5,14 @@ import android.app.ActivityManager;
 import android.content.Intent;
 import android.media.Image;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +43,7 @@ public class ContentsHolder extends UniversalHolder {
 	}
 
 	public void bind(Contents contents){
+		int counter = 0;
 		container.removeAllViews();
 		for(Content c : contents.list){
 			View v = activity.getLayoutInflater().inflate(R.layout.card_thumbnail, container, false);
@@ -47,6 +52,8 @@ public class ContentsHolder extends UniversalHolder {
 			TextView txtPrimary = (TextView) v.findViewById(R.id.txt_primary);
 			TextView txtSecondary = (TextView) v.findViewById(R.id.txt_secondary);
 			TextView txtTertiary = (TextView) v.findViewById(R.id.txt_tertiary);
+			final ImageButton btnMenu = (ImageButton) v.findViewById(R.id.btn_menu);
+			final CardView card = (CardView) v.findViewById(R.id.card);
 
 			final Content temp = c;
 			imgCover.setImageResource(R.drawable.wallpaper);
@@ -65,6 +72,8 @@ public class ContentsHolder extends UniversalHolder {
 							Data.remove((MasterModel)temp);
 							createSnackBar(activity).show();
 						}
+					}else{
+						Toast.makeText(activity, "Card clicked", Toast.LENGTH_SHORT).show();
 					}
 				}
 			});
@@ -73,6 +82,16 @@ public class ContentsHolder extends UniversalHolder {
 			}else{
 				imgHeart.setVisibility(View.GONE);
 			}
+
+			btnMenu.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					PopupMenu menu = new PopupMenu(activity, btnMenu);
+					menu.inflate(R.menu.popup_default);
+					menu.setOnMenuItemClickListener(new PopupMenuListener(activity));
+					menu.show();
+				}
+			});
 
 			if(c.txtPrimary != null)
 				txtPrimary.setText(c.txtPrimary);
@@ -88,7 +107,17 @@ public class ContentsHolder extends UniversalHolder {
 				txtTertiary.setVisibility(View.GONE);
 
 			container.addView(v);
+
+
+			counter++;
 		}
+
+//		while(counter < 3){
+//			LayoutInflater inflater = activity.getLayoutInflater();
+//			View v = inflater.inflate(R.layout.view_filler_horizontal_full, container, false);
+//			container.addView(v);
+//			counter++;
+//		}
 	}
 
 	public static Snackbar createSnackBar(final Activity activity){

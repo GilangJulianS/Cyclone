@@ -110,22 +110,22 @@ public class MixFragment extends RecyclerFragment {
 
 		datas.add(new Section("Genre", "genre", Section.TYPE_TRANSPARENT, MasterActivity.FRAGMENT_GRID_MIX));
 		mixList = new ArrayList<>();
-		mixList.add(new Mix("", "Pop"));
-		mixList.add(new Mix("", "Electronic"));
+		mixList.add(new Mix("", "Pop", "Genre"));
+		mixList.add(new Mix("", "Electronic", "Genre"));
 		mixes = new Mixes(mixList);
 		datas.add(mixes);
 
 		datas.add(new Section("Artist", "artist", Section.TYPE_TRANSPARENT, MasterActivity.FRAGMENT_GRID_MIX));
 		mixList = new ArrayList<>();
-		mixList.add(new Mix("", "Raisa"));
-		mixList.add(new Mix("", "Daft Punk"));
-		mixList.add(new Mix("", "Maroon 5"));
+		mixList.add(new Mix("", "Raisa", "Artist"));
+		mixList.add(new Mix("", "Daft Punk", "Artist"));
+		mixList.add(new Mix("", "Maroon 5", "Artist"));
 		mixes = new Mixes(mixList);
 		datas.add(mixes);
 
 		datas.add(new Section("Radio Content", "content", Section.TYPE_TRANSPARENT, MasterActivity.FRAGMENT_GRID_MIX));
 		mixList = new ArrayList<>();
-		mixList.add(new Mix("", "News"));
+		mixList.add(new Mix("", "News", "Radio Content"));
 		mixes = new Mixes(mixList);
 		datas.add(mixes);
 

@@ -1,6 +1,7 @@
 package com.cyclone;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -11,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.cyclone.R;
 import com.cyclone.custom.OnOffsetChangedListener;
@@ -64,6 +67,7 @@ public abstract class MasterActivity extends AppCompatActivity implements Gestur
 
 	protected GestureDetectorCompat gd;
 	protected View miniPlayer;
+	protected ImageButton btnMiniPlay, btnMiniNext;
 	protected OnOffsetChangedListener callback;
 	protected Toolbar toolbar;
 
@@ -80,6 +84,44 @@ public abstract class MasterActivity extends AppCompatActivity implements Gestur
 
 	protected void setupMiniPlayer(){
 		miniPlayer = findViewById(R.id.minimized_player);
+		btnMiniNext = (ImageButton) miniPlayer.findViewById(R.id.btn_next);
+		btnMiniPlay = (ImageButton) miniPlayer.findViewById(R.id.btn_play);
+
+		miniPlayer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(MasterActivity.this, DrawerActivity.class);
+				i.putExtra("fragmentType", FRAGMENT_PLAYER);
+				i.putExtra("title", "Player");
+				startActivity(i);
+			}
+		});
+
+		btnMiniNext.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(MasterActivity.this, "Next Pressed", Toast.LENGTH_SHORT).show();
+			}
+		});
+
+		btnMiniPlay.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (PlayerFragment.state == PlayerFragment.STATE_STOP) {
+					PlayerFragment.state = PlayerFragment.STATE_PLAYING;
+					btnMiniPlay.setImageResource(R.drawable.ic_pause_white_36dp);
+				} else {
+					PlayerFragment.state = PlayerFragment.STATE_STOP;
+					btnMiniPlay.setImageResource(R.drawable.ic_play_arrow_white_36dp);
+				}
+				SharedPreferences pref = getSharedPreferences(getString(R.string
+						.preference_key), Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = pref.edit();
+				editor.putInt("state", PlayerFragment.state);
+				editor.commit();
+			}
+		});
+
 		SharedPreferences pref = getSharedPreferences(getString(R.string.preference_key), Context
 				.MODE_PRIVATE);
 		if(pref.getInt("state", PlayerFragment.STATE_STOP) == PlayerFragment.STATE_STOP){

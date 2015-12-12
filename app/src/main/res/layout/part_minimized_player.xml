@@ -46,17 +46,19 @@
 	</LinearLayout>
 
 	<ImageButton
+		android:id="@+id/btn_play"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:background="#0000"
+		android:background="@drawable/btn_flat_transparent_oval"
 		android:src="@drawable/ic_play_arrow_white_36dp"/>
 
 
 	<ImageButton
+		android:id="@+id/btn_next"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="5dp"
-		android:background="#0000"
+		android:background="@drawable/btn_flat_transparent_oval"
 		android:src="@drawable/ic_skip_next_white_36dp"/>
 
 </LinearLayout>

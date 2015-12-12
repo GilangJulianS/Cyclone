@@ -7,6 +7,7 @@ public class Section {
 
 	public static final int TYPE_TRANSPARENT = 100;
 	public static final int TYPE_NORMAL = 101;
+	public static final int TYPE_NONE = 102;
 	public String name;
 	public String category;
 	public int sectionType;

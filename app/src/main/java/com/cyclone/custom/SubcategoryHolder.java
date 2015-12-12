@@ -1,11 +1,14 @@
 package com.cyclone.custom;
 
 import android.app.Activity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cyclone.R;
 import com.cyclone.model.Data;
@@ -44,6 +47,15 @@ public class SubcategoryHolder extends UniversalHolder {
 		txtSecondary.setText(subcategoryItem.txtSecondary);
 		if(subcategoryItem.type == SubcategoryItem.TYPE_NORMAL) {
 			btnMenu.setVisibility(View.VISIBLE);
+			btnMenu.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					PopupMenu menu = new PopupMenu(activity, btnMenu);
+					menu.inflate(R.menu.popup_default);
+					menu.setOnMenuItemClickListener(new PopupMenuListener(activity));
+					menu.show();
+				}
+			});
 		}else if(subcategoryItem.type == SubcategoryItem.TYPE_DELETABLE){
 			btnDelete.setVisibility(View.VISIBLE);
 			btnDelete.setOnClickListener(new View.OnClickListener() {

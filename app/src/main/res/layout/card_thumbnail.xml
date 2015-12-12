@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
-	android:id="@+id/card_program"
+	android:id="@+id/card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_margin="5dp"
@@ -99,8 +99,9 @@
 				android:layout_width="wrap_content"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
+				android:padding="10dp"
 				android:src="@drawable/ic_more_vert_black_24dp"
-				android:background="@drawable/btn_flat_transparent"/>
+				android:background="@drawable/btn_flat_transparent_oval"/>
 
 		</LinearLayout>
 

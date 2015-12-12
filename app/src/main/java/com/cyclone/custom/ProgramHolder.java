@@ -6,7 +6,9 @@ import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ public class ProgramHolder extends UniversalHolder{
 	public TextView txtSchedule;
 	public RatingBar ratingBar;
 	public ViewGroup card;
+	public ImageButton btnMenu;
 
 	public ProgramHolder(View v, Activity activity, UniversalAdapter adapter){
 		super(v, activity, adapter);
@@ -32,6 +35,7 @@ public class ProgramHolder extends UniversalHolder{
 		txtSchedule = (TextView) v.findViewById(R.id.txt_schedule);
 		ratingBar = (RatingBar) v.findViewById(R.id.ratingbar);
 		card = (ViewGroup) v.findViewById(R.id.card_program);
+		btnMenu = (ImageButton) v.findViewById(R.id.btn_menu);
 	}
 
 	@Override
@@ -52,13 +56,22 @@ public class ProgramHolder extends UniversalHolder{
 				Intent i = new Intent(activity, DrawerActivity.class);
 				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_PROGRAM_PAGE);
 				i.putExtra("title", "Hit the Beat");
-				if(Build.VERSION.SDK_INT >= 16) {
+				if (Build.VERSION.SDK_INT >= 16) {
 					ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation
 							(activity, imageView, "program");
 					activity.startActivity(i, options.toBundle());
-				}else{
+				} else {
 					activity.startActivity(i);
 				}
+			}
+		});
+		btnMenu.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				PopupMenu menu = new PopupMenu(activity, btnMenu);
+				menu.inflate(R.menu.popup_default);
+				menu.setOnMenuItemClickListener(new PopupMenuListener(activity));
+				menu.show();
 			}
 		});
 	}

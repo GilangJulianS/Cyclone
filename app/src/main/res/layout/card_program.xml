@@ -74,8 +74,9 @@
 				android:layout_width="wrap_content"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
+				android:padding="10dp"
 				android:src="@drawable/ic_more_vert_black_24dp"
-				android:background="@drawable/btn_flat_transparent"/>
+				android:background="@drawable/btn_flat_transparent_oval"/>
 
 		</LinearLayout>
 

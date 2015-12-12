@@ -106,61 +106,61 @@ public class HomeFragment extends RecyclerFragment {
 
 		datas.add(new Section("Latest News", "news", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Dua Aturan Pemerintah", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
-		contentList.add(new Content("", "Hampir 30 film", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
-		contentList.add(new Content("", "Melawan Asap", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
+		contentList.add(new Content("", "Latest News", "Dua Aturan Pemerintah", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
+		contentList.add(new Content("", "Latest News", "Hampir 30 film", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
+		contentList.add(new Content("", "Latest News", "Melawan Asap", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Talk", "talk", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Talkshow GOWASDSA", "Prambors FM Jakarta", null));
-		contentList.add(new Content("", "Hampir 30 film", "Prambors FM Jakarta", null));
+		contentList.add(new Content("", "Talk", "Talkshow GOWASDSA", "Prambors FM Jakarta", null));
+		contentList.add(new Content("", "Talk", "Hampir 30 film", "Prambors FM Jakarta", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("New Release", "release", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Love never feel", "Michael Jackson", null));
-		contentList.add(new Content("", "Demons", "Imagine Dragons", null));
-		contentList.add(new Content("", "Smells like te", "Nirvana", null));
+		contentList.add(new Content("", "New Release", "Love never feel", "Michael Jackson", null));
+		contentList.add(new Content("", "New Release", "Demons", "Imagine Dragons", null));
+		contentList.add(new Content("", "New Release", "Smells like te", "Nirvana", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Recommended Music", "recommended", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Its My Life", "Bon Jovi", null));
-		contentList.add(new Content("", "Don't Look Back", "Oasis", null));
+		contentList.add(new Content("", "Recommended Music", "Its My Life", "Bon Jovi", null));
+		contentList.add(new Content("", "Recommended Music", "Don't Look Back", "Oasis", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Hits Playlist", "hits", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Morning Sunshine", "Dimas Danang", null));
-		contentList.add(new Content("", "Rock Yeah", "Imam Darto", null));
-		contentList.add(new Content("", "HipHopYo!", "Desta", null));
+		contentList.add(new Content("", "Hits Playlist", "Morning Sunshine", "Dimas Danang", null));
+		contentList.add(new Content("", "Hits Playlist", "Rock Yeah", "Imam Darto", null));
+		contentList.add(new Content("", "Hits Playlist", "HipHopYo!", "Desta", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Top mix", "mix", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Mix max", "Nycta Gina", null));
-		contentList.add(new Content("", "DUbldbldb", "Julio", null));
+		contentList.add(new Content("", "Top mix", "Mix max", "Nycta Gina", null));
+		contentList.add(new Content("", "Top mix", "DUbldbldb", "Julio", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Most Played Upload", "popular_upload", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Cover Love", "Dimas Danang", null));
-		contentList.add(new Content("", "Cover Demons", "Imam Darto", null));
-		contentList.add(new Content("", "Cover Smells Like", "Desta", null));
+		contentList.add(new Content("", "Most Played Upload", "Cover Love", "Dimas Danang", null));
+		contentList.add(new Content("", "Most Played Upload", "Cover Demons", "Imam Darto", null));
+		contentList.add(new Content("", "Most Played Upload", "Cover Smells Like", "Desta", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Newly Uploaded", "new_upload", MasterActivity.FRAGMENT_SUBCATEGORY));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Cover Its-me", "Nycta Gina", null));
-		contentList.add(new Content("", "Cover Don't Look Back", "Julio", null));
+		contentList.add(new Content("", "Newly Uploaded", "Cover Its-me", "Nycta Gina", null));
+		contentList.add(new Content("", "Newly Uploaded", "Cover Don't Look Back", "Julio", null));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
