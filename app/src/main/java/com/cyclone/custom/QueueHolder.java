@@ -10,14 +10,16 @@ import com.cyclone.model.Queue;
 /**
  * Created by gilang on 01/11/2015.
  */
-public class PlaylistHolder extends UniversalHolder{
+public class QueueHolder extends UniversalHolder{
 
+	public TextView txtNumber;
 	public TextView txtTitle;
 	public TextView txtArtist;
 	public TextView txtDuration;
 
-	public PlaylistHolder(View v, Activity activity, UniversalAdapter adapter) {
+	public QueueHolder(View v, Activity activity, UniversalAdapter adapter) {
 		super(v, activity, adapter);
+		txtNumber = (TextView) v.findViewById(R.id.txt_number);
 		txtTitle = (TextView) v.findViewById(R.id.txt_song_title);
 		txtArtist = (TextView) v.findViewById(R.id.txt_song_artist);
 		txtDuration = (TextView) v.findViewById(R.id.txt_duration);
@@ -29,6 +31,7 @@ public class PlaylistHolder extends UniversalHolder{
 	}
 
 	public void bind(Queue queue){
+		txtNumber.setText(String.valueOf(queue.id));
 		txtTitle.setText(queue.artist + " - " + queue.title);
 		txtArtist.setText(queue.artist);
 		txtDuration.setText(queue.duration);

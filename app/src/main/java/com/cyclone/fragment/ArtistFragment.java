@@ -1,6 +1,7 @@
 package com.cyclone.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -14,8 +15,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.cyclone.DrawerActivity;
+import com.cyclone.MasterActivity;
 import com.cyclone.R;
 import com.cyclone.custom.SnapGestureListener;
 import com.cyclone.custom.UniversalAdapter;
@@ -32,6 +37,10 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
  * Created by gilang on 02/11/2015.
  */
 public class ArtistFragment extends RecyclerFragment {
+
+	private ImageButton btnMenu;
+	private Button btnPlay;
+	private Button btnAddShowlist;
 
 	public ArtistFragment(){}
 
@@ -82,7 +91,26 @@ public class ArtistFragment extends RecyclerFragment {
 	}
 
 	public void setupHeader(View v, String json){
+		btnMenu = (ImageButton) v.findViewById(R.id.btn_menu);
+		btnPlay = (Button) v.findViewById(R.id.btn_play);
+		btnAddShowlist = (Button) v.findViewById(R.id.btn_add_showlist);
 
+		btnMenu.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(activity, "Menu button clicked", Toast.LENGTH_SHORT).show();
+			}
+		});
+
+		btnPlay.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(activity, DrawerActivity.class);
+				intent.putExtra("title", "Player");
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_PLAYER);
+				startActivity(intent);
+			}
+		});
 	}
 
 	public List<Object> parse(String json){

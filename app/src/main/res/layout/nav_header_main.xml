@@ -15,15 +15,15 @@
 		android:layout_width="80dp"
 		android:layout_height="80dp"
 		android:paddingTop="@dimen/nav_header_vertical_spacing"
-		android:scaleType="centerCrop"
-		android:src="@drawable/radio_icon"
+		android:scaleType="centerInside"
+		android:src="@drawable/logo_prambors_highlighted"
 		android:id="@+id/img_drawer_logo"/>
 
 	<TextView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:paddingTop="@dimen/nav_header_vertical_spacing"
-		android:text="Nama Radio"
+		android:text="Prambors FM Jakarta"
 		android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 

@@ -1,11 +1,13 @@
 package com.cyclone.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.cyclone.DrawerActivity;
 import com.cyclone.MasterActivity;
 import com.cyclone.R;
 import com.cyclone.model.Categories;
@@ -77,7 +79,10 @@ public class HomeFragment extends RecyclerFragment {
 		btnPlay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(activity, "Play radio pressed", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(activity, DrawerActivity.class);
+				intent.putExtra("title", "Live Stream");
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_STREAM_PLAYER);
+				startActivity(intent);
 			}
 		});
 

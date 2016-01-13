@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.cyclone.DrawerActivity;
 import com.cyclone.R;
+import com.cyclone.model.Program;
 import com.cyclone.model.ProgramContent;
 import com.cyclone.model.ProgramPager;
 import com.cyclone.model.RunningProgram;
@@ -72,11 +73,11 @@ public class LiveStreamFragment extends RecyclerFragment {
 
 	public List<Object> parse(String json){
 		List<Object> datas = new ArrayList<>();
-		List<String> images = new ArrayList<>();
-		images.add("");
-		images.add("");
-		images.add("");
-		datas.add(new ProgramPager(images, 1));
+		List<Program> programs = new ArrayList<>();
+		programs.add(new Program("", "The Dandees", "9am-12am", 5f));
+		programs.add(new Program("", "Desta and Gina in The Morning", "7am-9am", 4.5f));
+		programs.add(new Program("", "Popular Musics", "1pm-2pm", 4.2f));
+		datas.add(new ProgramPager(programs, 1));
 		datas.add(new RunningProgram("The Dandees", "The Most Wanted Guys In Town"));
 		datas.add(new ProgramContent(ProgramContent.TYPE_MUSIC, "10:21", "Biru - Afgan"));
 		datas.add(new ProgramContent(ProgramContent.TYPE_MUSIC, "10:18", "Stop Look Listen - " +

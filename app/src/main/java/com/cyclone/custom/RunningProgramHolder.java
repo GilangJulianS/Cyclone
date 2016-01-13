@@ -39,6 +39,7 @@ public class RunningProgramHolder extends UniversalHolder {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(activity, DrawerActivity.class);
+				i.putExtra("title", "Live Stream");
 				i.putExtra("fragmentType", DrawerActivity.FRAGMENT_STREAM_PLAYER);
 				activity.startActivity(i);
 			}

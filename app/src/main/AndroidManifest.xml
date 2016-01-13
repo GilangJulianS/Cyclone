@@ -8,15 +8,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+
         <activity
             android:name=".DrawerActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.Collapse" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".StandardActivity"
@@ -34,7 +35,7 @@
         </activity>
         <activity
             android:name=".SplashActivity"
-            android:label="@string/title_activity_splash" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

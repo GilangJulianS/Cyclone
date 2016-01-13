@@ -60,6 +60,7 @@ public class DrawerActivity extends MasterActivity
 	private boolean isCollapseLayout = false;
 	private ActionBarDrawerToggle toggle;
 	private CollapsingToolbarLayout toolbarLayout;
+	private MenuItem activeMenuItem;
 	public CoordinatorLayout coordinatorLayout;
 	private boolean showMiniPlayer = true;
 	private boolean hasExtras;
@@ -105,10 +106,11 @@ public class DrawerActivity extends MasterActivity
 		radioLogo.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				activeMenuItem.setChecked(false);
 				Intent i = new Intent(getApplicationContext(), DrawerActivity.class);
 				i.putExtra("fragmentType", MasterActivity.FRAGMENT_RADIO_PROFILE);
 				i.putExtra("parent", true);
-				i.putExtra("title", "K-Lite FM Bandung");
+				i.putExtra("title", "Prambors FM Jakarta");
 				startActivity(i);
 				finish();
 			}
@@ -122,7 +124,7 @@ public class DrawerActivity extends MasterActivity
 			toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id
 					.collapsing_toolbar_layout);
 			toolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
-			toolbarLayout.setTitle("K-Lite FM Bandung");
+			toolbarLayout.setTitle("Prambors FM Jakarta");
 		}
 
 		if(hasExtras) {
@@ -157,9 +159,10 @@ public class DrawerActivity extends MasterActivity
 				callback = fragment;
 				manager.beginTransaction().replace(R.id.container, fragment).commit();
 			} else if (fragmentType == FRAGMENT_PLAYER) {
-				callback = null;
+				PlayerFragment fragment = PlayerFragment.newInstance("");
+				callback = fragment;
 				showMiniPlayer = false;
-				manager.beginTransaction().replace(R.id.container, PlayerFragment.newInstance(""))
+				manager.beginTransaction().replace(R.id.container, fragment)
 						.commit();
 			} else if (fragmentType == FRAGMENT_ALBUM) {
 				callback = null;
@@ -330,6 +333,14 @@ public class DrawerActivity extends MasterActivity
 					onBackPressed();
 					return true;
 				}
+				break;
+			case R.id.action_settings:
+				Intent intent = new Intent(this, DrawerActivity.class);
+				intent.putExtra("title", "Settings");
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_SETTINGS);
+				intent.putExtra("menuId", 7);
+				startActivity(intent);
+				break;
 		}
 
 		return super.onOptionsItemSelected(item);
@@ -340,6 +351,11 @@ public class DrawerActivity extends MasterActivity
 	@Override
 	public boolean onNavigationItemSelected(MenuItem item) {
 		// Handle navigation view item clicks here.
+		if(activeMenuItem != null)
+			activeMenuItem.setChecked(false);
+		item.setChecked(true);
+		activeMenuItem = item;
+
 		int id = item.getItemId();
 		Intent intent = new Intent(this, DrawerActivity.class);
 		intent.putExtra("parent", true);

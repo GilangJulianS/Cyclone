@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.graphics.Palette;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,7 +27,6 @@ import android.widget.TextView;
 import com.cyclone.DrawerActivity;
 import com.cyclone.R;
 import com.cyclone.model.Queue;
-import com.wunderlist.slidinglayer.SlidingLayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +47,8 @@ public class PlayerFragment extends RecyclerFragment {
 	private View minimizedPlayer;
 	private TextView txtTitle, txtArtist, txtTotalTime;
 	private SeekBar seekbar;
+	private MenuItem btnCollapse;
+	private boolean visible = false;
 
 	public PlayerFragment(){}
 
@@ -127,6 +129,20 @@ public class PlayerFragment extends RecyclerFragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.player, menu);
 		super.onCreateOptionsMenu(menu, inflater);
+		btnCollapse = menu.findItem(R.id.btn_collapse);
+	}
+
+	@Override
+	public void onChanged(float percent) {
+		super.onChanged(percent);
+		System.out.println(percent);
+		if(btnCollapse != null) {
+			if (percent == 0) {
+				btnCollapse.setVisible(false);
+			} else if (percent == 100) {
+				btnCollapse.setVisible(true);
+			}
+		}
 	}
 
 	@Override
@@ -301,6 +317,7 @@ public class PlayerFragment extends RecyclerFragment {
 
 	public List<Object> parse(String json){
 		List<Object> playlists = new ArrayList<>();
+		Queue.reset();
 		playlists.add(new Queue("The Celestials", "The Smashing Pumpkins", "03:20"));
 		playlists.add(new Queue("Track 5 of 30 Playlist", "Morning Songs", "1:08:20"));
 		playlists.add(new Queue("Drones", "Muse", "05:45"));

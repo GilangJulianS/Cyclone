@@ -128,6 +128,7 @@ public class PersonProfileFragment extends RecyclerFragment{
 			header.findViewById(R.id.btn_follow).setVisibility(View.GONE);
 		}else if(mode == MODE_OTHERS_PROFILE){
 			header.findViewById(R.id.group_btn_own_profile).setVisibility(View.GONE);
+			header.findViewById(R.id.group_btn_others_profile).setVisibility(View.VISIBLE);
 			final Button followButton = (Button) header.findViewById(R.id.btn_follow);
 			followButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -213,13 +214,6 @@ public class PersonProfileFragment extends RecyclerFragment{
 				i.putExtra("fragmentType", MasterActivity.FRAGMENT_UPLOAD);
 				i.putExtra("title", "Upload New Content");
 				startActivity(i);
-			}
-		});
-
-		btnFollow.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(activity, "Follow button pressed", Toast.LENGTH_SHORT).show();
 			}
 		});
 

@@ -154,11 +154,11 @@ public abstract class MasterActivity extends AppCompatActivity implements Gestur
 //				System.out.println(percent);
 				if(percent == 0) {
 					isExpanded = true;
-					System.out.println("expanded blalbla");
+//					System.out.println("expanded blalbla");
 				}
 				else if(percent == 100) {
 					isExpanded = false;
-					System.out.println("collapsed blalbla");
+//					System.out.println("collapsed blalbla");
 				}
 				if(percent == 100 || percent == 0){
 					System.out.println("finish");
