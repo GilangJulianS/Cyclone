@@ -97,7 +97,10 @@ public class ClubFeedHolder extends UniversalHolder{
 		btnComment.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				Intent intent = new Intent(activity, DrawerActivity.class);
+				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_COMMENT);
+				intent.putExtra("title", "Comments");
+				activity.startActivity(intent);
 			}
 		});
 		final ImageView imageView = imgUser;
