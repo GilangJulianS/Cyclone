@@ -82,61 +82,61 @@ public class FavoritesFragment extends RecyclerFragment {
 		Contents contents;
 
 		contentList = new ArrayList<>();
-		datas.add(new Section("Playlist", "palylist"));
-		contentList.add(new Content("", "Playlist", "Morning Sunshine", "Dimas Danang", null));
-		contentList.add(new Content("", "Playlist", "My Playlist 1", "Imam Darto", null));
-		contentList.add(new Content("", "Playlist", "My Playlist 2", "Siapa", null));
+		datas.add(new Section("Playlist", "playlist"));
+		contentList.add(new Content("", "Playlist", "Morning Sunshine", "Dimas Danang", null, Content.TYPE_PLAYLIST));
+		contentList.add(new Content("", "Playlist", "My Playlist 1", "Imam Darto", null, Content.TYPE_PLAYLIST));
+		contentList.add(new Content("", "Playlist", "My Playlist 2", "Siapa", null, Content.TYPE_PLAYLIST));
 		completeList.addAll(contentList);
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		contentList = new ArrayList<>();
 		datas.add(new Section("Mix", "mix"));
-		contentList.add(new Content("", "Mix", "Mix max", "Nycta Gina", null));
-		contentList.add(new Content("", "Mix", "Dubidududu", "Julia", null));
+		contentList.add(new Content("", "Mix", "Mix max", "Nycta Gina", null, Content.TYPE_MIX));
+		contentList.add(new Content("", "Mix", "Dubidududu", "Julia", null, Content.TYPE_MIX));
 		completeList.addAll(contentList);
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		contentList = new ArrayList<>();
 		datas.add(new Section("Tracks", "tracks"));
-		contentList.add(new Content("", "Tracks", "Demons", "Imagine Dragons", null));
-		contentList.add(new Content("", "Tracks", "Demons", "Imagine Dragons", null));
-		contentList.add(new Content("", "Tracks", "Demons", "Imagine Dragons", null));
+		contentList.add(new Content("", "Tracks", "Demons", "Imagine Dragons", null, Content.TYPE_TRACKS));
+		contentList.add(new Content("", "Tracks", "Demons", "Imagine Dragons", null, Content.TYPE_TRACKS));
+		contentList.add(new Content("", "Tracks", "Demons", "Imagine Dragons", null, Content.TYPE_TRACKS));
 		completeList.addAll(contentList);
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		contentList = new ArrayList<>();
 		datas.add(new Section("Artist", "artist"));
-		contentList.add(new Content("", "Artist", "Sheila on 7", null, null));
-		contentList.add(new Content("", "Artist", "Oasis", null, null));
+		contentList.add(new Content("", "Artist", "Sheila on 7", null, null, Content.TYPE_ARTIST));
+		contentList.add(new Content("", "Artist", "Oasis", null, null, Content.TYPE_ARTIST));
 		completeList.addAll(contentList);
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		contentList = new ArrayList<>();
 		datas.add(new Section("Album", "album"));
-		contentList.add(new Content("", "Album", "Xscape", "Michael Jackson", null));
-		contentList.add(new Content("", "Album", "Night Vision", "Imagine Dragons", null));
-		contentList.add(new Content("", "Album", "The Very Best", "Nirvana", null));
+		contentList.add(new Content("", "Album", "Xscape", "Michael Jackson", null, Content.TYPE_ALBUM));
+		contentList.add(new Content("", "Album", "Night Vision", "Imagine Dragons", null, Content.TYPE_ALBUM));
+		contentList.add(new Content("", "Album", "The Very Best", "Nirvana", null, Content.TYPE_ALBUM));
 		completeList.addAll(contentList);
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		contentList = new ArrayList<>();
 		datas.add(new Section("Uploaded", "uploaded"));
-		contentList.add(new Content("", "Uploaded", "It's me - cover", "Nycta Gina", null));
-		contentList.add(new Content("", "Uploaded", "Don't remember - cover", "Julia", null));
+		contentList.add(new Content("", "Uploaded", "It's me - cover", "Nycta Gina", null, Content.TYPE_UPLOADED));
+		contentList.add(new Content("", "Uploaded", "Don't remember - cover", "Julia", null, Content.TYPE_UPLOADED));
 		completeList.addAll(contentList);
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		contentList = new ArrayList<>();
 		datas.add(new Section("Radio Content", "radio content"));
-		contentList.add(new Content("", "Radio Content", "Di atas sesuatu", "Apalah", null));
-		contentList.add(new Content("", "Radio Content", "Hampir 30 film", "Hampir sebanyak 30 film terbaru ditayangkan dalam acara ini", null));
-		contentList.add(new Content("", "Radio Content", "Melawan Asap", "Dalam perjuangannya melawan asap yang semakin memburuk", null));
+		contentList.add(new Content("", "Radio Content", "Di atas sesuatu", "Apalah", null, Content.TYPE_RADIO_CONTENT));
+		contentList.add(new Content("", "Radio Content", "Hampir 30 film", "Hampir sebanyak 30 film terbaru ditayangkan dalam acara ini", null, Content.TYPE_RADIO_CONTENT));
+		contentList.add(new Content("", "Radio Content", "Melawan Asap", "Dalam perjuangannya melawan asap yang semakin memburuk", null, Content.TYPE_RADIO_CONTENT));
 		completeList.addAll(contentList);
 		contents = new Contents(contentList);
 		datas.add(contents);

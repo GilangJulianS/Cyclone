@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cyclone.R;
+import com.cyclone.model.Content;
 import com.cyclone.model.Data;
 import com.cyclone.model.SubcategoryItem;
 
@@ -46,13 +47,14 @@ public class SubcategoryHolder extends UniversalHolder {
 		txtPrimary.setText(subcategoryItem.txtPrimary);
 		txtSecondary.setText(subcategoryItem.txtSecondary);
 		if(subcategoryItem.type == SubcategoryItem.TYPE_NORMAL) {
+			final Content c = new Content(subcategoryItem.imgUrl, "Tracks", subcategoryItem.txtPrimary, subcategoryItem.txtSecondary, null, Content.TYPE_TRACKS);
 			btnMenu.setVisibility(View.VISIBLE);
 			btnMenu.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					PopupMenu menu = new PopupMenu(activity, btnMenu);
 					menu.inflate(R.menu.popup_default);
-					menu.setOnMenuItemClickListener(new PopupMenuListener(activity));
+					menu.setOnMenuItemClickListener(new PopupMenuListener(activity, c, btnMenu));
 					menu.show();
 				}
 			});

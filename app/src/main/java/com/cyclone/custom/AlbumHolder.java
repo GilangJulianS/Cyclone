@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.cyclone.DrawerActivity;
 import com.cyclone.R;
 import com.cyclone.model.Album;
+import com.cyclone.model.Content;
 
 /**
  * Created by gilang on 01/11/2015.
@@ -36,16 +37,17 @@ public class AlbumHolder extends UniversalHolder {
 		bind((Album) object);
 	}
 
-	public void bind(Album album){
+	public void bind(final Album album){
 		imgCover.setImageResource(R.drawable.wallpaper);
 		txtPrimary.setText(album.primary);
 		txtSecondary.setText(album.secondary);
+		final Content c = new Content(album.imgUrl, "album", album.primary, album.secondary, null, Content.TYPE_ALBUM);
 		btnMenu.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				PopupMenu menu = new PopupMenu(activity, btnMenu);
 				menu.inflate(R.menu.popup_default);
-				menu.setOnMenuItemClickListener(new PopupMenuListener(activity));
+				menu.setOnMenuItemClickListener(new PopupMenuListener(activity, c, btnMenu));
 				menu.show();
 			}
 		});

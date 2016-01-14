@@ -73,39 +73,39 @@ public class CategoryFragment extends RecyclerFragment {
 
 		datas.add(new Section("News", "news"));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "News", "Dua Aturan Pemerintah", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
-		contentList.add(new Content("", "News", "Hampir 30 film", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
-		contentList.add(new Content("", "News", "Melawan Asap", "Prambors FM Jakarta", "17 Sept 2015 - 10:05"));
+		contentList.add(new Content("", "News", "Dua Aturan Pemerintah", "Prambors FM Jakarta", "17 Sept 2015 - 10:05", Content.TYPE_RADIO_CONTENT));
+		contentList.add(new Content("", "News", "Hampir 30 film", "Prambors FM Jakarta", "17 Sept 2015 - 10:05", Content.TYPE_RADIO_CONTENT));
+		contentList.add(new Content("", "News", "Melawan Asap", "Prambors FM Jakarta", "17 Sept 2015 - 10:05", Content.TYPE_RADIO_CONTENT));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Talk", "talk"));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Talk", "Talkshow GOWASDSA", "Prambors FM Jakarta", null));
-		contentList.add(new Content("", "Talk", "Hampir 30 film", "Prambors FM Jakarta", null));
+		contentList.add(new Content("", "Talk", "Talkshow GOWASDSA", "Prambors FM Jakarta", null, Content.TYPE_RADIO_CONTENT));
+		contentList.add(new Content("", "Talk", "Hampir 30 film", "Prambors FM Jakarta", null, Content.TYPE_RADIO_CONTENT));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Music", "music"));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Music", "Love never feel", "Michael Jackson", null));
-		contentList.add(new Content("", "Music", "Demons", "Imagine Dragons", null));
-		contentList.add(new Content("", "Music", "Smells like te", "Nirvana", null));
+		contentList.add(new Content("", "Music", "Love never feel", "Michael Jackson", null, Content.TYPE_TRACKS));
+		contentList.add(new Content("", "Music", "Demons", "Imagine Dragons", null, Content.TYPE_TRACKS));
+		contentList.add(new Content("", "Music", "Smells like te", "Nirvana", null, Content.TYPE_TRACKS));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Travel", "travel"));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Travel", "Its My Life", "Bon Jovi", null));
-		contentList.add(new Content("", "Travel", "Don't Look Back", "Oasis", null));
+		contentList.add(new Content("", "Travel", "Its My Life", "Bon Jovi", null, Content.TYPE_RADIO_CONTENT));
+		contentList.add(new Content("", "Travel", "Don't Look Back", "Oasis", null, Content.TYPE_RADIO_CONTENT));
 		contents = new Contents(contentList);
 		datas.add(contents);
 
 		datas.add(new Section("Advertisement", "ads"));
 		contentList = new ArrayList<>();
-		contentList.add(new Content("", "Advertisement", "Morning Sunshine", "Dimas Danang", null));
-		contentList.add(new Content("", "Advertisement", "Rock Yeah", "Imam Darto", null));
-		contentList.add(new Content("", "Advertisement", "HipHopYo!", "Desta", null));
+		contentList.add(new Content("", "Advertisement", "Morning Sunshine", "Dimas Danang", null, Content.TYPE_ADS));
+		contentList.add(new Content("", "Advertisement", "Rock Yeah", "Imam Darto", null, Content.TYPE_ADS));
+		contentList.add(new Content("", "Advertisement", "HipHopYo!", "Desta", null, Content.TYPE_ADS));
 		contents = new Contents(contentList);
 		datas.add(contents);
 

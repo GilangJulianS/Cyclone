@@ -70,7 +70,7 @@ public class ProgramHolder extends UniversalHolder{
 			public void onClick(View v) {
 				PopupMenu menu = new PopupMenu(activity, btnMenu);
 				menu.inflate(R.menu.popup_default);
-				menu.setOnMenuItemClickListener(new PopupMenuListener(activity));
+//				menu.setOnMenuItemClickListener(new PopupMenuListener(activity));
 				menu.show();
 			}
 		});

@@ -1,19 +1,14 @@
 package com.cyclone.custom;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Intent;
-import android.media.Image;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,7 +55,7 @@ public class ContentsHolder extends UniversalHolder {
 			imgCover.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(temp.targetType == Content.TYPE_FAVORITABLE){
+					if(temp.favoritableType == Content.FAVORITABLE){
 						temp.isFavorited = !temp.isFavorited;
 						if(temp.isFavorited) {
 							imgHeart.setVisibility(View.VISIBLE);
@@ -83,12 +78,13 @@ public class ContentsHolder extends UniversalHolder {
 				imgHeart.setVisibility(View.GONE);
 			}
 
+
 			btnMenu.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					PopupMenu menu = new PopupMenu(activity, btnMenu);
-					menu.inflate(R.menu.popup_default);
-					menu.setOnMenuItemClickListener(new PopupMenuListener(activity));
+					menu.inflate(temp.getMenuResId());
+					menu.setOnMenuItemClickListener(new PopupMenuListener(activity, temp, btnMenu));
 					menu.show();
 				}
 			});
