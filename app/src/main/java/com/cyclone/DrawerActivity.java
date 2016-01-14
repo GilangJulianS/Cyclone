@@ -106,7 +106,8 @@ public class DrawerActivity extends MasterActivity
 		radioLogo.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				activeMenuItem.setChecked(false);
+				if(activeMenuItem != null)
+					activeMenuItem.setChecked(false);
 				Intent i = new Intent(getApplicationContext(), DrawerActivity.class);
 				i.putExtra("fragmentType", MasterActivity.FRAGMENT_RADIO_PROFILE);
 				i.putExtra("parent", true);
