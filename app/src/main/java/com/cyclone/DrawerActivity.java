@@ -228,7 +228,7 @@ public class DrawerActivity extends MasterActivity
 						.commit();
 			}else if(fragmentType == FRAGMENT_COMMENT){
 				callback = null;
-				manager.beginTransaction().replace(R.id.container, CommentFragment.newInstance(""))
+				manager.beginTransaction().replace(R.id.container, CommentFragment.newInstance("", caller.getExtras().getInt("mode")))
 						.commit();
 			}else if(fragmentType == FRAGMENT_MIX){
 				callback = null;
