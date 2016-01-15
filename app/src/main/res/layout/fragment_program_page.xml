@@ -41,7 +41,7 @@
 				android:layout_width="30dp"
 				android:layout_height="30dp"
 				android:src="@drawable/ic_share_black_24dp"
-				android:background="#0000"/>
+				android:background="@drawable/btn_flat_transparent"/>
 
 		</LinearLayout>
 

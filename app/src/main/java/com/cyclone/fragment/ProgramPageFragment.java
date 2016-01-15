@@ -126,7 +126,7 @@ public class ProgramPageFragment extends Fragment {
 				builder.create().show();
 			}
 		});
-		
+
 		refreshComment();
 
 		return v;

@@ -15,7 +15,9 @@ import android.widget.TextView;
 import com.cyclone.DrawerActivity;
 import com.cyclone.MasterActivity;
 import com.cyclone.R;
+import com.cyclone.fragment.CommentFragment;
 import com.cyclone.fragment.PersonProfileFragment;
+import com.cyclone.model.Comment;
 import com.cyclone.model.Post;
 
 /**
@@ -99,6 +101,7 @@ public class ClubFeedHolder extends UniversalHolder{
 			public void onClick(View v) {
 				Intent intent = new Intent(activity, DrawerActivity.class);
 				intent.putExtra("fragmentType", MasterActivity.FRAGMENT_COMMENT);
+				intent.putExtra("mode", CommentFragment.MODE_READ_WRITE);
 				intent.putExtra("title", "Comments");
 				activity.startActivity(intent);
 			}
